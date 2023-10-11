@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">AudioBookFront</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="large_text">To gain a broader understanding of the three psychological regions, we examined the
+correlations between the state prototypicality scores and the PESH
+indicators. The correlations shown in Table 3 reveal a number of
+associations between the clusters and indicators.1 In general, the
+patterns of relationships appear to be unique to each cluster and
+thus highlight the distinctiveness of the regions.
+As can be seen in the first data column of Table 3, states in the
+Friendly Conventional region displayed strong negative correlations with all three economic indicators, indicating that this
+region is less affluent, has fewer highly educated residents, and is
+less innovative compared with states in the other regions. States in
+this region also appeared to have higher levels of social capital and
+less social tolerance compared with states in other regions. Moreover, Friendly Conventional states were more politically conservative and Protestant compared with other regions. Analyses of
+the health indicators suggest that residents of Friendly Conventional states are less healthy and engage in less health-promoting
+behavior compared with people who live in other psychological
+regions</string>
+
+    <string name="personal_item1">个人主页</string>
+    <string name="personal_item2">创作中心</string>
+    <string name="personal_item3">浏览历史</string>
+    <string name="personal_item4">设置</string>
+
+    <string name="setting_title">设置</string>
+    <string name="setting_item1">外观设置</string>
+    <string name="setting_item2">退出登录</string>
+    <string name="setting_pwd">修改密码</string>
+
+<!--    <string name="setting_item1"></string>-->
+<!--    <string name="setting_item1"></string>-->
+<!--    <string name="setting_item1"></string>-->
+
+</resources>
