@@ -1,16 +1,11 @@
-package com.jskyer.audiobookfront.activity;
+package com.example.newhelloworld.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.jskyer.audiobookfront.R;
-import com.jskyer.audiobookfront.adapter.HistoryAdapter;
-import com.jskyer.audiobookfront.model.History;
+import com.example.newhelloworld.model.History;
+import com.example.newhelloworld.R;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

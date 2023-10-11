@@ -1,4 +1,4 @@
-package com.jskyer.audiobookfront.model;
+package com.example.newhelloworld.model;
 
 import java.time.LocalDateTime;
 

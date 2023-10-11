@@ -1,9 +1,11 @@
-package com.jskyer.audiobookfront;
+package com.example.newhelloworld.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.newhelloworld.R;
 
 
 public class MainActivity extends AppCompatActivity {

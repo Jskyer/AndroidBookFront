@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AudioBookFront</string>
+    <string name="app_name">NewHelloWorld</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -29,8 +29,11 @@ regions</string>
     <string name="setting_item2">退出登录</string>
     <string name="setting_pwd">修改密码</string>
 
-<!--    <string name="setting_item1"></string>-->
-<!--    <string name="setting_item1"></string>-->
-<!--    <string name="setting_item1"></string>-->
+
+
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="please_input">请输入</string>
+    <string name="search">搜索</string>
 
 </resources>

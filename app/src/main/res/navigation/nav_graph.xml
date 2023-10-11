@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/afragment">
+    <!--AFragment-->
+    <fragment
+        android:id="@+id/afragment"
+        android:name="com.example.newhelloworld.AFragment"
+        android:label="afragment"
+        tools:layout="@layout/fragment_a">
+        <!--添加动作-->
+        <action
+            android:id="@+id/action_afragment_to_bfragment"
+            app:destination="@id/bfragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <!--BFragment-->
+    <fragment
+        android:id="@+id/bfragment"
+        android:name="com.example.newhelloworld.BFragment"
+        android:label="bfragment"
+        tools:layout="@layout/fragment_b" />
+    <!--EFragment-->
+    <fragment
+        android:id="@+id/efragment"
+        android:name="com.example.newhelloworld.CFragment"
+        android:label="efragment"
+        tools:layout="@layout/fragment_c" />
+</navigation>

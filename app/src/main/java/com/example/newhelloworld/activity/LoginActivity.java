@@ -1,4 +1,4 @@
-package com.jskyer.audiobookfront.activity;
+package com.example.newhelloworld.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.jskyer.audiobookfront.R;
+import com.example.newhelloworld.R;
 
 public class LoginActivity extends AppCompatActivity {
     @Override
@@ -17,13 +17,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        Button btn = findViewById(R.id.login_btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_LONG).show();
-            }
-        });
+
     }
 
 }

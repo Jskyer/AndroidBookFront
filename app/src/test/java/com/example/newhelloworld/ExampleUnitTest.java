@@ -1,4 +1,4 @@
-package com.jskyer.audiobookfront;
+package com.example.newhelloworld;
 
 import org.junit.Test;
 

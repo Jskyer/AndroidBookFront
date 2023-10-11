@@ -1,4 +1,4 @@
-package com.jskyer.audiobookfront.adapter;
+package com.example.newhelloworld.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jskyer.audiobookfront.R;
-import com.jskyer.audiobookfront.model.History;
+import com.example.newhelloworld.R;
+import com.example.newhelloworld.model.History;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,6 +24,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             titleView = itemView.findViewById(R.id.item_title);
             contentView = itemView.findViewById(R.id.item_content);
             timeView = itemView.findViewById(R.id.item_leftTime);

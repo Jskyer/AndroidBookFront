@@ -11,4 +11,7 @@
     <color name="primary">#FF7F24</color>
     <color name="warning">#ff0000</color>
     <color name="grey88">#ff888888</color>
+
+    <color name="blue_light">#aaaaff</color>
+
 </resources>
