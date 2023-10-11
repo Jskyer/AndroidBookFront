@@ -1,0 +1,55 @@
+<!-- activity_profile.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 头像 -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_find" />
+
+    <!-- 姓名 -->
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="姓名:"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+
+    <!-- 年龄 -->
+    <TextView
+        android:id="@+id/profile_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="年龄："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+
+    <!-- 性别 -->
+    <TextView
+        android:id="@+id/profile_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+
+    <!-- 栏目简介 -->
+    <TextView
+        android:id="@+id/profile_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="栏目描述："
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
