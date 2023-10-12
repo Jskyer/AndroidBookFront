@@ -10,6 +10,7 @@ import com.example.newhelloworld.R;
 
 
 public class PersonalSpaceActivity extends AppCompatActivity implements View.OnClickListener{
+    private ImageView btn_space;
     private ImageView btn_history;
     private ImageView btn_setting;
     @Override
@@ -21,6 +22,9 @@ public class PersonalSpaceActivity extends AppCompatActivity implements View.OnC
     }
 
     public void initListeners(){
+        btn_space = findViewById(R.id.goto_space);
+        btn_space.setOnClickListener(this);
+
         btn_history = findViewById(R.id.goto_history);
         btn_history.setOnClickListener(this);
 
@@ -35,6 +39,8 @@ public class PersonalSpaceActivity extends AppCompatActivity implements View.OnC
             HistoryActivity.startAction(this);
         }else if(id == R.id.goto_setting){
             SettingActivity.startAction(this);
+        }else if(id == R.id.goto_space){
+            PersonalDetailActivity.startAction(this);
         }
     }
 }

@@ -36,4 +36,9 @@ regions</string>
     <string name="please_input">请输入</string>
     <string name="search">搜索</string>
 
+    <string name="follow_name">关注</string>
+    <string name="subscribe_name">订阅</string>
+    <string name="listen_total">收听时长</string>
+    <string name="edit_avatar">编辑头像</string>
+
 </resources>
