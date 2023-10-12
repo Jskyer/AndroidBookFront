@@ -35,7 +35,7 @@
 <!--        </activity>-->
 
         <activity
-            android:name="com.example.newhelloworld.activity.PersonalSpaceActivity"
+            android:name=".activity.PersonalSpaceActivity"
             android:exported="true"
             android:label="@string/app_name">
 
@@ -43,6 +43,31 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".activity.HistoryActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+
+            <intent-filter>
+                <action android:name="android.intent.HistoryActivity.ACTION_START" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.SettingActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+
+            <intent-filter>
+                <action android:name="android.intent.SettingActivity.ACTION_START" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
