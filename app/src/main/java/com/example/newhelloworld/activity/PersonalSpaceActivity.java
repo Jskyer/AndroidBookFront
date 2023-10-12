@@ -3,7 +3,11 @@ package com.example.newhelloworld.activity;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.newhelloworld.adapter.HistoryAdapter;
 import com.example.newhelloworld.model.History;
 import com.example.newhelloworld.R;
 
@@ -21,10 +25,7 @@ public class PersonalSpaceActivity extends AppCompatActivity {
         setContentView(R.layout.personal_layout);
 
 //        setContentView(R.layout.history_layout);
-
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
+//
 //        initData();
 //        RecyclerView rcycView = findViewById(R.id.personal_history_list);
 //        LinearLayoutManager manager = new LinearLayoutManager(this);
