@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:id="@+id/textCurTime"
+            android:text="00:00"
+            android:textSize="14dp"/>
+
+        <SeekBar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/seekbar"
+            android:max="100"
+            />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:id="@+id/textEndTime"
+            android:text="00:00"
+            android:textSize="14dp"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/btn_pre"
+            android:src="@drawable/btn_pre"
+            android:clickable="true"
+            />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/btn_play"
+            android:src="@drawable/btn_play"
+            android:clickable="true"
+            />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/btn_next"
+            android:src="@drawable/btn_next"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
