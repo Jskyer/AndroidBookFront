@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.adapter.HistoryAdapter;
+import com.example.newhelloworld.databinding.HistoryLayoutBinding;
 import com.example.newhelloworld.model.History;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends ViewBindingActivity<HistoryLayoutBinding> {
 
     private List<History> historyList;
 
@@ -28,7 +29,7 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history_layout);
+//        setContentView(R.layout.history_layout);
 
         initData();
         RecyclerView rcycView = findViewById(R.id.personal_history_list);

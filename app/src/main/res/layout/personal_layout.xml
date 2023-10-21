@@ -8,7 +8,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="135dp"
-        android:background="@drawable/personal_background">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,6 +26,7 @@
                 android:gravity="center"
                 android:text="Calora"
                 android:textSize="30sp"
+                android:textColor="@color/black"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,135 +48,119 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <ListView
+        android:id="@+id/list_personal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/personal_space" />
-
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30dp"
-                    android:text="@string/personal_item1"
-                    android:textSize="24dp" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:orientation="vertical">-->
 
 
-                <ImageView
-                    android:id="@+id/goto_space"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:src="@drawable/goto_right" />
-            </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/personal_contribution" />
+<!--                <ImageView-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/personal_contribution" />-->
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30dp"
-                    android:text="@string/personal_item2"
-                    android:textSize="24dp" />
-
-
-                <ImageView
-                    android:id="@+id/goto_contribution"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:src="@drawable/goto_right" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:paddingLeft="30dp"-->
+<!--                    android:text="@string/personal_item2"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="24dp" />-->
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/personal_history" />
-
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30dp"
-                    android:text="@string/personal_item3"
-                    android:textSize="24dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/goto_contribution"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clickable="true"-->
+<!--                    android:src="@drawable/goto_right" />-->
+<!--            </LinearLayout>-->
 
 
-                <ImageView
-                    android:id="@+id/goto_history"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:src="@drawable/goto_right" />
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/personal_history" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:paddingLeft="30dp"-->
+<!--                    android:text="@string/personal_item3"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="24dp" />-->
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/personal_setting" />
-
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="30dp"
-                    android:text="@string/personal_item4"
-                    android:textSize="24dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/goto_history"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clickable="true"-->
+<!--                    android:src="@drawable/goto_right" />-->
+<!--            </LinearLayout>-->
 
 
-                <ImageView
-                    android:id="@+id/goto_setting"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:src="@drawable/goto_right" />
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:orientation="horizontal">-->
 
-        </LinearLayout>
+<!--                <ImageView-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/personal_setting" />-->
 
-    </androidx.core.widget.NestedScrollView>
+<!--                <TextView-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:paddingLeft="30dp"-->
+<!--                    android:text="@string/personal_item4"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="24dp" />-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/goto_setting"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clickable="true"-->
+<!--                    android:src="@drawable/goto_right" />-->
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </androidx.core.widget.NestedScrollView>-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

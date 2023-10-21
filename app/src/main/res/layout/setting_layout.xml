@@ -8,12 +8,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/setting_outlook" />
 
         <TextView
@@ -23,6 +24,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:text="@string/setting_item1"
+            android:textColor="@color/black"
             android:textSize="24dp" />
 
 
@@ -36,12 +38,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/setting_pwd" />
 
         <TextView
@@ -51,6 +53,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:text="@string/setting_pwd"
+            android:textColor="@color/black"
             android:textSize="24dp" />
 
 

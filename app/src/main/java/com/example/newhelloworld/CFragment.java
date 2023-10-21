@@ -4,58 +4,71 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.newhelloworld.activity.HistoryActivity;
 import com.example.newhelloworld.activity.PersonalDetailActivity;
 import com.example.newhelloworld.activity.SettingActivity;
+import com.example.newhelloworld.adapter.CFragmentAdapter;
 
-public class CFragment extends Fragment implements View.OnClickListener{
-    private ImageView btn_space;
-    private ImageView btn_history;
-    private ImageView btn_setting;
+public class CFragment extends Fragment{
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.personal_layout, container, false);
-        btn_space = view.findViewById(R.id.goto_space);
-        btn_space.setOnClickListener(this);
+        ListView listView = view.findViewById(R.id.list_personal);
 
-        btn_history = view.findViewById(R.id.goto_history);
-        btn_history.setOnClickListener(this);
+        // 创建图像数组和文本数组
+        Integer[] imageArray = {R.drawable.personal_space, R.drawable.personal_contribution, R.drawable.personal_history,R.drawable.personal_setting}; // 替换为您的图片资源
+        String[] textArray = {"个人主页", "创作中心", "浏览历史", "设置"}; // 栏目名
 
-        btn_setting = view.findViewById(R.id.goto_setting);
-        btn_setting.setOnClickListener(this);
+        // 创建自定义适配器
+        CFragmentAdapter adapter = new CFragmentAdapter(getActivity(), textArray, imageArray);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener((adapterView, view1, position, l) -> {
+            // 根据点击的位置跳转到相应的页面
+            // 这里具体页面还没写，所以还没完善这里
+            switch (position) {
+                case 0:
+                    // 跳转到column 1
+                    PersonalDetailActivity.startAction(getActivity());
+                    Toast.makeText(getActivity(), "0", Toast.LENGTH_LONG).show();
+                    break;
+                case 1:
+                    // 跳转到column 2
+                    // startActivity(new Intent(getActivity(), Page2Activity.class));
+                    Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    // 跳转到column 3
+                    HistoryActivity.startAction(getActivity());
+                    Toast.makeText(getActivity(), "2", Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    // 跳转到column 4
+                    SettingActivity.startAction(getActivity());
+                    Toast.makeText(getActivity(), "3", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        });
 
         return view;
-//        return inflater.inflate(R.layout.fragment_c, container, false);
     }
 
-//    public void initListeners(){
-//        btn_space = getActivity().findViewById(R.id.goto_space);
-//        btn_space.setOnClickListener(this);
-//
-//        btn_history = getActivity().findViewById(R.id.goto_history);
-//        btn_history.setOnClickListener(this);
-//
-//        btn_setting = getActivity().findViewById(R.id.goto_setting);
-//        btn_setting.setOnClickListener(this);
+//    @Override
+//    public void onClick(View view) {
+//        int id = view.getId();
+//        if(id == R.id.goto_history){
+//            HistoryActivity.startAction(getActivity());
+//        }else if(id == R.id.goto_setting){
+//            SettingActivity.startAction(getActivity());
+//        }else if(id == R.id.goto_space){
+//            PersonalDetailActivity.startAction(getActivity());
+//        }
 //    }
 
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if(id == R.id.goto_history){
-            HistoryActivity.startAction(getActivity());
-        }else if(id == R.id.goto_setting){
-            SettingActivity.startAction(getActivity());
-        }else if(id == R.id.goto_space){
-            PersonalDetailActivity.startAction(getActivity());
-        }
-    }
+
 }
