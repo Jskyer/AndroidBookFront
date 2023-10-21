@@ -105,18 +105,18 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.d("audio", "seekBar onProgressChanged");
-                seekBar.setProgress(progress);
-                Log.d("audio", "fromUser "+fromUser);
-                Log.d("audio", "progress "+progress);
-
-                if(fromUser){
-                    if(!isRelease){
-                        player.seekTo(progress * 1000);
-                    }
-                }
-
-                String cur = String.format(Locale.getDefault(), "%02d:%02d", progress / 60, progress % 60);
-                textCurTime.setText(cur);
+//                seekBar.setProgress(progress);
+//                Log.d("audio", "fromUser "+fromUser);
+//                Log.d("audio", "progress "+progress);
+//
+//                if(fromUser){
+//                    if(!isRelease){
+//                        player.seekTo(progress * 1000);
+//                    }
+//                }
+//
+//                String cur = String.format(Locale.getDefault(), "%02d:%02d", progress / 60, progress % 60);
+//                textCurTime.setText(cur);
             }
 
             @Override
