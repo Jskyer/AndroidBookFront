@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-
 import com.example.newhelloworld.databinding.SettingLayoutBinding;
 
 public class SettingActivity extends ViewBindingActivity<SettingLayoutBinding> {

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/go_down"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:src="@drawable/go_down"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:id="@+id/btn_subscribe"
+            android:text="@string/subscribe_plus"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            app:cornerRadius="10dp"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_url"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_avatar"
+            app:shapeAppearanceOverlay="@style/roundSideStyle"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="啊啊啊啊啊啊"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="啊啊啊啊啊啊"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/playbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/go_detail"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/info"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/comment"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            app:icon="@drawable/comment"
+            app:iconGravity="top"
+            app:iconSize="40dp"
+            app:cornerRadius="10dp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

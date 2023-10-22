@@ -54,7 +54,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.playbar);
+//        setContentView(R.layout.playbar);
+        setContentView(R.layout.activity_playing);
         bindView();
         initPlayer();
         initListeners();

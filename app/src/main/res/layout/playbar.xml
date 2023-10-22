@@ -43,24 +43,24 @@
         android:gravity="center">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/btn_pre"
             android:src="@drawable/btn_pre"
             android:clickable="true"
             />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/btn_play"
             android:src="@drawable/btn_play"
             android:clickable="true"
             />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/btn_next"
             android:src="@drawable/btn_next"
             android:clickable="true"

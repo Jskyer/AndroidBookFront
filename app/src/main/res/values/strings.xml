@@ -41,4 +41,6 @@ regions</string>
     <string name="listen_total">收听时长</string>
     <string name="edit_avatar">编辑头像</string>
 
+    <string name="subscribe_plus">+订阅</string>
+
 </resources>
