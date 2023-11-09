@@ -12,7 +12,10 @@ import android.widget.RelativeLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.newhelloworld.activity.PageActivity;
+import com.example.newhelloworld.activity.SubscribeActicity;
 import com.example.newhelloworld.adapter.CustomAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class BFragment extends Fragment {
@@ -32,7 +35,14 @@ public class BFragment extends Fragment {
         // 创建自定义适配器
         CustomAdapter adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);
         listView.setAdapter(adapter);
-
+        FloatingActionButton fab=view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), SubscribeActicity.class);
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemClickListener((adapterView, view1, position, l) -> {
             // 根据点击的位置跳转到相应的页面
@@ -40,27 +50,27 @@ public class BFragment extends Fragment {
             switch (position) {
                 case 0:
                     // 跳转到column 1
-                    // startActivity(new Intent(getActivity(), Page1Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 1:
                     // 跳转到column 2
-                    // startActivity(new Intent(getActivity(), Page2Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 2:
                     // 跳转到column 3
-                    // startActivity(new Intent(getActivity(), Page3Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 3:
                     // 跳转到column 4
-                    // startActivity(new Intent(getActivity(), Page1Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 4:
                     // 跳转到column 5
-                    // startActivity(new Intent(getActivity(), Page2Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 5:
                     // 跳转到column 6
-                    // startActivity(new Intent(getActivity(), Page3Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
             }
         });

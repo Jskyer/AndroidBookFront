@@ -1,4 +1,5 @@
 package com.example.newhelloworld;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.newhelloworld.activity.PageActivity;
 import com.example.newhelloworld.adapter.CustomAdapter;
 import com.example.newhelloworld.adapter.YourPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
@@ -44,15 +46,15 @@ public class AFragment extends Fragment {
             switch (position) {
                 case 0:
                     // 跳转到column 1
-                    // startActivity(new Intent(getActivity(), Page1Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 1:
                     // 跳转到column 2
-                    // startActivity(new Intent(getActivity(), Page2Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 2:
                     // 跳转到column 3
-                    // startActivity(new Intent(getActivity(), Page3Activity.class));
+                    startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
             }
         });
