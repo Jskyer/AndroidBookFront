@@ -16,9 +16,7 @@ import java.io.InputStream;
 
 /**
  * 瀑布流中流动的单元
- * @author carrey
- *
- */
+ **/
 public class FlowingViewUtil extends View implements View.OnClickListener, View.OnLongClickListener {
 
     /** 单元的编号,在整个瀑布流中是唯一的,可以用来标识身份 */

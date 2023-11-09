@@ -14,13 +14,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Random;
-
-/**
- * 瀑布流
- * 某些参数做了固定设置，如果想扩展功能，可自行修改
- * @author carrey
- *
- */
 public class WaterfallUtil extends ScrollView {
 
     /** 延迟发送message的handler */
