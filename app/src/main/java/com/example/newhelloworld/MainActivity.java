@@ -5,6 +5,7 @@ import static android.opengl.ETC1.getWidth;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -15,6 +16,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -67,12 +69,18 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
 
-
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pref = getSharedPreferences("mode_pref", MODE_PRIVATE);
+        boolean isSwitchOn = pref.getBoolean("isSwitchOn", false);
+        if(isSwitchOn){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 

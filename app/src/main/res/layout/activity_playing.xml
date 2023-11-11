@@ -54,7 +54,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:text="啊啊啊啊啊啊"
-            android:textColor="@color/black"
+            android:textColor="@color/grey88"
             android:textSize="25dp"
             android:textAlignment="center"
             android:layout_marginTop="10dp"/>
@@ -65,7 +65,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:text="啊啊啊啊啊啊"
-            android:textColor="@color/black"
+            android:textColor="@color/grey88"
             android:textSize="20dp"
             android:textAlignment="center"
             android:layout_marginTop="10dp"/>

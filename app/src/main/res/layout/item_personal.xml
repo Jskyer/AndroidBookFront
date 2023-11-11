@@ -19,7 +19,6 @@
         android:gravity="center_vertical"
         android:paddingLeft="30dp"
         android:text="@string/personal_item1"
-        android:textColor="@color/black"
         android:textSize="24dp" />
 
 

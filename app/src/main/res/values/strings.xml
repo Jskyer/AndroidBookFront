@@ -25,7 +25,7 @@ regions</string>
     <string name="personal_item4">设置</string>
 
     <string name="setting_title">设置</string>
-    <string name="setting_item1">外观设置</string>
+    <string name="setting_item1">夜间模式</string>
     <string name="setting_item2">退出登录</string>
     <string name="setting_pwd">修改密码</string>
 

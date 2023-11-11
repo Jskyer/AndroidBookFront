@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -24,22 +25,35 @@
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:text="@string/setting_item1"
-            android:textColor="@color/black"
+            android:textColor="@color/grey88"
             android:textSize="24dp" />
 
 
-        <ImageView
-            android:id="@+id/outlook"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:src="@drawable/goto_right" />
+<!--        <ImageView-->
+<!--            android:id="@+id/outlook"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:clickable="true"-->
+<!--            android:src="@drawable/goto_right" />-->
+
+        <com.example.newhelloworld.views.SwitchButtonView
+            android:id="@+id/mySwitch"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            app:status="false"
+            app:switch_off_color="@color/grey88"
+            app:switch_on_color="@color/primary">
+
+        </com.example.newhelloworld.views.SwitchButtonView>
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:layout_width="40dp"
@@ -53,7 +67,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:text="@string/setting_pwd"
-            android:textColor="@color/black"
+            android:textColor="@color/grey88"
             android:textSize="24dp" />
 
 
@@ -67,18 +81,29 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:layout_marginTop="20dp">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:layout_height="60dp"
+            android:id="@+id/btn_avatar"
             android:text="@string/setting_item2"
+            android:textSize="20sp"
             android:textColor="@color/warning"
-            android:textSize="24dp"
-            android:clickable="true"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:text="@string/setting_item2"-->
+<!--            android:textColor="@color/warning"-->
+<!--            android:textSize="24dp"-->
+<!--            android:clickable="true"/>-->
 
     </LinearLayout>
 

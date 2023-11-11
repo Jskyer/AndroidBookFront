@@ -20,7 +20,6 @@
             android:gravity="center"
             android:text="Calora"
             android:textSize="30sp"
-            android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +72,6 @@
                 android:layout_height="50dp"
                 android:text="10"
                 android:gravity="end|bottom"
-                android:textColor="@color/black"
                 android:textSize="30sp"
                 />
 
@@ -84,7 +82,6 @@
                 android:layout_alignParentBottom="true"
                 android:text="@string/follow_name"
                 android:textSize="20sp"
-                android:textColor="@color/black"
                 android:gravity="center"/>
 
         </RelativeLayout>
@@ -100,7 +97,6 @@
                 android:layout_height="50dp"
                 android:text="10"
                 android:gravity="end|bottom"
-                android:textColor="@color/black"
                 android:textSize="30sp"
                 />
 
@@ -111,7 +107,6 @@
                 android:layout_alignParentBottom="true"
                 android:text="@string/subscribe_name"
                 android:textSize="20sp"
-                android:textColor="@color/black"
                 android:gravity="center"/>
 
         </RelativeLayout>
@@ -127,7 +122,6 @@
                 android:layout_height="50dp"
                 android:text="0"
                 android:gravity="end|bottom"
-                android:textColor="@color/black"
                 android:textSize="30sp"
                 />
 
@@ -138,7 +132,6 @@
                 android:layout_alignParentBottom="true"
                 android:text="@string/listen_total"
                 android:textSize="20sp"
-                android:textColor="@color/black"
                 android:gravity="center"/>
 
         </RelativeLayout>
