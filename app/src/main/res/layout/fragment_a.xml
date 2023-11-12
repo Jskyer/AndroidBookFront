@@ -15,15 +15,12 @@
         android:id="@+id/recommend"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_below="@+id/searchView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="编辑推荐"
         android:textColor="@color/primary"
-        android:textSize="26dp"
-        />
-
-
+        android:textSize="26dp" />
 
 
     <View
@@ -37,170 +34,193 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Divider1"
         android:layout_above="@+id/view_pager"
+        android:layout_below="@id/Divider1"
         android:layout_marginTop="5dp" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:layout_width="310dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="430dp"
-        android:layout_marginLeft="50dp"
         android:background="@color/grey88"
         android:elevation="6dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
-        android:layout_width="310dp"
-        android:layout_height="150dp"
+        android:layout_width="418dp"
+        android:layout_height="154dp"
         android:layout_below="@id/tab_layout"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="-2dp" />
 
     <LinearLayout
         android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="630dp"
-        android:layout_marginLeft="50dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="102.75dp"
+            android:layout_height="34dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="0dp"
             android:background="#EEEEEE"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Type 1"
-            android:textSize="20sp"
+            android:text="文化"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/category_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 1" />
+            android:text="历史"
+            android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/category_politic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 2" />
+            android:text="政治"
+            android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Item 3" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/line2"
-        android:layout_width="wrap_content"
+        android:layout_width="102.75dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="102.75dp"
         android:layout_marginTop="630dp"
-        android:layout_marginLeft="130dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
             android:background="#EEEEEE"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Type 2"
-            android:textSize="20sp"
+            android:text="商业"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 1" />
+            android:text="职场"
+            android:id="@+id/category_career"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 2" />
+            android:text="理财"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Item 3" />
+            android:id="@+id/category_finance"
+            android:textSize="12sp" />
+
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/line3"
-        android:layout_width="wrap_content"
+        android:layout_width="102.75dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="210dp"
+        android:layout_marginLeft="205.5dp"
         android:layout_marginTop="630dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
             android:background="#EEEEEE"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Type 3"
-            android:textSize="20sp"
+            android:text="成长"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 1" />
+            android:text="故事奇谭"
+            android:clickable="true"
+            android:id="@+id/category_story"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 2" />
+            android:text="治愈陪伴"
+            android:clickable="true"
+            android:id="@+id/category_cure"
+            android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Item 3" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/line4"
-        android:layout_width="wrap_content"
+        android:layout_width="102.75dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="290dp"
+        android:layout_marginLeft="308.25dp"
         android:layout_marginTop="630dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
             android:background="#EEEEEE"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Type 4"
-            android:textSize="20sp"
+            android:text="艺术"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Item 1" />
+            android:text="城市探索"
+            android:clickable="true"
+            android:id="@+id/category_city"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:padding="8dp"
-            android:text="Item 2" />
+            android:text="趣味闲谈"
+            android:clickable="true"
+            android:id="@+id/category_comedy"
+            android:textSize="12sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Item 3" />
 
     </LinearLayout>
 

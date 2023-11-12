@@ -1,5 +1,6 @@
 package com.example.newhelloworld;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.newhelloworld.activity.AudioActivity;
 
 public class Fragment2 extends Fragment {
     private ListView listView;
@@ -32,15 +35,15 @@ public class Fragment2 extends Fragment {
             switch (position) {
                 case 0:
                     // 跳转到column 1
-                    // startActivity(new Intent(getActivity(), Page1Activity.class));
+                    startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 1:
                     // 跳转到column 2
-                    // startActivity(new Intent(getActivity(), Page2Activity.class));
+                    startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 2:
                     // 跳转到column 3
-                    // startActivity(new Intent(getActivity(), Page3Activity.class));
+                    startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
             }
         });

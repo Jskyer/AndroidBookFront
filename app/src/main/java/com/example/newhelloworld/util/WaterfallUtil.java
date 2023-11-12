@@ -39,7 +39,7 @@ public class WaterfallUtil extends ScrollView {
     private int[] colHeight;
 
     /** 所有的图片资源路径 */
-    private String[] imageFilePaths;
+    private String[] imageFilePaths={"app/src/main/res/drawable/guolai.JPG","app/src/main/res/drawable/logo1.jpg"};
 
     /** 瀑布流显示的列数 */
     private int colCount;
@@ -74,9 +74,9 @@ public class WaterfallUtil extends ScrollView {
     private void init() {
         delayHandler = new DelayHandler(this);
         addItemHandler = new AddItemHandler(this);
-        colCount = 3;//默认情况下是4列
-        pageCount = 20;//默认每次加载30个瀑布流单元
-        capacity = 100;//默认容纳10000张图
+        colCount = 3;//默认情况下是3列
+        pageCount = 20;//默认每次加载20个瀑布流单元
+        capacity = 100;//默认容纳100张图
         random = new Random();
         colWidth = getResources().getDisplayMetrics().widthPixels / colCount;
 
@@ -186,7 +186,6 @@ public class WaterfallUtil extends ScrollView {
      * 这里之所以要用一个Handler，是为了使用他的延迟发送message的函数
      * 延迟的效果在于，如果用户快速滑动，手指很早离开屏幕，然后滑动到了底部的时候，
      * 因为信息稍后发送，在手指离开屏幕到滑动到底部的这个时间差内，依然能够加载图片
-     * @author carrey
      *
      */
     private static class DelayHandler extends Handler {
@@ -215,7 +214,6 @@ public class WaterfallUtil extends ScrollView {
 
     /**
      * 添加单元到瀑布流中的Handler
-     * @author carrey
      *
      */
     private static class AddItemHandler extends Handler {

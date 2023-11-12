@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.newhelloworld.activity.AudioActivity;
+import com.example.newhelloworld.activity.CategoryActivity;
 import com.example.newhelloworld.activity.PageActivity;
 import com.example.newhelloworld.adapter.CustomAdapter;
 import com.example.newhelloworld.adapter.YourPagerAdapter;
@@ -46,18 +49,84 @@ public class AFragment extends Fragment {
             switch (position) {
                 case 0:
                     // 跳转到column 1
-                    startActivity(new Intent(getActivity(), PageActivity.class));
+                    //TODO：这里想把PageAcitivity换成AudioActivity，但是会闪退
+                    startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 1:
                     // 跳转到column 2
-                    startActivity(new Intent(getActivity(), PageActivity.class));
+                    startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 2:
                     // 跳转到column 3
-                    startActivity(new Intent(getActivity(), PageActivity.class));
+                    startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
             }
         });
+        TextView cat_career = view.findViewById(R.id.category_career);
+        cat_career.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+        TextView cat_city = view.findViewById(R.id.category_city);
+        cat_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+        TextView cat_comedy = view.findViewById(R.id.category_comedy);
+        cat_comedy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+        TextView cat_cure = view.findViewById(R.id.category_cure);
+        cat_cure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(),CategoryActivity.class));
+            }
+        });
+        TextView cat_finance = view.findViewById(R.id.category_finance);
+        cat_finance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+        TextView cat_history = view.findViewById(R.id.category_history);
+        cat_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+        TextView cat_politic = view.findViewById(R.id.category_politic);
+        cat_politic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+        TextView cat_story = view.findViewById(R.id.category_story);
+        cat_story.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+
 
         return view;
     }
@@ -65,11 +134,13 @@ public class AFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         // 创建适配器，并向其中添加Fragment以用作页面
         YourPagerAdapter adapter = new YourPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new Fragment1(), "First");
-        adapter.addFragment(new Fragment2(), "Second");
-        adapter.addFragment(new Fragment3(), "Third");
+        adapter.addFragment(new Fragment1(), "最热专辑");
+        adapter.addFragment(new Fragment2(), "最热单集");
+        adapter.addFragment(new Fragment3(), "最新单集");
         viewPager.setAdapter(adapter);
     }
+
+
 }
 
 

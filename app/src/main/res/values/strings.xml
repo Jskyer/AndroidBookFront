@@ -42,5 +42,7 @@ regions</string>
     <string name="edit_avatar">编辑头像</string>
 
     <string name="subscribe_plus">+订阅</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
