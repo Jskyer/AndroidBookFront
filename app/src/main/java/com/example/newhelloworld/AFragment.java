@@ -49,7 +49,6 @@ public class AFragment extends Fragment {
             switch (position) {
                 case 0:
                     // 跳转到column 1
-                    //TODO：这里想把PageAcitivity换成AudioActivity，但是会闪退
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 1:

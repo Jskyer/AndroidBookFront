@@ -44,8 +44,11 @@ private ActivityCategoryBinding binding;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //TODO：这里点击按钮切换榜单的最新最热
+                if(fab.getTooltipText()=="最热")
+                    fab.setTooltipText("最新");
+                else
+                    fab.setTooltipText("最热");
             }
         });
         initData();

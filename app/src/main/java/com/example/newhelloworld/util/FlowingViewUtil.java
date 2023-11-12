@@ -11,6 +11,9 @@ import android.graphics.Rect;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.newhelloworld.activity.PageActivity;
+import com.example.newhelloworld.activity.SubscribeActicity;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -25,7 +28,7 @@ public class FlowingViewUtil extends View implements View.OnClickListener, View.
     /** 单元中要显示的图片Bitmap */
     private Bitmap imageBmp;
     /** 图像文件的路径 */
-    private String imageFilePath="com/example/newhelloworld/images/new.png";
+    private String imageFilePath;
     /** 单元的宽度,也是图像的宽度 */
     private int width;
     /** 单元的高度,也是图像的高度 */
@@ -142,6 +145,7 @@ public class FlowingViewUtil extends View implements View.OnClickListener, View.
     @Override
     public void onClick(View v) {
         Toast.makeText(getContext(), "click : " + index, Toast.LENGTH_SHORT).show();
+        PageActivity.startAction(getContext());
     }
 
     /**

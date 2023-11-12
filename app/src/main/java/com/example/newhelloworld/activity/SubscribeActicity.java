@@ -1,5 +1,7 @@
 package com.example.newhelloworld.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,5 +29,8 @@ public class SubscribeActicity extends AppCompatActivity {
 
         });
 
+
     }
+
 }
+

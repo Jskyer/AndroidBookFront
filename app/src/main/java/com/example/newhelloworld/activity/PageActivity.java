@@ -1,5 +1,7 @@
 package com.example.newhelloworld.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -51,5 +53,9 @@ public class PageActivity extends AppCompatActivity {
                     i, LocalDateTime.now());
             albumPodcastEpisodeList.add(item);
         }
+    }
+    public static void startAction(Context context){
+        Intent intent = new Intent(context, PageActivity.class);
+        context.startActivity(intent);
     }
 }
