@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:text="@string/contribution"
+            android:textColor="@color/primary"
+            android:textSize="28dp"
+            android:gravity="center"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/create_album"
+            android:text="@string/album_plus"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            app:cornerRadius="10dp"/>
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_colomn"
+        />
+
+</LinearLayout>
