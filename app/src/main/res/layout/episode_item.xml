@@ -5,62 +5,89 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:paddingLeft="@dimen/dp_8"
-    android:paddingTop="@dimen/dp_8"
-    android:paddingRight="@dimen/dp_8"
-    android:paddingBottom="@dimen/dp_8">
+    >
 
-    <!-- logo和播放进度 使用相对布局达成覆盖的效果-->
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <!--logo-->
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="@dimen/dp_48"
-            android:layout_height="@dimen/dp_48"
-            android:padding="1dp"
-            android:src="@drawable/icon_music"
-            app:strokeColor="@color/white"
-            app:strokeWidth="@dimen/dp_2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_8">
 
-    </RelativeLayout>
+        <!-- logo和播放进度 使用相对布局达成覆盖的效果-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!--logo-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_48"
+                android:padding="1dp"
+                android:src="@drawable/icon_music"
+                app:strokeColor="@color/white"
+                app:strokeWidth="@dimen/dp_2" />
 
-    <!--歌曲信息  歌名 - 歌手 -->
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/episode_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingLeft="@dimen/dp_12"
-        android:paddingRight="@dimen/dp_12"
-        android:layout_gravity="center"
-        android:singleLine="true"
-        android:text="episode title"
-        android:textSize="22sp" />
+        </RelativeLayout>
 
-    <!--歌曲控制按钮-->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_play"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:insetLeft="@dimen/dp_0"
-        android:insetTop="@dimen/dp_0"
-        android:insetRight="@dimen/dp_0"
-        android:insetBottom="@dimen/dp_0"
-        android:onClick="onClick"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-        app:backgroundTint="@color/teal_700"
-        app:cornerRadius="@dimen/dp_18"
-        app:icon="@drawable/icon_play"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/dp_0"
-        app:iconSize="@dimen/dp_36" />
+        <!--歌曲信息  歌名 - 歌手 -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/episode_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:text="episode title"
+            android:textSize="22sp" />
+
+        <!--歌曲控制按钮-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_play"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:insetLeft="@dimen/dp_0"
+            android:insetTop="@dimen/dp_0"
+            android:insetRight="@dimen/dp_0"
+            android:insetBottom="@dimen/dp_0"
+            android:onClick="onClick"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:backgroundTint="@color/teal_700"
+            app:cornerRadius="@dimen/dp_18"
+            app:icon="@drawable/icon_play"
+            app:iconGravity="textStart"
+            app:iconPadding="@dimen/dp_0"
+            app:iconSize="@dimen/dp_36" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/del_hidden"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="#ff0000"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/tv_item_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="删除"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
 
 
 </LinearLayout>

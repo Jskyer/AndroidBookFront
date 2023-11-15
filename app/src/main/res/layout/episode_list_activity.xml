@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
 
     <LinearLayout
         android:id="@+id/bottom_sheet"
@@ -11,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:background="@drawable/bottom_sheet_background"
+        android:layout_alignParentBottom="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -18,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/short_line"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,15 +30,27 @@
             android:layout_marginLeft="5dp"
             android:text="@string/episode_list"
             android:textColor="@color/primary"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:gravity="center"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.yanzhenjie.recyclerview.SwipeRecyclerView
+            android:id="@+id/episode_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/episode_list"
             />
+
+<!--        <com.example.newhelloworld.views.MySwipeRecyclerView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/episode_list"-->
+<!--            />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/episode_list"-->
+<!--            />-->
 
     </LinearLayout>
 

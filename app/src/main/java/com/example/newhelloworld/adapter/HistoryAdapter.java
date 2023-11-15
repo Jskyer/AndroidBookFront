@@ -14,6 +14,7 @@ import com.example.newhelloworld.model.Episode;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+// 个人 浏览历史adapter
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
     private List<Episode> episodeList;
     static class ViewHolder extends RecyclerView.ViewHolder{
