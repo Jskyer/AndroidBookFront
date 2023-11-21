@@ -24,8 +24,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -36,17 +36,18 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_avatar"
                 app:shapeAppearanceOverlay="@style/circleStyle"/>
 
             <com.google.android.material.button.MaterialButton
-                android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
                 android:id="@+id/btn_avatar"
                 android:text="@string/edit_avatar"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 app:icon="@drawable/personal_contribution"
                 app:iconSize="16dp"
                 app:cornerRadius="10dp"/>
@@ -59,7 +60,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -68,10 +70,11 @@
 
             <TextView
                 android:id="@+id/follow_num"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="60dp"
                 android:text="10"
-                android:gravity="end|bottom"
+                android:gravity="center"
                 android:textSize="30sp"
                 />
 
@@ -93,10 +96,11 @@
 
             <TextView
                 android:id="@+id/subscribe_num"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="60dp"
                 android:text="10"
-                android:gravity="end|bottom"
+                android:gravity="center"
                 android:textSize="30sp"
                 />
 
@@ -111,31 +115,58 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/listen_total"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:text="0"
-                android:gravity="end|bottom"
-                android:textSize="30sp"
-                />
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:text="@string/listen_total"
-                android:textSize="20sp"
-                android:gravity="center"/>
+<!--        <RelativeLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
 
-        </RelativeLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/listen_total"-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:text="0"-->
+<!--                android:gravity="end|bottom"-->
+<!--                android:textSize="30sp"-->
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:text="@string/listen_total"-->
+<!--                android:textSize="20sp"-->
+<!--                android:gravity="center"/>-->
+
+<!--        </RelativeLayout>-->
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/introduction"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:gravity="left|top"
+        android:hint="@string/introduction"
+        android:lineSpacingMultiplier="1.2"
+        android:enabled="false"
+        >
+    </EditText>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:id="@+id/introduction_edit"
+        android:text="@string/introduction_edit"
+        android:textSize="20sp"
+        app:icon="@drawable/personal_contribution"
+        app:iconSize="20dp"
+        app:cornerRadius="10dp"/>
+
 
 
 

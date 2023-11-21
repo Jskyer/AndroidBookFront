@@ -70,7 +70,7 @@
 
                 <!--邮箱输入-->
                 <EditText
-                    android:id="@+id/PassWordEdit"
+                    android:id="@+id/EmailEdit"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:padding="10dp"
@@ -122,7 +122,7 @@
 
                 <!--验证码输入-->
                 <EditText
-                    android:id="@+id/EmailEdit"
+                    android:id="@+id/VerifyEdit"
                     android:layout_width="200dp"
                     android:layout_height="55dp"
                     android:padding="10dp"
@@ -138,7 +138,7 @@
 
                 <!--立即注册按钮-->
                 <Button
-                    android:id="@+id/Button"
+                    android:id="@+id/VerifyButton"
                     android:layout_width="120dp"
                     android:layout_height="55dp"
                     android:layout_margin="10dp"
@@ -164,18 +164,18 @@
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
-            <Button
-                android:id="@+id/LoginButton"
-                android:layout_width="291dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/translucent_button2"
-                android:padding="3dp"
-                android:text="Enter to login"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+<!--            <Button-->
+<!--                android:id="@+id/LoginButton"-->
+<!--                android:layout_width="291dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/translucent_button2"-->
+<!--                android:padding="3dp"-->
+<!--                android:text="Enter to login"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20dp" />-->
 
 
 
