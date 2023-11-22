@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:color="@color/grey88"/>
+<!--    <item android:color="@color/colorBlack"/>-->
+<!--    <item android:state_pressed="true"-->
+<!--        android:drawable="@drawable/button_pressed" /> &lt;!&ndash; 当按钮被按下时 &ndash;&gt;-->
+<!--    <item android:state_focused="true"-->
+<!--        android:drawable="@drawable/button_focused" /> &lt;!&ndash; 当按钮获得焦点时 &ndash;&gt;-->
+<!--    <item android:drawable="@drawable/button_default" /> &lt;!&ndash; 默认状态 &ndash;&gt;-->
+</selector>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/album_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/translucent_edit"
+        android:hint="@string/album_title"
+        android:textSize="24sp"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/album_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/translucent_edit"
+        android:hint="@string/album_description"
+        android:textSize="24sp"
+        android:singleLine="true" />
+
+    <RadioGroup
+        android:id="@+id/public_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp">
+
+        <RadioButton
+            android:id="@+id/public_true"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="公开"
+            android:textSize="18sp"
+            />
+
+        <RadioButton
+            android:id="@+id/public_false"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="私密"
+            android:textSize="18sp"
+            />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/album_img"
+        android:textColor="@color/primary"
+        android:textSize="24sp"
+        android:gravity="start"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/album_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/edit_avatar"
+        android:textSize="14sp"
+        app:icon="@drawable/upload_icon"
+        app:iconGravity="top"
+        app:iconSize="100dp"
+        app:cornerRadius="10dp"/>
+
+
+
+</LinearLayout>

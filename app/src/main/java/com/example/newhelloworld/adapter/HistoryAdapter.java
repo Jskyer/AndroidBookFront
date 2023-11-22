@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newhelloworld.R;
-import com.example.newhelloworld.model.History;
+import com.example.newhelloworld.model.Episode;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+// 个人 浏览历史adapter
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
-    private List<History> historyList;
+    private List<Episode> episodeList;
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView titleView;
         TextView contentView;
@@ -32,8 +33,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         }
     }
 
-    public HistoryAdapter(List<History> historyList) {
-        this.historyList = historyList;
+    public HistoryAdapter(List<Episode> episodeList) {
+        this.episodeList = episodeList;
     }
 
     @NonNull
@@ -46,15 +47,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
-        History history = historyList.get(position);
-        holder.titleView.setText(history.getTitle());
-        holder.contentView.setText(history.getContent());
-        holder.timeView.setText("剩余 "+ history.getLeftTime() + " 分钟");
-        holder.dateView.setText(history.getDateTime().format(DateTimeFormatter.ofPattern("yyyy/mm/dd")));
+        Episode episode = episodeList.get(position);
+        holder.titleView.setText(episode.getTitle());
+        holder.contentView.setText(episode.getContent());
+        holder.timeView.setText("剩余 "+ episode.getLeftTime() + " 分钟");
+        holder.dateView.setText(episode.getDateTime().format(DateTimeFormatter.ofPattern("yyyy/mm/dd")));
     }
 
     @Override
     public int getItemCount() {
-        return historyList.size();
+        return episodeList.size();
     }
 }

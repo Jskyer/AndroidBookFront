@@ -2,13 +2,13 @@ package com.example.newhelloworld.model;
 
 import java.time.LocalDateTime;
 
-public class History {
+public class Episode {
     private String title;
     private String content;
     private int leftTime;
     private LocalDateTime dateTime;
 
-    public History(String title, String content, int leftTime, LocalDateTime dateTime) {
+    public Episode(String title, String content, int leftTime, LocalDateTime dateTime) {
         this.title = title;
         this.content = content;
         this.leftTime = leftTime;

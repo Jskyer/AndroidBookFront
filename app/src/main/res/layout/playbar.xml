@@ -45,6 +45,14 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:id="@+id/btn_second_back"
+            android:src="@drawable/btn_speeddown"
+            android:clickable="true"
+            />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/btn_pre"
             android:src="@drawable/btn_pre"
             android:clickable="true"
@@ -63,6 +71,14 @@
             android:layout_height="80dp"
             android:id="@+id/btn_next"
             android:src="@drawable/btn_next"
+            android:clickable="true"
+            />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/btn_second_forward"
+            android:src="@drawable/btn_speedup"
             android:clickable="true"
             />
 

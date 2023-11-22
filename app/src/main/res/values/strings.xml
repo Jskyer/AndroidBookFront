@@ -25,7 +25,7 @@ regions</string>
     <string name="personal_item4">设置</string>
 
     <string name="setting_title">设置</string>
-    <string name="setting_item1">外观设置</string>
+    <string name="setting_item1">夜间模式</string>
     <string name="setting_item2">退出登录</string>
     <string name="setting_pwd">修改密码</string>
 
@@ -42,7 +42,25 @@ regions</string>
     <string name="edit_avatar">编辑头像</string>
 
     <string name="subscribe_plus">+订阅</string>
+
+    <string name="dialog_modifypwd">修改密码</string>
+
+    <string name="contribution">我的专栏</string>
+    <string name="album_plus">+新建</string>
+    <string name="album_del">删除</string>
+    <string name="episode_list">播放列表</string>
+    <string name="count_subscribe">订阅数: </string>
+    <string name="album_title">专栏名</string>
+    <string name="album_description">专栏描述</string>
+    <string name="album_img">上传专栏图</string>
+    <string name="introduction">个人简介</string>
+    <string name="introduction_edit">编辑简介</string>
+
+
+
     <string name="title_activity_category">CategoryActivity</string>
     <string name="action_settings">Settings</string>
+
+
 
 </resources>

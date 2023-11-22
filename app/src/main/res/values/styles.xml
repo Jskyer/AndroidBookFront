@@ -20,4 +20,13 @@
         <attr name="strokeColor" format="color"/>
     </declare-styleable>
 
+<!--    播放列表弹出动画(暂未使用)-->
+<!--    <style name="AnimBottom" parent="@android:style/Animation">-->
+<!--        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>-->
+<!--        <item name="android:windowExitAnimation">@anim/dialog_leave</item>-->
+<!--    </style>-->
+
+
+
+
 </resources>

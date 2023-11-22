@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newhelloworld.R;
-import com.example.newhelloworld.model.History;
 import com.example.newhelloworld.model.PodcastEpisode;
 
 import java.time.format.DateTimeFormatter;

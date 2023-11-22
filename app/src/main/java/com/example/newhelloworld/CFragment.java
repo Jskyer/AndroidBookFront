@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.newhelloworld.activity.MyAlbumListActivity;
 import com.example.newhelloworld.activity.HistoryActivity;
 import com.example.newhelloworld.activity.PersonalDetailActivity;
 import com.example.newhelloworld.activity.SettingActivity;
@@ -35,22 +35,22 @@ public class CFragment extends Fragment{
                 case 0:
                     // 跳转到column 1
                     PersonalDetailActivity.startAction(getActivity());
-                    Toast.makeText(getActivity(), "0", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), "0", Toast.LENGTH_LONG).show();
                     break;
                 case 1:
                     // 跳转到column 2
-                    // startActivity(new Intent(getActivity(), Page2Activity.class));
-                    Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
+                    MyAlbumListActivity.startAction(getActivity());
+//                    Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
                     break;
                 case 2:
                     // 跳转到column 3
                     HistoryActivity.startAction(getActivity());
-                    Toast.makeText(getActivity(), "2", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), "2", Toast.LENGTH_LONG).show();
                     break;
                 case 3:
                     // 跳转到column 4
                     SettingActivity.startAction(getActivity());
-                    Toast.makeText(getActivity(), "3", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), "3", Toast.LENGTH_LONG).show();
                     break;
             }
         });

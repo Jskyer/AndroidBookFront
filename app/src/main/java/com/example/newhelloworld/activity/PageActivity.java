@@ -11,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newhelloworld.R;
-import com.example.newhelloworld.adapter.CustomAdapter;
-import com.example.newhelloworld.adapter.HistoryAdapter;
 import com.example.newhelloworld.adapter.PodcastEpisodeAdapter;
-import com.example.newhelloworld.model.History;
 import com.example.newhelloworld.model.PodcastEpisode;
 
 import java.time.LocalDateTime;
