@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.queryVO.LoginResp;
 import com.example.newhelloworld.util.PreferenceUtil;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 关联activity.xml
         setContentView(R.layout.activity_login);
+
+        //加入管理器，方便登录后销毁
+        MyActivityManager.getInstance().add(this);
 
         emailView = this.findViewById(R.id.EmailEdit);
         pwdView = this.findViewById(R.id.PassWordEdit);
@@ -46,13 +51,18 @@ public class LoginActivity extends AppCompatActivity {
                         String email = emailView.getText().toString();
                         String pwd = pwdView.getText().toString();
 
-                        Map<String, String> map = new HashMap<>();
-                        map.put("email", email);
-                        map.put("password", pwd);
+                        if(StringUtils.isBlank(email) || StringUtils.isEmpty(pwd)){
+                            Toast.makeText(LoginActivity.this, "邮箱或密码为空", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
 
                         Log.d("rxjava", email);
                         Log.d("rxjava", pwd);
 
+                        Map<String, String> map = new HashMap<>();
+                        map.put("email", email);
+                        map.put("password", pwd);
                         login(map);
 
 //                        String strUserName = userName.getText().toString().trim();
@@ -85,16 +95,26 @@ public class LoginActivity extends AppCompatActivity {
         MyRetrofitClient client = new MyRetrofitClient();
 
         Observable<LoginResp> register = client.login(map, new MyObserver<LoginResp>() {
+            //登录成功
             @Override
             public void onSuccss(LoginResp res) {
                 Context context = getApplicationContext();
                 PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_ID, res.getUser_id());
+//                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_NAME, res.getUser_name());
+//                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_TOKEN, res.getAccess_token());
 
-//                String token = PreferenceUtil.getString(context, "token", null);
                 Log.d("rxjava", "success");
 
-                //跳转到首页
+                //跳转到首页,销毁自己
+                MyActivityManager.getInstance().finishAll();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
+            }
+            //登录失败
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                Toast.makeText(LoginActivity.this, "邮箱或密码错误", Toast.LENGTH_SHORT).show();
             }
         });
 

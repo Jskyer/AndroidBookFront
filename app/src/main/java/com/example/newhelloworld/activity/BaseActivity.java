@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.newhelloworld.manager.MyActivityManager;
+
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -18,6 +20,14 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyActivityManager.getInstance().add(this);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyActivityManager.getInstance().remove(this);
     }
 
     @Override

@@ -106,7 +106,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/translucent_button"
             android:padding="3dp"
-            android:text="Sign up"
+            android:text="go to sign up"
             android:textSize="24dp" />
 
         <TextView

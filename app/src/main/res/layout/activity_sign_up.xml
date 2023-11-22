@@ -153,14 +153,14 @@
             <!--注册按钮-->
             <Button
                 android:id="@+id/SignUpButton"
-                android:layout_width="176dp"
+                android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/translucent_button"
                 android:padding="3dp"
-                android:text="Signal up"
+                android:text="back to login"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
