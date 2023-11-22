@@ -15,6 +15,7 @@ import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.queryVO.LoginResp;
+import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.util.PreferenceUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
         );
 
-        // 注册按钮监听器
+
         signUpButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -98,17 +99,22 @@ public class LoginActivity extends AppCompatActivity {
             //登录成功
             @Override
             public void onSuccss(LoginResp res) {
-                Context context = getApplicationContext();
-                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_ID, res.getUser_id());
-//                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_NAME, res.getUser_name());
-//                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_TOKEN, res.getAccess_token());
+                Status status = res.getStatus();
+                if (status.getCode() != 200){
+                    Toast.makeText(LoginActivity.this, status.getMsg(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Log.d("rxjava", "success");
+
+                Context context = getApplicationContext();
+                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_ID, res.getUser_id());
+                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_NAME, res.getUser_name());
+                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_TOKEN, res.getAccess_token());
 
                 //跳转到首页,销毁自己
                 MyActivityManager.getInstance().finishAll();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
             }
             //登录失败
             @Override

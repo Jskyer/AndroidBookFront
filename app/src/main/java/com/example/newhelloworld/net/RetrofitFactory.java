@@ -1,5 +1,16 @@
 package com.example.newhelloworld.net;
 
+import androidx.annotation.NonNull;
+
+import com.example.newhelloworld.MyApplication;
+import com.example.newhelloworld.util.PreferenceUtil;
+
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -9,6 +20,7 @@ public class RetrofitFactory {
         private static Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:9090")
 //                .baseUrl("http://39.101.66.253:9090")
+                .client(getClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
@@ -18,5 +30,22 @@ public class RetrofitFactory {
 
     public static Retrofit getInstance(){
         return RetrofitHolder.retrofit;
+    }
+
+    private static OkHttpClient getClient(){
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addNetworkInterceptor(new Interceptor() {
+            @NonNull
+            @Override
+            public Response intercept(@NonNull Chain chain) throws IOException {
+                Request request = chain.request();
+                String token = PreferenceUtil.token(MyApplication.getContext());
+                if(token != null){
+                    request = request.newBuilder().addHeader("token", token).build();
+                }
+                return chain.proceed(request);
+            }
+        });
+        return builder.build();
     }
 }

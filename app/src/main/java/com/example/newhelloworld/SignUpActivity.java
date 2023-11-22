@@ -6,12 +6,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.queryVO.SendVerificationResp;
+import com.example.newhelloworld.queryVO.Status;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +43,17 @@ public class SignUpActivity extends AppCompatActivity {
         verifyButton = this.findViewById(R.id.VerifyButton);
         signUpButton = this.findViewById(R.id.SignUpButton);
 
-        // 立即注册按钮监听器
+
         verifyButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String email = emailView.getText().toString();
+                        if(StringUtils.isBlank(email)){
+                            Toast.makeText(SignUpActivity.this, "邮箱为空", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         Log.d("rxjava", email);
                         getVerification(email);
 
@@ -75,21 +84,30 @@ public class SignUpActivity extends AppCompatActivity {
                 }
         );
 
-        // 返回登录按钮监听器
+
         signUpButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String username = userNameView.getText().toString();
                         String email = emailView.getText().toString();
                         String code = codeView.getText().toString();
                         String pwd = pwdView.getText().toString();
 
+                        if(StringUtils.isBlank(username) || StringUtils.isBlank(email) ||
+                                StringUtils.isEmpty(pwd) || StringUtils.isEmpty(code)){
+                            Toast.makeText(SignUpActivity.this, "用户名、邮箱、验证码、密码不能为空", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         Map<String, String> map = new HashMap<>();
+                        map.put("username", username);
                         map.put("email", email);
                         map.put("verification", code);
                         map.put("password", pwd);
 
 
+                        Log.d("rxjava", username);
                         Log.d("rxjava", email);
                         Log.d("rxjava", code);
                         Log.d("rxjava", pwd);
@@ -107,6 +125,12 @@ public class SignUpActivity extends AppCompatActivity {
         Observable<SendVerificationResp> register = client.verify(email, new MyObserver<SendVerificationResp>() {
             @Override
             public void onSuccss(SendVerificationResp res) {
+                Status status = res.getStatus();
+                if(status.getCode() != 200){
+                    Toast.makeText(SignUpActivity.this, status.getMsg(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Log.d("rxjava", "success");
             }
         });
@@ -123,12 +147,25 @@ public class SignUpActivity extends AppCompatActivity {
 //                Context context = getApplicationContext();
 //                PreferenceUtil.putString(context, "token", "12345");
 //                String token = PreferenceUtil.getString(context, "token", null);
+                Status status = res.getStatus();
+                if(status.getCode() != 200){
+                    Toast.makeText(SignUpActivity.this, status.getMsg(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Log.d("rxjava", "success");
 
                 // 跳转到登录界面,销毁自己
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                Toast.makeText(SignUpActivity.this, "注册失败，请重试", Toast.LENGTH_SHORT).show();
+
             }
         });
 
