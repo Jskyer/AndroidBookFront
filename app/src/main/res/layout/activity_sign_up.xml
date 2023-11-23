@@ -81,9 +81,8 @@
                     android:background="@drawable/translucent_edit"
                     android:hint="  E-mail address"
                     android:textSize="20dp"
-                    android:maxLength="16"
                     android:singleLine="true"
-                    android:inputType="textPassword" />
+                    />
 
             </LinearLayout>
 
@@ -160,7 +159,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/translucent_button"
                 android:padding="3dp"
-                android:text="back to login"
+                android:text="register"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
