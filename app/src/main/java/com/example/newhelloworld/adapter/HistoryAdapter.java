@@ -49,8 +49,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
         Episode episode = episodeList.get(position);
         holder.titleView.setText(episode.getTitle());
-        holder.contentView.setText(episode.getContent());
-        holder.timeView.setText("剩余 "+ episode.getLeftTime() + " 分钟");
+        holder.contentView.setText(episode.getUploader_name());
+        holder.timeView.setText("剩余 "+ episode.getDuration() + " 分钟");
         holder.dateView.setText(episode.getDateTime().format(DateTimeFormatter.ofPattern("yyyy/mm/dd")));
     }
 

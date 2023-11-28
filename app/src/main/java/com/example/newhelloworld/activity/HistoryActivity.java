@@ -41,9 +41,9 @@ public class HistoryActivity extends ViewBindingActivity<HistoryLayoutBinding> {
     public void initData(){
         episodeList = new ArrayList<>();
         for (int i = 1; i < 20; i++){
-            Episode item = new Episode("啊啊啊啊啊啊",
-                    "在 Java 中，集合是一个非常重要的概念，它是指一组相关对象的容器，在实际应用中使用十分广泛。Java 中提供了一个集合框架，它是指一组接口、实现类和算法，用于处理集合中的元素。",
-                    i, LocalDateTime.now());
+            Episode item = new Episode(i,"啊啊啊啊啊啊",
+                    "user111",200,
+                    LocalDateTime.now(), null);
             episodeList.add(item);
         }
     }
