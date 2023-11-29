@@ -58,7 +58,7 @@ public class AFragment extends Fragment {
             // 这里具体页面还没写，所以还没完善这里
             switch (position) {
                 case 0:
-                    Episode episode1 = new Episode(1, "title1", "user_name1", 237, null, "/song/song1.mp3");
+                    Episode episode1 = new Episode(1, "title1", "user_name1", 237, null, "/music/obj168925.mp3");
                     instance.addData(episode1);
                     EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));
 

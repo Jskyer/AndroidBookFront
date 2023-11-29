@@ -515,9 +515,21 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             Log.d("audio", "finish activity");
         }else if (id == R.id.btn_second_back){
             Log.d("audio", "btn_second_back");
+            audioListManager.secondBack(curEpisode);
+
+            btn_play.setImageResource(R.drawable.btn_pause);
+            btn_play.setTag("btn_pause");
+
+            stopAndPublish();
             
         } else if (id == R.id.btn_second_forward) {
             Log.d("audio", "btn_second_forward");
+            audioListManager.secondForward(curEpisode);
+
+            btn_play.setImageResource(R.drawable.btn_pause);
+            btn_play.setTag("btn_pause");
+
+            stopAndPublish();
             
         } else if (id == R.id.play_mode) {
             Log.d("audio", "play_mode");

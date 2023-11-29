@@ -270,6 +270,63 @@ public class AudioListManager {
         audioPlayManager.to_pause();
     }
 
+    //快退10秒
+    public void secondBack(Episode episode) {
+        int pos = getPositionInList(episode);
+        if(pos == -1){
+            Log.d(TAG, "secondBack pos -1");
+            throw new RuntimeException();
+        }
+
+        if(pos != curPosition){
+            audioPlayManager.setCurEpisode(episode);
+            curPosition = pos;
+        }else {
+            if(isPlayManagerPlaying())audioPlayManager.to_pause();
+        }
+
+        MediaPlayer player = audioPlayManager.getPlayer();
+        if(player == null){
+            Log.d(TAG, "secondBack player null");
+            throw new RuntimeException();
+        }
+
+        int curPos = player.getCurrentPosition() - 10000;
+        if(curPos <= 0)curPos = 0;
+
+        player.seekTo(curPos);
+        player.start();
+        Log.d(TAG, "secondBack ok");
+    }
+
+    //快进10秒
+    public void secondForward(Episode episode) {
+        int pos = getPositionInList(episode);
+        if(pos == -1){
+            Log.d(TAG, "secondForward pos -1");
+            throw new RuntimeException();
+        }
+
+        if(pos != curPosition){
+            audioPlayManager.setCurEpisode(episode);
+            curPosition = pos;
+        }else {
+            if(isPlayManagerPlaying())audioPlayManager.to_pause();
+        }
+
+        MediaPlayer player = audioPlayManager.getPlayer();
+        if(player == null){
+            Log.d(TAG, "secondForward player null");
+            throw new RuntimeException();
+        }
+
+        int curPos = player.getCurrentPosition() + 10000;
+
+        player.seekTo(curPos);
+        player.start();
+        Log.d(TAG, "secondForward ok");
+    }
+
     public void release(){
         audioPlayManager.releasePlayer();
     }
@@ -294,8 +351,8 @@ public class AudioListManager {
 //        audioPlayManager.to_reset();
         curPosition = position - 1;
         Episode ans = audioList.get(curPosition);
-        ans.setLastTime(0);
         audioPlayManager.setCurEpisode(ans);
+        ans.setLastTime(0);
         audioPlayManager.to_play();
         return ans;
     }
@@ -316,8 +373,8 @@ public class AudioListManager {
 //        audioPlayManager.to_reset();
         curPosition = position + 1;
         Episode ans = audioList.get(curPosition);
-        ans.setLastTime(0);
         audioPlayManager.setCurEpisode(ans);
+        ans.setLastTime(0);
         audioPlayManager.to_play();
         return ans;
     }

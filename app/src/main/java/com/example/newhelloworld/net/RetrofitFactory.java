@@ -41,7 +41,8 @@ public class RetrofitFactory {
                 Request request = chain.request();
                 String token = PreferenceUtil.token(MyApplication.getContext());
                 if(token != null){
-                    request = request.newBuilder().addHeader("token", token).build();
+//                    request = request.newBuilder().addHeader("token", token).build();
+                    request = request.newBuilder().addHeader("Authorization", "Bearer " + token).build();
                 }
                 return chain.proceed(request);
             }
