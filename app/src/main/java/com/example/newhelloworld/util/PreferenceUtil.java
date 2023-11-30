@@ -108,6 +108,6 @@ public class PreferenceUtil {
     // 获取token
     public static String token(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREFERENCE_NAME, 0);
-        return pref.getString(KEY_USER_ID, null);
+        return pref.getString(KEY_USER_TOKEN, null);
     }
 }

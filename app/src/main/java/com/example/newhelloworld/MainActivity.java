@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newhelloworld.adapter.EpisodeAdapter;
+import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.views.AudioRoundProgressView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,6 +29,10 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 import com.yanzhenjie.recyclerview.touch.OnItemMoveListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -92,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
     //recyclerview
     private SwipeRecyclerView rcycView;
 
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void eventProcess(MsgAddToAudioList msg){
+//
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
+        //注册事件总线
+//        EventBus.getDefault().register(this);
 
 
         setEpisodeListSheet();
@@ -132,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigation,navController);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+    }
 
     public void setEpisodeListSheet(){
         //获取播放列表视图
@@ -145,7 +162,8 @@ public class MainActivity extends AppCompatActivity {
         //获取数据
         episodeList = new ArrayList<>();
         for (int i = 0; i < 9; i++){
-            Episode item = new Episode("episode item","aa", i, LocalDateTime.now());
+            //TODO 待后端接口完成后修改
+            Episode item = new Episode(i, "title", "user_name1", 237, null, "/song/song1.mp3");
             episodeList.add(item);
         }
 

@@ -15,12 +15,20 @@ import com.example.newhelloworld.activity.CategoryActivity;
 import com.example.newhelloworld.activity.PageActivity;
 import com.example.newhelloworld.adapter.CustomAdapter;
 import com.example.newhelloworld.adapter.YourPagerAdapter;
+import com.example.newhelloworld.event.MsgAddToAudioList;
+import com.example.newhelloworld.manager.AudioListManager;
+import com.example.newhelloworld.model.Episode;
 import com.google.android.material.tabs.TabLayout;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.time.LocalDateTime;
 
 public class AFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,19 +51,34 @@ public class AFragment extends Fragment {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
+        AudioListManager instance = AudioListManager.getInstance();
+
         listView.setOnItemClickListener((adapterView, view1, position, l) -> {
             // 根据点击的位置跳转到相应的页面
             // 这里具体页面还没写，所以还没完善这里
             switch (position) {
                 case 0:
+                    Episode episode1 = new Episode(1, "title1", "user_name1", 237, null, "/music/obj168925.mp3");
+                    instance.addData(episode1);
+                    EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));
+
                     // 跳转到column 1
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 1:
+                    Episode episode2 = new Episode(2, "title2", "user_name2", 210, null, "/song/song2.mp3");
+
+                    instance.addData(episode2);
+                    EventBus.getDefault().postSticky(new MsgAddToAudioList(episode2));
+
                     // 跳转到column 2
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 2:
+                    Episode episode3 = new Episode(3, "title3", "user_name3", 265, null, "/song/song3.mp3");
+
+                    instance.addData(episode3);
+                    EventBus.getDefault().postSticky(new MsgAddToAudioList(episode3));
                     // 跳转到column 3
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
