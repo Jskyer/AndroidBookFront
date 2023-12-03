@@ -64,13 +64,11 @@ public class MyRetrofitClient {
     }
 
     //CommentController
-    public Observable<StatusResp> addComment(Integer podcastId,
-                                             Integer user_id,
-                                             String comment_text, Observer<StatusResp> observer){
+    public Observable<StatusResp> addComment(Integer podcastId, String comment_text, Observer<StatusResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
-        Observable<StatusResp> res = iRequest.addComment(podcastId, user_id, comment_text);
+        Observable<StatusResp> res = iRequest.addComment(podcastId, comment_text);
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -89,11 +87,11 @@ public class MyRetrofitClient {
     }
 
 
-    public Observable<StatusResp> delComment(Integer user_id, Integer comment_id, Observer<StatusResp> observer){
+    public Observable<StatusResp> delComment(Integer comment_id, Observer<StatusResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
-        Observable<StatusResp> res = iRequest.delComment(user_id, comment_id);
+        Observable<StatusResp> res = iRequest.delComment(comment_id);
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -101,12 +99,11 @@ public class MyRetrofitClient {
     }
 
     //LikeController
-    public Observable<StatusResp> likeComment(Integer user_id, Integer comment_id,
-                                              Observer<StatusResp> observer){
+    public Observable<StatusResp> likeComment(Integer comment_id, Observer<StatusResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
-        Observable<StatusResp> res = iRequest.likeComment(user_id, comment_id);
+        Observable<StatusResp> res = iRequest.likeComment(comment_id);
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -265,7 +262,7 @@ public class MyRetrofitClient {
         return res;
     }
 
-    public Observable<GetPodcastOffiRecResp> getPodcastOffiRec(Integer podcastId, Observer<GetPodcastOffiRecResp> observer){
+    public Observable<GetPodcastOffiRecResp> getPodcastOffiRec(Observer<GetPodcastOffiRecResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
@@ -277,7 +274,7 @@ public class MyRetrofitClient {
     }
 
 
-    public Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewView(Integer podcastId, Observer<GetPodcastRankPreviewResp> observer){
+    public Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewView(Observer<GetPodcastRankPreviewResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
@@ -288,7 +285,7 @@ public class MyRetrofitClient {
         return res;
     }
 
-    public Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewLike(Integer podcastId, Observer<GetPodcastRankPreviewResp> observer){
+    public Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewLike(Observer<GetPodcastRankPreviewResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 

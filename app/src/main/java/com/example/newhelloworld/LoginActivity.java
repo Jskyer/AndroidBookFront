@@ -39,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         //加入管理器，方便登录后销毁
         MyActivityManager.getInstance().add(this);
 
+//        PreferenceUtil.clearPreferences(this);
+
         emailView = this.findViewById(R.id.EmailEdit);
         pwdView = this.findViewById(R.id.PassWordEdit);
         loginButton = this.findViewById(R.id.LoginButton);

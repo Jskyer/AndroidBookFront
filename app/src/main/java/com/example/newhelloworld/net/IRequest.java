@@ -40,18 +40,18 @@ public interface IRequest {
 
     //CommentController
     @POST("/api/Comment/add_comment")
-    Observable<StatusResp> addComment(@Query("podcastId") Integer podcastId, @Query("user_id") Integer user_id, @Query("comment_text") String comment_text);
+    Observable<StatusResp> addComment(@Query("podcastId") Integer podcastId, @Query("comment_text") String comment_text);
 
     @GET("/api/Comment/get_comment")
     Observable<GetCommentsResp> getComments(@Query("podcastId") Integer podcastId);
 
     @POST("/api/Comment/del_comment")
-    Observable<StatusResp> delComment(@Query("user_id") Integer user_id, @Query("comment_id") Integer comment_id);
+    Observable<StatusResp> delComment(@Query("comment_id") Integer comment_id);
 
 
     //LikeController
     @POST("/api/like/like_comment")
-    Observable<StatusResp> likeComment(@Query("user_id") Integer user_id, @Query("comment_id") Integer comment_id);
+    Observable<StatusResp> likeComment(@Query("comment_id") Integer comment_id);
 
     //UserController
     @GET("/api/user/history")
@@ -64,10 +64,10 @@ public interface IRequest {
     @GET("/api/user/subscribed")
     Observable<GetSubscribeResp> getSubscribePreviews(@Query("page_no")Integer page_no, @Query("page_size") Integer page_size);
 
-    @GET("api/user/api/user/subscribe_num")
+    @GET("/api/user/subscribe_num")
     Observable<IntegerResp> getSubscribeNumPreviews();
 
-    @POST("api/user/reset_des")
+    @POST("/api/user/reset_des")
     Observable<ResetPassResp> resetDescription(@Query("description") String description);
 
     @POST("/api/user/reset_avatar")

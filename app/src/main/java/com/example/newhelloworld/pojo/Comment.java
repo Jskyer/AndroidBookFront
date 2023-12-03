@@ -3,31 +3,31 @@ package com.example.newhelloworld.pojo;
 import java.util.Date;
 
 public class Comment {
-    private Integer commentId;
+    private Integer comment_id;
     private Integer podcastId;
     private Integer commenter_id;
     private String comment_text;
-    private Date commentTime;
+    private Date comment_time;
     private Integer likeNum;
 
     @Override
     public String toString() {
         return "Comment{" +
-                "commentId=" + commentId +
+                "comment_id=" + comment_id +
                 ", podcastId=" + podcastId +
                 ", commenter_id=" + commenter_id +
                 ", comment_text='" + comment_text + '\'' +
-                ", commentTime=" + commentTime +
+                ", comment_time=" + comment_time +
                 ", likeNum=" + likeNum +
                 '}';
     }
 
-    public Integer getCommentId() {
-        return commentId;
+    public Integer getComment_id() {
+        return comment_id;
     }
 
-    public void setCommentId(Integer commentId) {
-        this.commentId = commentId;
+    public void setComment_id(Integer comment_id) {
+        this.comment_id = comment_id;
     }
 
     public Integer getPodcastId() {
@@ -54,12 +54,12 @@ public class Comment {
         this.comment_text = comment_text;
     }
 
-    public Date getCommentTime() {
-        return commentTime;
+    public Date getComment_time() {
+        return comment_time;
     }
 
-    public void setCommentTime(Date commentTime) {
-        this.commentTime = commentTime;
+    public void setComment_time(Date comment_time) {
+        this.comment_time = comment_time;
     }
 
     public Integer getLikeNum() {
@@ -70,12 +70,12 @@ public class Comment {
         this.likeNum = likeNum;
     }
 
-    public Comment(Integer commentId, Integer podcastId, Integer commenter_id, String comment_text, Date commentTime, Integer likeNum) {
-        this.commentId = commentId;
+    public Comment(Integer comment_id, Integer podcastId, Integer commenter_id, String comment_text, Date comment_time, Integer likeNum) {
+        this.comment_id = comment_id;
         this.podcastId = podcastId;
         this.commenter_id = commenter_id;
         this.comment_text = comment_text;
-        this.commentTime = commentTime;
+        this.comment_time = comment_time;
         this.likeNum = likeNum;
     }
 }
