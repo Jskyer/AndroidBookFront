@@ -1,23 +1,56 @@
 package com.example.newhelloworld;
 
+import android.media.metrics.Event;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.newhelloworld.activity.MyAlbumListActivity;
 import com.example.newhelloworld.activity.HistoryActivity;
 import com.example.newhelloworld.activity.PersonalDetailActivity;
 import com.example.newhelloworld.activity.SettingActivity;
 import com.example.newhelloworld.adapter.CFragmentAdapter;
+import com.example.newhelloworld.event.MsgChangeAvatar;
+import com.example.newhelloworld.util.PreferenceUtil;
+import com.example.newhelloworld.util.ResourceUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class CFragment extends Fragment{
+    public static final String TAG = "CFragment";
+    private View view;
+
+    private ImageView avatarView;
+
+    private TextView nameView;
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onChangeAvatar(MsgChangeAvatar msg){
+        Log.d(TAG, "onChangeAvatar");
+
+        if(msg.getPath() != null){
+            Glide.with(this)
+                    .load(ResourceUtil.getUserAvatarPath(msg.getPath()))
+                    .centerCrop()
+                    .into(avatarView);
+        }
+
+        EventBus.getDefault().removeStickyEvent(this);
+    }
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.personal_layout, container, false);
+        view = inflater.inflate(R.layout.personal_layout, container, false);
         ListView listView = view.findViewById(R.id.list_personal);
 
         // 创建图像数组和文本数组
@@ -55,10 +88,44 @@ public class CFragment extends Fragment{
             }
         });
 
+
+        nameView = view.findViewById(R.id.username);
+        avatarView = view.findViewById(R.id.avatar);
+
+        bindPersonalInfo();
+
+
+        EventBus.getDefault().register(this);
+
         return view;
     }
 
-//    @Override
+    public void bindPersonalInfo(){
+        //绑定头像
+        String avatarPath = PreferenceUtil.getString(MyApplication.getContext(), PreferenceUtil.KEY_USER_AVATAR, null);
+        if (avatarPath != null){
+            Glide.with(this)
+                    .load(ResourceUtil.getUserAvatarPath(avatarPath))
+                    .centerCrop()
+                    .into(avatarView);
+        }
+
+        //绑定名字
+        String name = PreferenceUtil.getString(MyApplication.getContext(), PreferenceUtil.KEY_USER_NAME);
+        if(name != null){
+            nameView.setText(name);
+        }
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    //    @Override
 //    public void onClick(View view) {
 //        int id = view.getId();
 //        if(id == R.id.goto_history){

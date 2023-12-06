@@ -22,11 +22,12 @@
             android:layout_height="wrap_content">
             <!--logo-->
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_logo"
+                android:id="@+id/playlst_poster"
                 android:layout_width="@dimen/dp_48"
                 android:layout_height="@dimen/dp_48"
                 android:padding="1dp"
                 android:src="@drawable/icon_music"
+                android:clickable="true"
                 app:strokeColor="@color/white"
                 app:strokeWidth="@dimen/dp_2" />
 
@@ -34,7 +35,7 @@
 
         <!--歌曲信息  歌名 - 歌手 -->
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/episode_name"
+            android:id="@+id/playlst_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -51,10 +52,11 @@
 
         <!--歌曲控制按钮-->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_play"
+            android:id="@+id/playlst_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
+            android:tag="btn_play"
             android:insetLeft="@dimen/dp_0"
             android:insetTop="@dimen/dp_0"
             android:insetRight="@dimen/dp_0"

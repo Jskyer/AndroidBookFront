@@ -55,7 +55,8 @@ regions</string>
     <string name="album_img">上传专栏图</string>
     <string name="introduction">个人简介</string>
     <string name="introduction_edit">编辑简介</string>
-
+    <string name="upload_avatar">上传头像</string>
+    <string name="main_playlist_null">欢迎探索~</string>
 
 
     <string name="title_activity_category">CategoryActivity</string>

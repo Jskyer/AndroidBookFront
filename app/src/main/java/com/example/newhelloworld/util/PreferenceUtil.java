@@ -13,6 +13,10 @@ public class PreferenceUtil {
     public static final String KEY_USER_NAME = "user_name";
     public static final String KEY_USER_TOKEN = "access_token";
 
+    public static final String KEY_USER_AVATAR = "user_avatar";
+
+    public static final String KEY_USER_INTRO = "user_intro";
+
 
 
 

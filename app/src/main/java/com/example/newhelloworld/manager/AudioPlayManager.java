@@ -78,6 +78,10 @@ public class AudioPlayManager {
         return player;
     }
 
+    public Episode getCurEpisodeInPlay(){
+        return curEpisode;
+    }
+
     public void to_reset(){
         player.reset();
         curEpisode = null;
@@ -125,6 +129,22 @@ public class AudioPlayManager {
         }
 
         curEpisode.setLastTime(time);
+    }
+
+    //仅用于自动按模式播放下一首
+    public void setModeNext(Episode next){
+        player.reset();
+        curEpisode = next;
+        try {
+            player.setDataSource(ResourceUtil.getUrlAbsolutePath(curEpisode.getPodcast_path()));
+            player.prepare();
+
+            Log.d(TAG, "prepare ok");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        isRelease = false;
     }
 
     // 暂停按钮

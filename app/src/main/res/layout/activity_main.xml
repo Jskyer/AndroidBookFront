@@ -45,6 +45,7 @@
                 android:layout_height="@dimen/dp_48"
                 android:padding="1dp"
                 android:src="@drawable/icon_music"
+                android:clickable="true"
                 app:strokeColor="@color/white"
                 app:strokeWidth="@dimen/dp_2" />
 
@@ -63,7 +64,7 @@
             android:paddingLeft="@dimen/dp_12"
             android:paddingRight="@dimen/dp_12"
             android:singleLine="true"
-            android:text="Good Music"
+            android:text="@string/main_playlist_null"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
         <!--歌曲控制按钮-->
@@ -71,6 +72,7 @@
             android:id="@+id/btn_play"
             android:layout_width="@dimen/dp_36"
             android:layout_height="@dimen/dp_36"
+            android:tag="btn_play"
             android:insetLeft="@dimen/dp_0"
             android:insetTop="@dimen/dp_0"
             android:insetRight="@dimen/dp_0"
