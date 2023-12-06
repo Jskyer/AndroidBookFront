@@ -3,6 +3,7 @@ package com.example.newhelloworld.net;
 import com.example.newhelloworld.queryVO.GetCommentsResp;
 import com.example.newhelloworld.queryVO.LoginResp;
 import com.example.newhelloworld.queryVO.SendVerificationResp;
+import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.StatusResp;
 import com.example.newhelloworld.queryVO.album.GetAlbumInfoResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
@@ -21,6 +22,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 import retrofit2.Retrofit;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -317,6 +319,17 @@ public class MyRetrofitClient {
         IRequest iRequest = retrofit.create(IRequest.class);
 
         Observable<StatusResp> res = iRequest.delPodcast(podcastId);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
+    public Observable<ResetPassResp> uploadAvatar(MultipartBody.Part mediaFile, Observer<ResetPassResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<ResetPassResp> res = iRequest.uploadAvatar(mediaFile);
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

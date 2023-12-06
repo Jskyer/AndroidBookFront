@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.event.MsgAddToAudioList;
+import com.example.newhelloworld.event.MsgAudioToMain;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 
@@ -127,10 +128,11 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         String end = String.format(Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60);
         textEndTime.setText(end);
 
+        int curTime = 0;
         //播放页点击过播放或暂停，退出播放页后重新打开，episode是listmanager中处于播放的，则恢复view的状态
-        if(audioListManager.judgeIsCurInList(episode)){
-            int curTime = 0;
-            Log.d("audio", "judgeIsCurInList true");
+        if(audioListManager.isCurInListPlaying(episode)){
+
+            Log.d("audio", "isCurInListPlaying true");
 
             //音频仍在播放
             if(audioListManager.isPlayManagerPlaying()){
@@ -138,7 +140,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
 
                 btn_play.setImageResource(R.drawable.btn_pause);
                 btn_play.setTag("btn_pause");
-                curTime = audioListManager.getCurPositionFromPlayer() / 1000;
+//                curTime = audioListManager.getCurPositionFromPlayer() / 1000;
 
                 publishProgress();
             }else{
@@ -151,8 +153,15 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 seekBar.setProgress(curTime);
             }
 
-        }
+        }else{
+            Log.d("audio", "isCurInListPlaying false");
+            curTime = episode.getLastTime() / 1000;
 
+            String curFormat = String.format(Locale.getDefault(), "%02d:%02d", curTime / 60, curTime % 60);
+            textCurTime.setText(curFormat);
+
+            seekBar.setProgress(curTime);
+        }
 
         curEpisode = episode;
         Log.d("audio", "duration: " + seconds);
@@ -511,6 +520,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             }
 
         }else if(id == R.id.go_down){
+            EventBus.getDefault().postSticky(new MsgAudioToMain(curEpisode, audioListManager.isPlayManagerPlaying()));
+
             finish();
             Log.d("audio", "finish activity");
         }else if (id == R.id.btn_second_back){

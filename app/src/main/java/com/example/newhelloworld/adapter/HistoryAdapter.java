@@ -1,40 +1,58 @@
 package com.example.newhelloworld.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.newhelloworld.MyApplication;
 import com.example.newhelloworld.R;
+import com.example.newhelloworld.activity.AudioActivity;
+import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.model.Episode;
+import com.example.newhelloworld.pojo.HistoryInfo;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 // 个人 浏览历史adapter
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
-    private List<Episode> episodeList;
+    private List<HistoryInfo> episodeList;
+
+    private Context context;
+
     static class ViewHolder extends RecyclerView.ViewHolder{
+        View itemView;
+        ImageView imageView;
         TextView titleView;
-        TextView contentView;
-        TextView timeView;
+        TextView uploaderView;
+        TextView viewsView;
         TextView dateView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            this.itemView = itemView;
+            imageView = itemView.findViewById(R.id.item_img);
             titleView = itemView.findViewById(R.id.item_title);
-            contentView = itemView.findViewById(R.id.item_content);
-            timeView = itemView.findViewById(R.id.item_leftTime);
+            uploaderView = itemView.findViewById(R.id.item_uploader);
+            viewsView = itemView.findViewById(R.id.item_views);
             dateView = itemView.findViewById(R.id.item_date);
         }
     }
 
-    public HistoryAdapter(List<Episode> episodeList) {
+    public HistoryAdapter(List<HistoryInfo> episodeList, Context context) {
         this.episodeList = episodeList;
+        this.context = context;
     }
 
     @NonNull
@@ -47,15 +65,44 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
-        Episode episode = episodeList.get(position);
+        HistoryInfo episode = episodeList.get(position);
+
+        //TODO
+//        Glide.with(MyApplication.getContext())
+//                .load("")
+//                .into(holder.imageView);
+
         holder.titleView.setText(episode.getTitle());
-        holder.contentView.setText(episode.getUploader_name());
-        holder.timeView.setText("剩余 "+ episode.getDuration() + " 分钟");
-        holder.dateView.setText(episode.getDateTime().format(DateTimeFormatter.ofPattern("yyyy/mm/dd")));
+        holder.uploaderView.setText(episode.getUploader_name());
+        holder.viewsView.setText("观看 "+ episode.getViews() + " 次");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 定义日期格式
+        holder.dateView.setText(sdf.format(episode.getDatetime()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                EventBus.getDefault().postSticky(new MsgAddToAudioList(episode));
+                AudioActivity.startAction(context);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return episodeList.size();
     }
+
+    // 暴露接口，更新数据源
+    public void updateList(List<HistoryInfo> newDatas) {
+        // 在原有的数据之上增加新数据
+        if (newDatas != null && newDatas.size() > 0) {
+            episodeList.addAll(newDatas);
+            notifyDataSetChanged();
+        }
+
+    }
+
+
+
 }

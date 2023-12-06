@@ -7,6 +7,7 @@ import com.example.newhelloworld.util.PreferenceUtil;
 
 import java.io.IOException;
 
+import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +20,8 @@ public class RetrofitFactory {
     private static class RetrofitHolder{
         private static Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:9090")
-//                .baseUrl("http://39.101.66.253:9090")
+//                .baseUrl("http://10.0.2.2:7070") //TODO 测试头像功能
+//                .baseUrl("http://139.224.194.55:9090")
                 .client(getClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -34,6 +36,8 @@ public class RetrofitFactory {
 
     private static OkHttpClient getClient(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        Cache cache = new Cache(MyApplication.getContext().getCacheDir(), 1024*1024*100);
+        builder.cache(cache);
         builder.addNetworkInterceptor(new Interceptor() {
             @NonNull
             @Override

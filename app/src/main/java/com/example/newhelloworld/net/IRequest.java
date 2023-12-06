@@ -3,6 +3,7 @@ package com.example.newhelloworld.net;
 import com.example.newhelloworld.queryVO.GetCommentsResp;
 import com.example.newhelloworld.queryVO.LoginResp;
 import com.example.newhelloworld.queryVO.SendVerificationResp;
+import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.StatusResp;
 import com.example.newhelloworld.queryVO.album.GetAlbumInfoResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
@@ -19,6 +20,7 @@ import com.example.newhelloworld.queryVO.userInfo.IntegerResp;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -123,9 +125,9 @@ public interface IRequest {
 
 
 
-
-    //    @Multipart
-//    @POST("/file/upload")
-//    Observable<Result> uploadAvatar(@Part MultipartBody.Part mediaFile);
+//    上传头像
+    @Multipart
+    @POST("/api/user/uploadAvatar")
+    Observable<ResetPassResp> uploadAvatar(@Part MultipartBody.Part mediaFile);
 
 }

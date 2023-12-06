@@ -126,7 +126,7 @@ public class MySwipeRecyclerView extends RecyclerView {
                 if (item != null) {
                     //获取当前选中的Item
                     EpisodeAdapter.ViewHolder viewHolder = (EpisodeAdapter.ViewHolder) getChildViewHolder(item);
-                    mCurItemLayout = viewHolder.getDelBlockView();
+//                    mCurItemLayout = viewHolder.getDelBlockView();
                     //找到具体元素
                     mLlHidden = (LinearLayout)mCurItemLayout.findViewById(R.id.del_hidden);
                     mItemDelete = (LinearLayout)mCurItemLayout.findViewById(R.id.del_hidden);

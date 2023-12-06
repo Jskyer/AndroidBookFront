@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SeekBar;
 
+import com.example.newhelloworld.event.AudioCompleteListener;
 import com.example.newhelloworld.model.Episode;
 
 import java.util.ArrayList;
@@ -49,15 +50,22 @@ public class AudioListManager {
     // 随机数生成
     private Random random;
 
+    //用于单集播放结束，按模式切换时，设置MainActivity中的laybottom
+    private AudioCompleteListener audioCompleteListener;
+
     //仅在一首结束，根据模式切换，刷新播放页ui时调用
     public Episode getCurEpisode(){
         if(curPosition == -1)return null;
         return audioList.get(curPosition);
     }
 
-//    public boolean isListEmpty(){
-//        return audioList.isEmpty();
-//    }
+    public int getCurpos(){
+        return curPosition;
+    }
+
+    public List<Episode> getList(){
+        return audioList;
+    }
 
     public int getCurPositionFromPlayer(){
         return audioPlayManager.getPlayer().getCurrentPosition();
@@ -67,10 +75,17 @@ public class AudioListManager {
         return audioPlayManager.getPlayer().isPlaying();
     }
 
-    public boolean judgeIsCurInList(Episode episode){
-        if(curPosition == -1)return false;
-        int curId  = audioList.get(curPosition).getId();
-        return episode.getId() == curId;
+    public boolean isCurInListPlaying(Episode episode){
+        if (episode == null)throw new RuntimeException();
+
+        Episode curEpisodeInPlay = audioPlayManager.getCurEpisodeInPlay();
+        if(curEpisodeInPlay == null)return false;
+
+        return episode.getId() == curEpisodeInPlay.getId();
+    }
+
+    public boolean judgeInList(Episode episode){
+        return getPositionInList(episode) != -1;
     }
 
     public int getCurLastTime(){
@@ -417,23 +432,22 @@ public class AudioListManager {
 //        }
 //    }
 
+    public void setCompleteNext(AudioCompleteListener listener){
+        audioCompleteListener = listener;
+    }
+
 
     // 当前播放的单集播放结束，按照mode播放
     public void mode_next_song(){
         if(mode == AudioListManager.MODE_LIST_LOOP){
             Log.d(TAG, "MODE_LIST_LOOP");
             curPosition = (curPosition + 1) % audioList.size();
-//            Episode episode = audioList.get(curPosition);
-
 
         }else if(mode == AudioListManager.MODE_SINGLE){
             Log.d(TAG, "MODE_SINGLE");
-//            audioPlayManager.setCurEpisode(audioList.get(curPosition));
-//            audioPlayManager.setLastTime(0);
-//            audioPlayManager.to_play();
 
         }else if(mode == AudioListManager.MODE_RANDOM){
-            Log.d(TAG, "MODE_SINGLE");
+            Log.d(TAG, "MODE_RANDOM");
 
             if (audioList.size() != 1){
                 int newPos = random.nextInt(audioList.size());
@@ -442,15 +456,16 @@ public class AudioListManager {
                 }
                 curPosition = newPos;
             }
-//            audioPlayManager.setCurEpisode(audioList.get(curPosition));
-//            audioPlayManager.setLastTime(0);
-//            audioPlayManager.to_play();
+
         }
 
+        Episode next = audioList.get(curPosition);
         audioPlayManager.setLastTime(0);
-        audioPlayManager.setCurEpisode(audioList.get(curPosition));
+        audioPlayManager.setModeNext(next);
         audioPlayManager.setLastTime(0);
         audioPlayManager.to_play();
+
+        audioCompleteListener.onCompleteForNext(next);
     }
 
     public int getMode(){
