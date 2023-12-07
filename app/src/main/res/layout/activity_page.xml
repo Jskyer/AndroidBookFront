@@ -84,7 +84,7 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/imageButton"
+                            android:id="@+id/page_comment"
                             android:layout_width="35dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"

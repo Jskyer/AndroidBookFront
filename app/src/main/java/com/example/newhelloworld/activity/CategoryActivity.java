@@ -26,14 +26,14 @@ import java.util.List;
 public class CategoryActivity extends AppCompatActivity {
     private List<PodcastEpisode> albumPodcastEpisodeList;
     private ImageButton btn_back;
-private ActivityCategoryBinding binding;
+    private ActivityCategoryBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-     binding = ActivityCategoryBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
+        binding = ActivityCategoryBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -55,7 +55,7 @@ private ActivityCategoryBinding binding;
         RecyclerView rcycView = findViewById(R.id.album_episode_list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
-        PodcastEpisodeAdapter adapter = new PodcastEpisodeAdapter(albumPodcastEpisodeList);
+        PodcastEpisodeAdapter adapter = new PodcastEpisodeAdapter(albumPodcastEpisodeList,this);
         rcycView.setAdapter(adapter);
         btn_back=(ImageButton)findViewById(R.id.btn_category_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
