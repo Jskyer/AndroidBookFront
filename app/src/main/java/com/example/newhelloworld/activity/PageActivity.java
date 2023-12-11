@@ -21,6 +21,7 @@ import java.util.List;
 public class PageActivity extends AppCompatActivity {
 
     private ImageButton button;
+    private ImageButton btn_comment;
     private List<PodcastEpisode> albumPodcastEpisodeList;
 
     @Override
@@ -34,12 +35,20 @@ public class PageActivity extends AppCompatActivity {
                 finish();
             }
         });
+        btn_comment=(ImageButton) findViewById(R.id.page_comment);
+        btn_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PageActivity.this, CommentActivity.class);
+                startActivity(intent);
+            }
+        });
         // 创建图像数组和文本数组
         initData();
         RecyclerView rcycView = findViewById(R.id.album_episode_list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
-        PodcastEpisodeAdapter adapter = new PodcastEpisodeAdapter(albumPodcastEpisodeList);
+        PodcastEpisodeAdapter adapter = new PodcastEpisodeAdapter(albumPodcastEpisodeList,this);
         rcycView.setAdapter(adapter);
     }
     public void initData(){
