@@ -23,11 +23,13 @@ import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
+import com.example.newhelloworld.queryVO.userInfo.IntegerResp;
 import com.example.newhelloworld.util.DialogUtil;
 import com.example.newhelloworld.util.PreferenceUtil;
 import com.example.newhelloworld.util.ResourceUtil;
 import com.google.android.material.button.MaterialButton;
 
+import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
@@ -44,11 +46,13 @@ public class PersonalDetailActivity extends ViewBindingActivity<PersonalDetailLa
 
     private boolean canEdit = false;
 
+    private MyRetrofitClient client;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        client = new MyRetrofitClient();
         bindPersonalInfo();
         setListeners();
 
@@ -56,6 +60,9 @@ public class PersonalDetailActivity extends ViewBindingActivity<PersonalDetailLa
 
     //绑定个人信息
     public void bindPersonalInfo(){
+        //订阅数
+        requestSubscribe();
+
         //绑定头像
         String avatarPath = PreferenceUtil.getString(this, PreferenceUtil.KEY_USER_AVATAR, null);
         if (avatarPath != null){
@@ -72,8 +79,6 @@ public class PersonalDetailActivity extends ViewBindingActivity<PersonalDetailLa
         }
         //TODO
         //关注数
-
-        //订阅数
 
         //简介
         String intro = PreferenceUtil.getString(this, PreferenceUtil.KEY_USER_INTRO);
@@ -145,6 +150,22 @@ public class PersonalDetailActivity extends ViewBindingActivity<PersonalDetailLa
         });
     }
 
+    public void requestSubscribe(){
+        client.getSubscribeNumPreviews(new MyObserver<IntegerResp>() {
+            @Override
+            public void onSuccss(IntegerResp integerResp) {
+                Status status = integerResp.getStatus();
+                Log.d(TAG, status.getMsg());
+
+                if(status.getCode() == 200){
+//                    binding.subscribeNum.setText(integerResp.getNum().toString());
+                    binding.subscribeNum.setText(String.valueOf(integerResp.getNum()));
+                }
+
+            }
+        });
+    }
+
 
 
     /**
@@ -193,8 +214,7 @@ public class PersonalDetailActivity extends ViewBindingActivity<PersonalDetailLa
         RequestBody fileBody = RequestBody.Companion.create(file, MediaType.parse("image/*"));
         MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("file", file.getName(), fileBody);
 
-        MyRetrofitClient myRetrofitClient = new MyRetrofitClient();
-        myRetrofitClient.uploadAvatar(multipartBody, new MyObserver<ResetPassResp>() {
+        client.uploadAvatar(multipartBody, new MyObserver<ResetPassResp>() {
             @Override
             public void onSuccss(ResetPassResp resp) {
                 Status status = resp.getStatus();

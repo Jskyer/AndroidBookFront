@@ -8,19 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.newhelloworld.R;
+import com.example.newhelloworld.util.ResourceUtil;
 
+//AFragment
 public class CustomAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final Integer[] imageArray;
+    private final String[] imageArray;
     private final String[] textArray;
 
     private final String[] textArrayP;
 
     private final String[] textArrayR;
 
-    public CustomAdapter(Activity context, String[] textArrayParam, String[] textArrayPart, String[] textArrayRecommend, Integer[] imageArrayParam) {
+    public CustomAdapter(Activity context, String[] textArrayParam, String[] textArrayPart, String[] textArrayRecommend, String[] imageArrayParam) {
         super(context, R.layout.a_fragment_unit, textArrayParam);
 
         this.context = context;
@@ -46,7 +49,12 @@ public class CustomAdapter extends ArrayAdapter<String> {
         text.setText(textArray[position]);
         text2.setText(textArrayP[position]);
         text3.setText(textArrayR[position]);
-        image.setImageResource(imageArray[position]);
+        Glide.with(context)
+                .load(ResourceUtil.getPodcastPosterPath(imageArray[position]))
+                .centerCrop()
+                .into(image);
+//        image.setImageResource(imageArray[position]);
+
         return rowView;
     }
 }

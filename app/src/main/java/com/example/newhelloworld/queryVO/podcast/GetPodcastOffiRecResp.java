@@ -1,6 +1,7 @@
 package com.example.newhelloworld.queryVO.podcast;
 
 
+import com.example.newhelloworld.pojo.Podcast;
 import com.example.newhelloworld.pojo.PodcastOffiRec;
 import com.example.newhelloworld.queryVO.Status;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class GetPodcastOffiRecResp {
     private Status status;
-    private List<PodcastOffiRec> podcasts;
+    private List<Podcast> podcasts;
 
     @Override
     public String toString() {
@@ -27,15 +28,15 @@ public class GetPodcastOffiRecResp {
         this.status = status;
     }
 
-    public List<PodcastOffiRec> getPodcasts() {
+    public List<Podcast> getPodcasts() {
         return podcasts;
     }
 
-    public void setPodcasts(List<PodcastOffiRec> podcasts) {
+    public void setPodcasts(List<Podcast> podcasts) {
         this.podcasts = podcasts;
     }
 
-    public GetPodcastOffiRecResp(Status status, List<PodcastOffiRec> podcasts) {
+    public GetPodcastOffiRecResp(Status status, List<Podcast> podcasts) {
         this.status = status;
         this.podcasts = podcasts;
     }

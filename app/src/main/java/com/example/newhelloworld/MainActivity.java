@@ -131,6 +131,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 //        TODO
+        Glide.with(this)
+                .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
+                .centerCrop()
+                .into(ivLogo);
 //        ivLogo.setImageResource();
         tvSongName.setText(episode.getTitle());
 
@@ -160,6 +164,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 //        TODO
+        Glide.with(this)
+                .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
+                .centerCrop()
+                .into(ivLogo);
 //        ivLogo.setImageResource();
         tvSongName.setText(episode.getTitle());
 
@@ -193,6 +201,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Episode tmp = list.get(0);
 //                TODO
+                Glide.with(this)
+                        .load(ResourceUtil.getPodcastPosterPath(tmp.getPoster()))
+                        .centerCrop()
+                        .into(ivLogo);
 //                ivLogo.setImageResource();
                 tvSongName.setText(tmp.getTitle());
 
@@ -342,7 +354,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            episodeList.add(item);
 //        }
 
-        //TODO
 //        episodeList = audioListManager.getList();
 //
 //        Log.d(TAG, "" + episodeList.size());
@@ -471,6 +482,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCompleteForNext(Episode episode) {
 //        TODO
+        Glide.with(this)
+                .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
+                .centerCrop()
+                .into(ivLogo);
 //        ivLogo.setImageResource();
         tvSongName.setText(episode.getTitle());
 

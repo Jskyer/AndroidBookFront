@@ -18,7 +18,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="Calora"
+            android:text=""
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +73,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="60dp"
-                android:text="10"
+                android:text=""
                 android:gravity="center"
                 android:textSize="30sp"
                 />
@@ -99,7 +99,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="60dp"
-                android:text="10"
+                android:text=""
                 android:gravity="center"
                 android:textSize="30sp"
                 />

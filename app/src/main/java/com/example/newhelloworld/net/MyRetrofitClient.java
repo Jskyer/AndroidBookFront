@@ -6,6 +6,7 @@ import com.example.newhelloworld.queryVO.SendVerificationResp;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.StatusResp;
 import com.example.newhelloworld.queryVO.album.GetAlbumInfoResp;
+import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastRankPreviewResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastResp;
@@ -59,6 +60,17 @@ public class MyRetrofitClient {
         IRequest iRequest = retrofit.create(IRequest.class);
 
         Observable<LoginResp> res = iRequest.login(map);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
+    public Observable<ResetPassResp> resetPwd(String pwd, Observer<ResetPassResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<ResetPassResp> res = iRequest.resetPwd(pwd);
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -182,6 +194,17 @@ public class MyRetrofitClient {
         return res;
     }
 
+    public Observable<ResetPassResp> addHistory(Integer podcast_id, Observer<ResetPassResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<ResetPassResp> res = iRequest.addHistory(podcast_id);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
     //AlbumController
     public Observable<GetAlbumInfoResp> getAlbumPreviews(Integer album_id, Integer page_no, Integer page_size,
                                                          Observer<GetAlbumInfoResp> observer){
@@ -251,6 +274,32 @@ public class MyRetrofitClient {
         return res;
     }
 
+    public Observable<GetPopularAlbumResp> getPopularAlbum(Integer pageNum, Integer pageSize,
+                                                           Observer<GetPopularAlbumResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<GetPopularAlbumResp> res = iRequest.getPopularAlbum(pageNum, pageSize);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
+    public Observable<GetPopularAlbumResp> getAlbumByType(Integer pageNum, Integer pageSize, String type,
+                                                          Observer<GetPopularAlbumResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<GetPopularAlbumResp> res = iRequest.getAlbumByType(pageNum, pageSize, type);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
+
+
 
     //PodcastController
     public Observable<GetPodcastResp> getPodcast(Integer podcastId, Observer<GetPodcastResp> observer){
@@ -276,22 +325,22 @@ public class MyRetrofitClient {
     }
 
 
-    public Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewView(Observer<GetPodcastRankPreviewResp> observer){
+    public Observable<GetPodcastOffiRecResp> getPodcastRankPreviewView(Observer<GetPodcastOffiRecResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
-        Observable<GetPodcastRankPreviewResp> res = iRequest.getPodcastRankPreviewView();
+        Observable<GetPodcastOffiRecResp> res = iRequest.getPodcastRankPreviewView();
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         return res;
     }
 
-    public Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewLike(Observer<GetPodcastRankPreviewResp> observer){
+    public Observable<GetPodcastOffiRecResp> getPodcastRankPreviewLike(Observer<GetPodcastOffiRecResp> observer){
         Retrofit retrofit = RetrofitFactory.getInstance();
         IRequest iRequest = retrofit.create(IRequest.class);
 
-        Observable<GetPodcastRankPreviewResp> res = iRequest.getPodcastRankPreviewLike();
+        Observable<GetPodcastOffiRecResp> res = iRequest.getPodcastRankPreviewLike();
         res.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

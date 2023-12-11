@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,9 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.adapter.MyAlbumListAdapter;
 import com.example.newhelloworld.databinding.ContributionLayoutBinding;
-import com.example.newhelloworld.model.Album;
+import com.example.newhelloworld.net.MyObserver;
+import com.example.newhelloworld.net.MyRetrofitClient;
+import com.example.newhelloworld.pojo.Album;
+import com.example.newhelloworld.queryVO.Status;
+import com.example.newhelloworld.queryVO.userInfo.GetCreateResp;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,22 +32,72 @@ public class MyAlbumListActivity extends ViewBindingActivity<ContributionLayoutB
     private final String TAG = "MyAlbumListActivity";
     private List<Album> albumList;
 
-    private Button createAlbumBtn;
+    private RecyclerView rcycView;
 
-    public static void startAction(Context context){
-        Intent intent = new Intent(context, MyAlbumListActivity.class);
-        context.startActivity(intent);
-    }
+    private MyAlbumListAdapter adapter;
+
+
+    private MyRetrofitClient client;
+
+    private int pageNo = 1;
+
+    private int pageSize = 6;
+
+    private int lastItemId = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.contribution_layout);
 
+        client = new MyRetrofitClient();
+        albumList = new ArrayList<>();
+        loadData();
         setRecycler();
+        setListener();
 
-        createAlbumBtn = findViewById(R.id.create_album);
-        createAlbumBtn.setOnClickListener(new View.OnClickListener() {
+    }
+
+    public void setRecycler(){
+
+//        for (int i = 0; i < 12; i++){
+//            Album item = new Album("aaaaaaaaaaa",LocalDateTime.now(), i);
+//            albumList.add(item);
+//        }
+
+        rcycView = findViewById(R.id.list_album);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        rcycView.setLayoutManager(manager);
+
+        adapter = new MyAlbumListAdapter(albumList, this);
+        rcycView.setAdapter(adapter);
+
+        rcycView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                int itemCount = adapter.getItemCount();
+                int last = layoutManager.findLastVisibleItemPosition();
+                int childCount = recyclerView.getChildCount();
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE
+                        && last == itemCount - 1
+                        && childCount > 0){
+                    Log.d(TAG, "加载下一页");
+                    pageNo++;
+                    loadData();
+                }
+
+            }
+        });
+    }
+
+    public void setListener(){
+        binding.createAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View inflate = getLayoutInflater().inflate(R.layout.dialog_myalbumlist_activity, null);
@@ -68,24 +123,41 @@ public class MyAlbumListActivity extends ViewBindingActivity<ContributionLayoutB
 
             }
         });
-
     }
 
-    public void setRecycler(){
-        albumList = new ArrayList<>();
-        for (int i = 0; i < 12; i++){
-            Album item = new Album("aaaaaaaaaaa",LocalDateTime.now(), i);
-            albumList.add(item);
-        }
+    public void loadData(){
+        client.getCreatedPreviews(pageNo, pageSize, new MyObserver<GetCreateResp>() {
+            @Override
+            public void onSuccss(GetCreateResp getCreateResp) {
+                Status status = getCreateResp.getStatus();
 
-        RecyclerView rcycView = findViewById(R.id.list_album);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        rcycView.setLayoutManager(manager);
+                if(status.getCode() == 200){
+//                    episodeList.addAll(getHistoryResp.getHistorys());
 
-        MyAlbumListAdapter adapter = new MyAlbumListAdapter(albumList, this);
-        rcycView.setAdapter(adapter);
+                    List<Album> albums = getCreateResp.getAlbums();
+                    if(albums != null && albums.size() > 0){
+                        Integer id = albums.get(0).getAlbum_id();
+                        if(id != lastItemId){
+                            Log.d(TAG,"load new: " + status.getMsg());
+                            adapter.updateList(albums);
+                            lastItemId = id;
+                        }else{
+                            Toast.makeText(MyAlbumListActivity.this, "到底啦~", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
+                }else{
+                    Log.d(TAG,"status error: " + status.getMsg());
+                }
+            }
+        });
     }
 
+
+
+    public static void startAction(Context context){
+        Intent intent = new Intent(context, MyAlbumListActivity.class);
+        context.startActivity(intent);
+    }
 
 }

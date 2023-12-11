@@ -12,15 +12,20 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.newhelloworld.MyApplication;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.adapter.HistoryAdapter;
 import com.example.newhelloworld.databinding.HistoryLayoutBinding;
+import com.example.newhelloworld.greenDao.DaoSession;
+import com.example.newhelloworld.greenDao.HistoryInfoDao;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.HistoryInfo;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.userInfo.GetHistoryResp;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,9 +44,14 @@ public class HistoryActivity extends ViewBindingActivity<HistoryLayoutBinding> {
 
     private int pageNo = 1;
 
-    private int pageSize = 5;
+    private int pageSize = 6;
 
-    private int lastHistoryId = -1;
+    private Long lastHistoryId = -1L;
+
+    private MyApplication app;
+    private DaoSession daoSession;
+
+    private HistoryInfoDao dao;
 
     public static void startAction(Context context){
         Intent intent = new Intent(context, HistoryActivity.class);
@@ -53,24 +63,14 @@ public class HistoryActivity extends ViewBindingActivity<HistoryLayoutBinding> {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.history_layout);
 
-//        prepareClient();
+        client = new MyRetrofitClient();
+        episodeList = new ArrayList<>();
         bindView();
-        loadData();
+        initData();
     }
 
 
-//    @Override
-//    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-//        super.onPostCreate(savedInstanceState, persistentState);
-//
-//        loadData();
-//        Log.d(TAG, "onPostCreate");
-//    }
-
     public void bindView(){
-        client = new MyRetrofitClient();
-        episodeList = new ArrayList<>();
-
         rcycView = findViewById(R.id.personal_history_list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
@@ -100,9 +100,50 @@ public class HistoryActivity extends ViewBindingActivity<HistoryLayoutBinding> {
         });
     }
 
+    //第一次加载数据
+    public void initData(){
+        app = (MyApplication)getApplication();
+        daoSession = app.getDaoSession();
+        dao = daoSession.getHistoryInfoDao();
 
-    public void prepareClient(){
+        List<HistoryInfo> historyInfos = dao.loadAll();
+        if(historyInfos == null || historyInfos.size() == 0){
+            Log.d(TAG, "没有缓存");
 
+            client.getMorePodcastPreviews(pageNo, pageSize, new MyObserver<GetHistoryResp>() {
+                @Override
+                public void onSuccss(GetHistoryResp getHistoryResp) {
+                    Status status = getHistoryResp.getStatus();
+
+                    if(status.getCode() == 200){
+                        List<HistoryInfo> historys = getHistoryResp.getHistorys();
+                        if(historys != null && historys.size() > 0){
+                            Long history_id = historys.get(0).getHistory_id();
+                            if(history_id != lastHistoryId){
+                                Log.d(TAG,"load new: " + status.getMsg());
+                                adapter.updateList(historys);
+                                lastHistoryId = history_id;
+
+                                //第一次会缓存数据
+                                dao.insertInTx(historys);
+
+                            }else{
+                                Toast.makeText(HistoryActivity.this, "到底啦~", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }else{
+                        Log.d(TAG,"status error: " + status.getMsg());
+                    }
+
+                }
+            });
+        }else{
+            Log.d(TAG, "已缓存");
+            //数据库已存在第一页，则不请求后端，直接取缓存
+            adapter.updateList(historyInfos);
+            lastHistoryId = historyInfos.get(0).getHistory_id();
+        }
 //        for (int i = 1; i < 20; i++){
 //            Episode item = new Episode(i,"啊啊啊啊啊啊",
 //                    "user111",200,
@@ -123,7 +164,7 @@ public class HistoryActivity extends ViewBindingActivity<HistoryLayoutBinding> {
 
                     List<HistoryInfo> historys = getHistoryResp.getHistorys();
                     if(historys != null && historys.size() > 0){
-                        Integer history_id = historys.get(0).getHistory_id();
+                        Long history_id = historys.get(0).getHistory_id();
                         if(history_id != lastHistoryId){
                             Log.d(TAG,"load new: " + status.getMsg());
                             adapter.updateList(historys);

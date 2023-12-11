@@ -33,8 +33,9 @@ public class BFragment extends Fragment {
         String[] textArrayR = {"Recommend 1", "Recommend 2", "Recommend 3","Recommend 1", "Recommend 2", "Recommend 3"};
 
         // 创建自定义适配器
-        CustomAdapter adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);
-        listView.setAdapter(adapter);
+//TODO
+//        CustomAdapter adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);
+//        listView.setAdapter(adapter);
         FloatingActionButton fab=view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

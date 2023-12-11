@@ -1,10 +1,16 @@
 package com.example.newhelloworld.pojo;
 
 
-import java.util.Date;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 
+import java.util.Date;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
 public class HistoryInfo {
-    private Integer history_id;//history_id
+    @Id(autoincrement = true)
+    private Long history_id;//history_id
 
     private Integer podcast_id;
     private String views;
@@ -25,6 +31,37 @@ public class HistoryInfo {
     private String album_name;
     private String podcast_name;
     private Date datetime;
+
+    @Generated(hash = 774391409)
+    public HistoryInfo(Long history_id, Integer podcast_id, String views,
+            String podcast_poster, String title, Date update_time, Date create_time,
+            String podcast_path, Integer uploader_id, String uploader_name,
+            String duration, Integer album_id, Integer like_num,
+            Integer comment_num, Integer userId, String album_name,
+            String podcast_name, Date datetime) {
+        this.history_id = history_id;
+        this.podcast_id = podcast_id;
+        this.views = views;
+        this.podcast_poster = podcast_poster;
+        this.title = title;
+        this.update_time = update_time;
+        this.create_time = create_time;
+        this.podcast_path = podcast_path;
+        this.uploader_id = uploader_id;
+        this.uploader_name = uploader_name;
+        this.duration = duration;
+        this.album_id = album_id;
+        this.like_num = like_num;
+        this.comment_num = comment_num;
+        this.userId = userId;
+        this.album_name = album_name;
+        this.podcast_name = podcast_name;
+        this.datetime = datetime;
+    }
+
+    @Generated(hash = 1690888989)
+    public HistoryInfo() {
+    }
 
     @Override
     public String toString() {
@@ -50,11 +87,11 @@ public class HistoryInfo {
                 '}';
     }
 
-    public Integer getHistory_id() {
+    public Long getHistory_id() {
         return history_id;
     }
 
-    public void setHistory_id(Integer history_id) {
+    public void setHistory_id(Long history_id) {
         this.history_id = history_id;
     }
 
@@ -191,27 +228,6 @@ public class HistoryInfo {
     }
 
     public void setDatetime(Date datetime) {
-        this.datetime = datetime;
-    }
-
-    public HistoryInfo(Integer history_id, Integer podcast_id, String views, String podcast_poster, String title, Date update_time, Date create_time, String podcast_path, Integer uploader_id, String uploader_name, String duration, Integer album_id, Integer like_num, Integer comment_num, Integer userId, String album_name, String podcast_name, Date datetime) {
-        this.history_id = history_id;
-        this.podcast_id = podcast_id;
-        this.views = views;
-        this.podcast_poster = podcast_poster;
-        this.title = title;
-        this.update_time = update_time;
-        this.create_time = create_time;
-        this.podcast_path = podcast_path;
-        this.uploader_id = uploader_id;
-        this.uploader_name = uploader_name;
-        this.duration = duration;
-        this.album_id = album_id;
-        this.like_num = like_num;
-        this.comment_num = comment_num;
-        this.userId = userId;
-        this.album_name = album_name;
-        this.podcast_name = podcast_name;
         this.datetime = datetime;
     }
 }

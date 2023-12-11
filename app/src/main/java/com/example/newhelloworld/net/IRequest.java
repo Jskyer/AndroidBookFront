@@ -6,6 +6,7 @@ import com.example.newhelloworld.queryVO.SendVerificationResp;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.StatusResp;
 import com.example.newhelloworld.queryVO.album.GetAlbumInfoResp;
+import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastRankPreviewResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastResp;
@@ -39,6 +40,9 @@ public interface IRequest {
 
     @POST("/api/login/login")
     Observable<LoginResp> login(@Body Map<String, String> map);
+
+    @POST("/api/login/reset_pass")
+    Observable<ResetPassResp> resetPwd(@Query("password") String pwd);
 
     //CommentController
     @POST("/api/Comment/add_comment")
@@ -75,6 +79,9 @@ public interface IRequest {
     @POST("/api/user/reset_avatar")
     Observable<ResetPassResp> resetAvatar(@Query("avatar") String avatar);
 
+    @POST("/api/user/add_history")
+    Observable<ResetPassResp> addHistory(@Query("podcast_id") Integer podcast_id);
+
 
     //AlbumController
     @GET("api/album/get_album")
@@ -95,6 +102,14 @@ public interface IRequest {
     @POST("/api/album/cancel_sub")
     Observable<ResetPassResp> cancelSubscribe(@Query("album_id") Integer album_id);
 
+    @GET("/api/album/popular_album")
+    Observable<GetPopularAlbumResp> getPopularAlbum(@Query("page_no") Integer pageNum, @Query("page_size") Integer pageSize);
+
+    @GET("/api/album/type")
+    Observable<GetPopularAlbumResp> getAlbumByType(@Query("page_no") Integer pageNum,
+                                                   @Query("page_size") Integer pageSize,
+                                                   @Query("type") String type);
+
 
     //PodcastController
     @GET("/api/podcast/get_podcast_by_id")
@@ -104,10 +119,10 @@ public interface IRequest {
     Observable<GetPodcastOffiRecResp> getPodcastOffiRec();
 
     @GET("/api/podcast/get_podcast_rank_preview_view")
-    Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewView();
+    Observable<GetPodcastOffiRecResp> getPodcastRankPreviewView();
 
     @GET("/api/podcast/get_podcast_rank_preview_like")
-    Observable<GetPodcastRankPreviewResp> getPodcastRankPreviewLike();
+    Observable<GetPodcastOffiRecResp> getPodcastRankPreviewLike();
 
 //    @GET("/api/podcast/get_podcast_update_preview")
 //    Observable<GetPodcastUpdatePreviewResp> getPodcastUpdatePreview(@Query(""))

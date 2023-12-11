@@ -55,10 +55,9 @@ public class AudioPlayManager {
 
         curEpisode = episode;
         try {
-            player.setDataSource(ResourceUtil.getUrlAbsolutePath(curEpisode.getPodcast_path()));
+            player.setDataSource(ResourceUtil.getPodcastPath(curEpisode.getPodcast_path()));
             player.prepare();
 
-            //TODO 测试用
 //            player.setDataSource("/raw/wengu001.mp3");
 //            player.prepareAsync();
 
@@ -136,7 +135,7 @@ public class AudioPlayManager {
         player.reset();
         curEpisode = next;
         try {
-            player.setDataSource(ResourceUtil.getUrlAbsolutePath(curEpisode.getPodcast_path()));
+            player.setDataSource(ResourceUtil.getPodcastPath(curEpisode.getPodcast_path()));
             player.prepare();
 
             Log.d(TAG, "prepare ok");

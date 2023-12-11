@@ -20,11 +20,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+import com.example.newhelloworld.MyApplication;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.event.MsgAudioToMain;
+import com.example.newhelloworld.greenDao.HistoryInfoDao;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
+import com.example.newhelloworld.net.MyObserver;
+import com.example.newhelloworld.net.MyRetrofitClient;
+import com.example.newhelloworld.queryVO.Status;
+import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
+import com.example.newhelloworld.util.ResourceUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,6 +43,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AudioActivity extends AppCompatActivity implements View.OnClickListener{
+    public static final String TAG = "AudioActivity";
     private ImageView btn_play;
     private ImageView btn_pre;
     private ImageView btn_next;
@@ -69,6 +78,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
     //当前页展示的episode，不一定在播放
     private Episode curEpisode;
 
+    private MyRetrofitClient client;
+
     //处理单集数据在播放页中的绑定
     private Handler mhandler = new Handler(){
         @Override
@@ -85,6 +96,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                         textTitleView.setText(newEpi.getTitle());
                         textUserNameView.setText(newEpi.getUploader_name());
 //                    TODO
+                        Glide.with(AudioActivity.this)
+                                .load(ResourceUtil.getPodcastPosterPath(newEpi.getPoster()))
+                                .centerCrop()
+                                .into(posterView);
 //                    posterView
 
                         curEpisode = newEpi;
@@ -119,7 +134,12 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         textTitleView.setText(episode.getTitle());
         textUserNameView.setText(episode.getUploader_name());
         setModeView();
+
 //        TODO
+        Glide.with(this)
+                .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
+                .centerCrop()
+                .into(posterView);
 //        posterView.setImageResource();
 
         int seconds = episode.getDuration();
@@ -166,13 +186,40 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         curEpisode = episode;
         Log.d("audio", "duration: " + seconds);
 
+        //后端更新历史
+        addHistory(curEpisode.getId());
+
         EventBus.getDefault().removeStickyEvent(this);
+    }
+
+    public void addHistory(int id){
+        client.addHistory(id, new MyObserver<ResetPassResp>() {
+            @Override
+            public void onSuccss(ResetPassResp resp) {
+                Status status = resp.getStatus();
+                if(status.getCode() == 200){
+                    Log.d(TAG, "addHistory ok");
+
+                    MyApplication app = (MyApplication)getApplication();
+                    HistoryInfoDao historyInfoDao = app.getDaoSession().getHistoryInfoDao();
+                    //清空表
+                    historyInfoDao.deleteAll();
+                    //清除缓存
+                    historyInfoDao.detachAll();
+
+                }else{
+                    Log.d(TAG, "addHistory failed");
+                }
+            }
+        });
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
+
+        client = new MyRetrofitClient();
 
         bindView();
         initPlayer();
@@ -483,6 +530,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 btn_play.setTag("btn_pause");
 
                 //TODO 改变当前显示的单集ui
+                Glide.with(this)
+                        .load(ResourceUtil.getPodcastPosterPath(res.getPoster()))
+                        .centerCrop()
+                        .into(posterView);
 //                posterView
                 textTitleView.setText(res.getTitle());
                 textUserNameView.setText(res.getUploader_name());
@@ -506,6 +557,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 btn_play.setImageResource(R.drawable.btn_pause);
                 btn_play.setTag("btn_pause");
                 //TODO 改变当前显示的单集ui
+                Glide.with(this)
+                        .load(ResourceUtil.getPodcastPosterPath(res.getPoster()))
+                        .centerCrop()
+                        .into(posterView);
 //                posterView
                 textTitleView.setText(res.getTitle());
                 textUserNameView.setText(res.getUploader_name());
@@ -514,7 +569,6 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 seekBar.setMax(res.getDuration());
 
                 curEpisode = res;
-
 
                 publishProgress();
             }
@@ -550,6 +604,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         } else if (id == R.id.comment) {
             Log.d("audio", "comment");
 
+            //TODO comment
         }
 
     }

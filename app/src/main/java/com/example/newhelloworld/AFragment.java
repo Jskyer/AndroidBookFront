@@ -1,6 +1,9 @@
 package com.example.newhelloworld;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,32 +21,68 @@ import com.example.newhelloworld.adapter.YourPagerAdapter;
 import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
+import com.example.newhelloworld.net.MyObserver;
+import com.example.newhelloworld.net.MyRetrofitClient;
+import com.example.newhelloworld.pojo.Album;
+import com.example.newhelloworld.pojo.Podcast;
+import com.example.newhelloworld.pojo.PodcastOffiRec;
+import com.example.newhelloworld.queryVO.Status;
+import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
+import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
+import com.example.newhelloworld.queryVO.podcast.GetPodcastResp;
+import com.example.newhelloworld.util.ModelUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AFragment extends Fragment {
+    public static final String TAG = "AFragment";
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
+    private View view;
+    private ListView listView;
+    private CustomAdapter adapter;
+    private MyRetrofitClient client;
+
+    private List<Podcast> podcasts;
+
+    private String[] imageArray;
+    private  String[] textArray; // 栏目名
+    private  String[] textArrayP;
+    private  String[] textArrayR;
+
+    private AudioListManager instance;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_a, container, false);
-        ListView listView = view.findViewById(R.id.list_view);
+        client = new MyRetrofitClient();
+
+        view = inflater.inflate(R.layout.fragment_a, container, false);
+        listView = view.findViewById(R.id.list_view);
+        podcasts = new ArrayList<>();
 
         // 创建图像数组和文本数组
-        Integer[] imageArray = {R.drawable.guolai, R.drawable.guolai, R.drawable.guolai}; // 替换为您的图片资源
-        String[] textArray = {"Column 1", "Column 2", "Column 3"}; // 栏目名
-        String[] textArrayP = {"P 1", "P 2", "P 3"};
-        String[] textArrayR = {"Recommend 1", "Recommend 2", "Recommend 3"};
+//        Integer[] imageArray = {R.drawable.guolai, R.drawable.guolai, R.drawable.guolai}; // 替换为您的图片资源
+//        String[] textArray = {"Column 1", "Column 2", "Column 3"}; // 栏目名
+//        String[] textArrayP = {"P 1", "P 2", "P 3"};
+//        String[] textArrayR = {"Recommend 1", "Recommend 2", "Recommend 3"};
+        imageArray = new String[3];
+        textArray = new String[3];
+        textArrayP = new String[3];
+        textArrayR = new String[3];
+
+        requestTopList();
 
         // 创建自定义适配器
-        CustomAdapter adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);
-        listView.setAdapter(adapter);
+//        CustomAdapter adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);
+//        listView.setAdapter(adapter);
 
         viewPager = view.findViewById(R.id.view_pager);
         tabLayout = view.findViewById(R.id.tab_layout);
@@ -51,7 +90,7 @@ public class AFragment extends Fragment {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
-        AudioListManager instance = AudioListManager.getInstance();
+        instance = AudioListManager.getInstance();
 
         listView.setOnItemClickListener((adapterView, view1, position, l) -> {
             // 根据点击的位置跳转到相应的页面
@@ -59,7 +98,10 @@ public class AFragment extends Fragment {
             switch (position) {
                 case 0:
 //                    Episode episode1 = new Episode(1, "title1", "user_name1", 237, null, "/music/obj168925.mp3");
-                    Episode episode1 = new Episode(1, "title1", "user_name1", 237, null, "/song/song1.mp3");
+//                    Episode episode1 = new Episode(1, "title1", "user_name1", 237, null, "/song/song1.mp3");
+
+                    Episode episode1 = ModelUtil.transEpisode(podcasts.get(0));
+
                     instance.addData(episode1);
                     EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));
 
@@ -67,8 +109,9 @@ public class AFragment extends Fragment {
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 1:
-                    Episode episode2 = new Episode(2, "title2", "user_name2", 210, null, "/song/song2.mp3");
+//                    Episode episode2 = new Episode(2, "title2", "user_name2", 210, null, "/song/song2.mp3");
 
+                    Episode episode2 = ModelUtil.transEpisode(podcasts.get(1));
                     instance.addData(episode2);
                     EventBus.getDefault().postSticky(new MsgAddToAudioList(episode2));
 
@@ -76,8 +119,9 @@ public class AFragment extends Fragment {
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
                 case 2:
-                    Episode episode3 = new Episode(3, "title3", "user_name3", 265, null, "/song/song3.mp3");
+//                    Episode episode3 = new Episode(3, "title3", "user_name3", 265, null, "/song/song3.mp3");
 
+                    Episode episode3 = ModelUtil.transEpisode(podcasts.get(2));
                     instance.addData(episode3);
                     EventBus.getDefault().postSticky(new MsgAddToAudioList(episode3));
                     // 跳转到column 3
@@ -155,6 +199,37 @@ public class AFragment extends Fragment {
 
         return view;
     }
+
+
+    public void requestTopList(){
+        client.getPodcastOffiRec(new MyObserver<GetPodcastOffiRecResp>() {
+            @Override
+            public void onSuccss(GetPodcastOffiRecResp getPodcastOffiRecResp) {
+                Status status = getPodcastOffiRecResp.getStatus();
+                if(status.getCode() == 200){
+                    podcasts = getPodcastOffiRecResp.getPodcasts();
+                    for(int i = 0; i < 3; i++){
+                        imageArray[i] = podcasts.get(i).getPodcastPoster();
+                        textArray[i] = podcasts.get(i).getTitle();
+                        textArrayP[i] = podcasts.get(i).getUploaderName();
+                        textArrayR[i] = podcasts.get(i).getViews().toString();
+                    }
+
+                    adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);
+                    listView.setAdapter(adapter);
+
+                    Log.d(TAG, "getPodcastOffiRec ok");
+                }else{
+                    Log.d(TAG, "getPodcastOffiRec error");
+                }
+
+            }
+        });
+
+    }
+
+
+
 
     private void setupViewPager(ViewPager viewPager) {
         // 创建适配器，并向其中添加Fragment以用作页面

@@ -19,6 +19,10 @@ public class Episode {
 //    非数据库存储, 上次播放到的位置 ms
     private int lastTime;
 
+    public Episode(){
+
+    }
+
     public Episode(int id, String title, String uploader_name, int duration, LocalDateTime dateTime, String podcast_path) {
         this(id, title, uploader_name, null, duration, dateTime, podcast_path, 0);
     }

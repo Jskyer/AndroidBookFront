@@ -1,6 +1,7 @@
 package com.example.newhelloworld.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,11 @@ import com.example.newhelloworld.MyApplication;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.event.MsgAddToAudioList;
+import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.pojo.HistoryInfo;
+import com.example.newhelloworld.util.ModelUtil;
+import com.example.newhelloworld.util.ResourceUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -67,10 +71,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
         HistoryInfo episode = episodeList.get(position);
 
-        //TODO
-//        Glide.with(MyApplication.getContext())
-//                .load("")
-//                .into(holder.imageView);
+        Glide.with(context)
+                .load(ResourceUtil.getPodcastPosterPath(episode.getPodcast_poster()))
+                .centerCrop()
+                .into(holder.imageView);
 
         holder.titleView.setText(episode.getTitle());
         holder.uploaderView.setText(episode.getUploader_name());
@@ -83,6 +87,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             @Override
             public void onClick(View view) {
 //                EventBus.getDefault().postSticky(new MsgAddToAudioList(episode));
+
+                //TODO
+                Episode episode1 = ModelUtil.transEpisode(episode);
+                AudioListManager.getInstance().addData(episode1);
+                EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));
                 AudioActivity.startAction(context);
             }
         });

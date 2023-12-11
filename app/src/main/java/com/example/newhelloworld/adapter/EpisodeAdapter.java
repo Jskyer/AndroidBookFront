@@ -16,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.event.MsgAddToAudioList;
@@ -23,6 +24,7 @@ import com.example.newhelloworld.event.MsgAudioToMain;
 import com.example.newhelloworld.event.MsgPlaylistToMain;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
+import com.example.newhelloworld.util.ResourceUtil;
 import com.google.android.material.button.MaterialButton;
 
 import org.greenrobot.eventbus.EventBus;
@@ -82,8 +84,12 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
         Episode episode = episodeList.get(position);
         holder.titleView.setText(episode.getTitle());
 
-        //TODO
-        //        holder.imgView.setImageResource();
+
+        Glide.with(context)
+                .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
+                .centerCrop()
+                .into(holder.imgView);
+
         holder.imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
