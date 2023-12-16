@@ -19,6 +19,7 @@ import com.example.newhelloworld.activity.PageActivity;
 import com.example.newhelloworld.adapter.CustomAdapter;
 import com.example.newhelloworld.adapter.YourPagerAdapter;
 import com.example.newhelloworld.event.MsgAddToAudioList;
+import com.example.newhelloworld.event.MsgToCategory;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.net.MyObserver;
@@ -131,74 +132,107 @@ public class AFragment extends Fragment {
         });
 
 
-        TextView cat_career = view.findViewById(R.id.category_career);
-        cat_career.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 在这里实现页面跳转逻辑
-                startActivity(new Intent(getActivity(), CategoryActivity.class));
-            }
-        });
-        TextView cat_city = view.findViewById(R.id.category_city);
-        cat_city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 在这里实现页面跳转逻辑
-                startActivity(new Intent(getActivity(), CategoryActivity.class));
-            }
-        });
-        TextView cat_comedy = view.findViewById(R.id.category_comedy);
-        cat_comedy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 在这里实现页面跳转逻辑
-                startActivity(new Intent(getActivity(), CategoryActivity.class));
-            }
-        });
-        TextView cat_cure = view.findViewById(R.id.category_cure);
-        cat_cure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 在这里实现页面跳转逻辑
-                startActivity(new Intent(getActivity(),CategoryActivity.class));
-            }
-        });
-        TextView cat_finance = view.findViewById(R.id.category_finance);
-        cat_finance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 在这里实现页面跳转逻辑
-                startActivity(new Intent(getActivity(), CategoryActivity.class));
-            }
-        });
+        setFirstRow();
+
+        setSecondRow();
+
+        return view;
+    }
+
+    public void setFirstRow(){
         TextView cat_history = view.findViewById(R.id.category_history);
         cat_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("pop"));
+
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
             }
         });
-        TextView cat_politic = view.findViewById(R.id.category_politic);
-        cat_politic.setOnClickListener(new View.OnClickListener() {
+
+
+        TextView cat_career = view.findViewById(R.id.category_career);
+        cat_career.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("rock"));
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
             }
         });
+
         TextView cat_story = view.findViewById(R.id.category_story);
         cat_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("folk"));
+
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
             }
         });
 
+        TextView cat_city = view.findViewById(R.id.category_city);
+        cat_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
 
-        return view;
+                EventBus.getDefault().postSticky(new MsgToCategory("jazz"));
+
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
     }
+
+
+    public void setSecondRow(){
+        TextView cat_politic = view.findViewById(R.id.category_politic);
+        cat_politic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("absolute music"));
+
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+
+        TextView cat_finance = view.findViewById(R.id.category_finance);
+        cat_finance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("rap"));
+
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+
+        TextView cat_cure = view.findViewById(R.id.category_cure);
+        cat_cure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("classical"));
+
+                startActivity(new Intent(getActivity(),CategoryActivity.class));
+            }
+        });
+
+        TextView cat_comedy = view.findViewById(R.id.category_comedy);
+        cat_comedy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在这里实现页面跳转逻辑
+                EventBus.getDefault().postSticky(new MsgToCategory("chinese style"));
+
+                startActivity(new Intent(getActivity(), CategoryActivity.class));
+            }
+        });
+    }
+
 
 
     public void requestTopList(){

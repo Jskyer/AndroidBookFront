@@ -23,4 +23,9 @@ public class ResourceUtil {
         return "http://139.224.194.55:8080/audio/" + url; //服务器url前缀
     }
 
+    //album封面
+    public static String getAlbumPosterPath(String url){
+        return "http://139.224.194.55:8080" + url; //服务器url前缀
+    }
+
 }

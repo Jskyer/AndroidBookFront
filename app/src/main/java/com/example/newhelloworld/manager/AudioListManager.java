@@ -165,19 +165,51 @@ public class AudioListManager {
         if(repeatFlag)return;
 
         audioList.add(0, episode);
-        if(curPosition != -1){
-            curPosition++;
-            if(curPosition >= 8){
-                audioPlayManager.to_reset();
-                curPosition = -1;
-            }
-        }
+
+//        if(curPosition != -1){
+//            curPosition++;
+//            if(curPosition >= 8){
+//                // 列表超过8个，正在播放的在最后，删除正播放单集的前一个
+//                audioList.remove(7);
+//                curPosition = 7;
+//
+////                audioPlayManager.to_reset();
+////                curPosition = -1;
+//            }
+//        }
 
         //维护list长度最大为8，防止ui显示错误
         int size = audioList.size();
         if(size > 8){
-            for(int i = 8; i < size; i++){
-                audioList.remove(i);
+            if(curPosition == -1){
+                for(int i = 8; i < size; i++){
+                    audioList.remove(i);
+                }
+
+            }else {
+                if(curPosition < 7){
+                    audioList.remove(8);
+                    curPosition++;
+                }else{
+                    if(isPlayManagerPlaying() && isCurInListPlaying(audioList.get(8))){
+                        audioList.remove(7);
+                    }else{
+                        audioList.remove(8);
+
+                        curPosition = -1;
+                        audioPlayManager.to_reset();
+                    }
+                }
+
+            }
+
+
+//            for(int i = 8; i < size; i++){
+//                audioList.remove(i);
+//            }
+        }else{
+            if(curPosition != -1){
+                curPosition++;
             }
         }
 
