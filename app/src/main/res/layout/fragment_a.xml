@@ -72,7 +72,7 @@
             android:background="#EEEEEE"
             android:gravity="center"
             android:padding="8dp"
-            android:text="文化"
+            android:text="流行"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -84,7 +84,7 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="历史"
+            android:text="pop"
             android:textSize="12sp" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="政治"
+            android:text="pure music"
             android:textSize="12sp" />
 
 
@@ -114,29 +114,29 @@
             android:background="#EEEEEE"
             android:gravity="center"
             android:padding="8dp"
-            android:text="商业"
+            android:text="现代"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/category_career"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="职场"
-            android:id="@+id/category_career"
+            android:text="rock"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/category_finance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="理财"
 
-            android:id="@+id/category_finance"
+            android:text="rap"
             android:textSize="12sp" />
 
 
@@ -156,28 +156,28 @@
             android:background="#EEEEEE"
             android:gravity="center"
             android:padding="8dp"
-            android:text="成长"
+            android:text="经典"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/category_story"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="故事奇谭"
-            android:clickable="true"
-            android:id="@+id/category_story"
+            android:text="folk"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/category_cure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="治愈陪伴"
-            android:clickable="true"
-            android:id="@+id/category_cure"
+            android:text="classical"
             android:textSize="12sp" />
 
 
@@ -197,28 +197,28 @@
             android:background="#EEEEEE"
             android:gravity="center"
             android:padding="8dp"
-            android:text="艺术"
+            android:text="爵士"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/category_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="城市探索"
-            android:clickable="true"
-            android:id="@+id/category_city"
+            android:text="jazz"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/category_comedy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:gravity="center_horizontal"
             android:padding="8dp"
-            android:text="趣味闲谈"
-            android:clickable="true"
-            android:id="@+id/category_comedy"
+            android:text="chinese"
             android:textSize="12sp" />
 
 

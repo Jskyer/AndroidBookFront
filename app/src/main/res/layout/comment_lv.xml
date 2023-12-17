@@ -10,13 +10,11 @@
         android:layout_height="46dp"
         app:srcCompat="@mipmap/ic_back" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comment_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="684dp"
         android:layout_below="@+id/btn_back_comment"
-        android:layout_marginTop="-2dp">
+        android:layout_marginTop="1dp" />
 
-
-    </ListView>
 </RelativeLayout>

@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="andorid.permission.MONUN_UNMOUNT_FILESYSTEMS"/>
 
     <application
         android:name=".MyApplication"
@@ -31,9 +32,16 @@
 
         <activity
             android:name=".activity.CategoryActivity"
-            android:exported="false"
-            android:label="@string/title_activity_category"
-            android:theme="@style/Theme.NewHelloWorld.NoActionBar" />
+            android:label="分类"
+            android:exported="true"
+            android:theme="@style/Theme.NewHelloWorld.NoActionBar" >
+<!--        <intent-filter android:label="分类">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>-->
+
+        </activity>
 
         <activity
             android:name=".MainActivity"
