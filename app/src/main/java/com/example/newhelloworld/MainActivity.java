@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import com.example.newhelloworld.event.MsgRemoveInList;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.util.ResourceUtil;
+import com.example.newhelloworld.util.WaterfallUtil;
 import com.example.newhelloworld.views.AudioRoundProgressView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -228,7 +230,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+/*
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }*/
         setContentView(R.layout.activity_main);
+
 
         pref = getSharedPreferences("mode_pref", MODE_PRIVATE);
         boolean isSwitchOn = pref.getBoolean("isSwitchOn", false);
