@@ -52,7 +52,7 @@ public class SubscribeActicity extends AppCompatActivity {
         rcycView = findViewById(R.id.sublist);
         init();
         /*LinearLayoutManager manager = new LinearLayoutManager(this);*/
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,RecyclerView.HORIZONTAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,RecyclerView.VERTICAL);
         rcycView.setLayoutManager(layoutManager);
 
         //WaterfallUtil.setup(imageFilePaths);
