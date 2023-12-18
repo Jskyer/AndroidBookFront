@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.example.newhelloworld.pojo.PodcastDo;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.album.GetAlbumInfoResp;
 import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
+import com.example.newhelloworld.queryVO.userInfo.IntegerResp;
 import com.example.newhelloworld.util.ResourceUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -45,6 +47,7 @@ public class PageActivity extends AppCompatActivity {
     private ImageButton btn_comment;
     private TextView albumNameView;
     private TextView uploadTimeView;
+
     private TextView uploaderNameView;
     private TextView descripView;
     private ImageView albumPosterView;
@@ -124,15 +127,43 @@ public class PageActivity extends AppCompatActivity {
         subscribeBtnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                client.AlbumSubscribe(album_id, new MyObserver<ResetPassResp>() {
+
+                client.getSubscribe(album_id, new MyObserver<IntegerResp>() {
                     @Override
-                    public void onSuccss(ResetPassResp resetPassResp) {
-                        Status status=resetPassResp.getStatus();
+                    public void onSuccss(IntegerResp integerResp) {
+                        Status status=integerResp.getStatus();
                         if(status.getCode()==200){
-                            Log.d(TAG,"关注"+album_id.toString()+"成功");
+
+                            Integer is_subscribe=0;
+                            is_subscribe=integerResp.getNum();
+                            if(is_subscribe==0){
+                                Log.d(TAG,"新增关注"+album_id.toString());
+                                client.AlbumSubscribe(album_id, new MyObserver<ResetPassResp>() {
+                                    @Override
+                                    public void onSuccss(ResetPassResp resetPassResp) {
+                                        Status status=resetPassResp.getStatus();
+                                        if(status.getCode()==200){
+                                            Log.d(TAG,"关注"+album_id.toString()+"成功");
+                                        }
+                                    }
+                                });
+                            }else{
+                                Log.d(TAG,"取消关注"+album_id.toString());
+                                client.cancelSubscribe(album_id, new MyObserver<ResetPassResp>() {
+                                    @Override
+                                    public void onSuccss(ResetPassResp resetPassResp) {
+                                        Status status=resetPassResp.getStatus();
+                                        if(status.getCode()==200){
+                                            Log.d(TAG,"取消关注"+album_id.toString()+"成功");
+                                        }
+                                    }
+                                });
+                            }
+
                         }
                     }
                 });
+
             }
         });
         // 创建图像数组和文本数组

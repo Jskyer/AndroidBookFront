@@ -7,7 +7,10 @@ package com.example.newhelloworld.activity;
         import android.os.Bundle;
         import android.util.Log;
         import android.view.View;
+        import android.view.inputmethod.InputMethodManager;
+        import android.widget.EditText;
         import android.widget.ImageButton;
+        import android.widget.Toast;
 
         import androidx.appcompat.app.AppCompatActivity;
         import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,37 +25,45 @@ package com.example.newhelloworld.activity;
         import com.example.newhelloworld.pojo.Comment;
         import com.example.newhelloworld.queryVO.GetCommentsResp;
         import com.example.newhelloworld.queryVO.Status;
+        import com.example.newhelloworld.queryVO.StatusResp;
 
+        import org.apache.commons.lang3.StringUtils;
         import org.greenrobot.eventbus.EventBus;
         import org.greenrobot.eventbus.Subscribe;
         import org.greenrobot.eventbus.ThreadMode;
 
         import java.util.ArrayList;
+        import java.util.Date;
         import java.util.List;
 
 public class CommentActivity extends AppCompatActivity {
     public static final String TAG = "CommentActivity";
 
     private ImageButton button;
-    private List<Comment> commentList=new ArrayList<>();
+    private ImageButton addCommentBtn;
+    private List<Comment> commentList = new ArrayList<>();
+    private EditText edit;
+    private Integer podcastId;
+    private CommentAdapter adapter;
     /*for adapter*/
-    private List<Comment> comments=new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
     private MyRetrofitClient client;
     //private ActivityCategoryBinding binding;
     private RecyclerView rcycView;
 
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onReceiveId(MsgToComment msg){
+    public void onReceiveId(MsgToComment msg) {
         Log.d(TAG, "onReceiveId");
 
-        int podcastId = msg.getPodcastId();
+        podcastId = msg.getPodcastId();
         //getComments(podcastId);
         requestComment(podcastId);
         EventBus.getDefault().removeStickyEvent(this);
     }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //binding=ActivityCategoryBinding.inflate(getLayoutInflater());
         client = new MyRetrofitClient();
@@ -61,13 +72,38 @@ public class CommentActivity extends AppCompatActivity {
         rcycView = findViewById(R.id.comment_list_view);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
-
-
-        button=findViewById(R.id.btn_back_comment);
+        edit = (EditText) findViewById(R.id.comment_ct);
+        addCommentBtn = findViewById(R.id.send);
+        button = findViewById(R.id.btn_back_comment);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        addCommentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = edit.getText().toString();
+                if (StringUtils.isBlank(content)) {
+                    Toast.makeText(CommentActivity.this, "不能发送空信息", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                client.addComment(podcastId, content, new MyObserver<StatusResp>() {
+                    @Override
+                    public void onSuccss(StatusResp statusResp) {
+                        Status status = statusResp.getStatus();
+                        if (status.getCode() == 200) {
+                            Log.d(TAG, "成功发送comment：" + content);
+                            flush(rcycView);
+                        } else {
+                            Log.d(TAG, "发送失败");
+                        }
+
+                    }
+                });
+
             }
         });
 
@@ -76,6 +112,7 @@ public class CommentActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
 
     }
+
     /*    public void initData(){
             for(int i=0;i<20;i++){
                 Comment comment=new Comment();
@@ -88,16 +125,16 @@ public class CommentActivity extends AppCompatActivity {
                 commentList.add(comment);
             }
         }*/
-    public void requestComment(int podcast_id){
+    public void requestComment(int podcast_id) {
         client.getComments(podcast_id, new MyObserver<GetCommentsResp>() {
             @Override
             public void onSuccss(GetCommentsResp getCommentsResp) {
-                Status status=getCommentsResp.getStatus();
-                if(status.getCode()==200){
-                    comments=new ArrayList<>();
-                    commentList=getCommentsResp.getComments();
-                    for(int i=0;i<commentList.size();i++){
-                        Comment comment=new Comment();
+                Status status = getCommentsResp.getStatus();
+                if (status.getCode() == 200) {
+                    comments = new ArrayList<>();
+                    commentList = getCommentsResp.getComments();
+                    for (int i = 0; i < commentList.size(); i++) {
+                        Comment comment = new Comment();
                         comment.setComment_id(commentList.get(i).getComment_id());
                         comment.setCommenter_id(commentList.get(i).getCommenter_id());
                         comment.setComment_text(commentList.get(i).getComment_text());
@@ -109,7 +146,7 @@ public class CommentActivity extends AppCompatActivity {
                         comments.add(comment);
                     }
 
-                    CommentAdapter adapter=new CommentAdapter(comments,CommentActivity.this);
+                    adapter = new CommentAdapter(comments, CommentActivity.this);
                     rcycView.setAdapter(adapter);
                     /*for(int i=0;i<comments.size();i++){
                         String temp=comments.get(i).getComment_text();
@@ -120,14 +157,24 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
     }
-    public static void startAction(Context context){
+
+    public static void startAction(Context context) {
         Intent intent = new Intent(context, CommentActivity.class);
         context.startActivity(intent);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
         EventBus.getDefault().unregister(this);
     }
+
+    public void flush(View view) {
+        finish();
+        EventBus.getDefault().postSticky(new MsgToComment(podcastId));
+        CommentActivity.startAction(this);
+
+    }
 }
+
