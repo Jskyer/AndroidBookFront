@@ -53,7 +53,7 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
         SubscribeInfo subscribeInfo=albums.get(position);
         String poster=subscribeInfo.getPodcast_poster();
         Glide.with(context)
-                .load(ResourceUtil.getAlbumPosterPath(poster))
+                .load(ResourceUtil.getPodcastPosterPath(poster))
                 .centerCrop()
                 .into(holder.album_poster);
         holder.album_poster.setOnClickListener(new View.OnClickListener() {

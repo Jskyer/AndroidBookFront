@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newhelloworld.R;
+import com.example.newhelloworld.activity.CommentActivity;
+import com.example.newhelloworld.event.MsgToComment;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.Comment;
@@ -89,7 +91,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                         Status status=statusResp.getStatus();
                         if(status.getCode()==200){
                             Log.d(TAG,"点赞/取消点赞成功");
-                            notifyItemChanged(holder.getAdapterPosition(),null);
+                            EventBus.getDefault().postSticky(new MsgToComment(comment.getPodcastId()));
+                            CommentActivity.startAction(context);
+                            //notifyItemChanged(holder.getAdapterPosition(),null);
                         }
                     }
                 });
@@ -101,4 +105,5 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     public int getItemCount() {
         return data.size();
     }
+
 }
