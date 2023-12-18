@@ -21,6 +21,7 @@ import com.example.newhelloworld.R;
 import com.example.newhelloworld.activity.MyAlbumListActivity;
 import com.example.newhelloworld.activity.PageActivity;
 
+import com.example.newhelloworld.event.MsgToAlbum;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.Album;
@@ -82,8 +83,7 @@ public class MyAlbumListAdapter extends RecyclerView.Adapter<MyAlbumListAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
-//                EventBus.getDefault().postSticky();
+                EventBus.getDefault().postSticky(new MsgToAlbum(album.getAlbum_id()));
                 PageActivity.startAction(context);
             }
         });
