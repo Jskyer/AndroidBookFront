@@ -4,11 +4,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <com.example.newhelloworld.util.WaterfallUtil
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sublist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+ <!--   <com.example.newhelloworld.util.WaterfallUtil
         android:id="@+id/waterfall"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.newhelloworld.util.WaterfallUtil>
+
+    </com.example.newhelloworld.util.WaterfallUtil>-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back"
         android:layout_width="match_parent"
