@@ -10,6 +10,10 @@ public class Comment {
     private Date comment_time;
     private Integer likeNum;
 
+    public Comment() {
+
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

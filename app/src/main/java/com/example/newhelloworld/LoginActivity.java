@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_ID, res.getUser_id());
                 PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_NAME, res.getUser_name());
                 PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_TOKEN, res.getAccess_token());
+                PreferenceUtil.putString(context, PreferenceUtil.KEY_USER_AVATAR, res.getUser_avatar());
 
                 //跳转到首页,销毁自己
                 MyActivityManager.getInstance().finishAll();

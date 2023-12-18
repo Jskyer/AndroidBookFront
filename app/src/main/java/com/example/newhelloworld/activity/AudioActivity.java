@@ -25,6 +25,7 @@ import com.example.newhelloworld.MyApplication;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.event.MsgAudioToMain;
+import com.example.newhelloworld.event.MsgToComment;
 import com.example.newhelloworld.greenDao.HistoryInfoDao;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
@@ -605,6 +606,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             Log.d("audio", "comment");
 
             //TODO comment
+            EventBus.getDefault().postSticky(new MsgToComment(curEpisode.getId()));
+            CommentActivity.startAction(this);
         }
 
     }
