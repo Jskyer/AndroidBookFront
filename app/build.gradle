@@ -88,6 +88,9 @@ dependencies {
 
     //greendao
     implementation 'org.greenrobot:greendao:3.3.0'
+    //shapeImage
+    implementation 'com.google.android.material:material:1.2.1'
+
 
 
 
