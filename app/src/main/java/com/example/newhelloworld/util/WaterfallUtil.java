@@ -41,7 +41,7 @@ public class WaterfallUtil extends ScrollView {
     private int[] colHeight;
 
     /** 所有的图片资源路径 */
-    /**存放于app/src/main/assets/images**/
+    /**存放于app/src/main/assets/albumPosters**/
     private List<String> imageFilePaths;
 
     /** 瀑布流显示的列数 */
