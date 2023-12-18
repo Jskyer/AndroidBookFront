@@ -45,7 +45,7 @@ regions</string>
 
     <string name="dialog_modifypwd">修改密码</string>
 
-    <string name="contribution">我的专栏</string>
+    <string name="contribution">我的订阅</string>
     <string name="album_plus">+新建</string>
     <string name="album_del">删除</string>
     <string name="episode_list">播放列表</string>

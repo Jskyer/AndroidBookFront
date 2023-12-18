@@ -86,9 +86,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                EventBus.getDefault().postSticky(new MsgAddToAudioList(episode));
-
-                //TODO
                 Episode episode1 = ModelUtil.transEpisode(episode);
                 AudioListManager.getInstance().addData(episode1);
                 EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));

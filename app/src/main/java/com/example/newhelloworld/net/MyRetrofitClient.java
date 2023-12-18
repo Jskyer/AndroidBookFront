@@ -299,6 +299,19 @@ public class MyRetrofitClient {
     }
 
 
+    public Observable<GetCreateResp> getMySubscribeAlbum(Integer pageNum, Integer pageSize,
+                                                          Observer<GetCreateResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<GetCreateResp> res = iRequest.getMySubscribeAlbum(pageNum, pageSize);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
+
 
 
     //PodcastController

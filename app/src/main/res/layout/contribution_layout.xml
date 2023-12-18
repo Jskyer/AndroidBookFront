@@ -24,16 +24,16 @@
             android:gravity="center"
             />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:id="@+id/create_album"
-            android:text="@string/album_plus"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginRight="20dp"
-            android:layout_alignParentRight="true"
-            app:cornerRadius="10dp"/>
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/create_album"-->
+<!--            android:text="@string/album_plus"-->
+<!--            android:textSize="20sp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            app:cornerRadius="10dp"/>-->
 
     </RelativeLayout>
 

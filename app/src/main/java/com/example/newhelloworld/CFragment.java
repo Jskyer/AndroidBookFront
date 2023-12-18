@@ -55,7 +55,7 @@ public class CFragment extends Fragment{
 
         // 创建图像数组和文本数组
         Integer[] imageArray = {R.drawable.personal_space, R.drawable.personal_contribution, R.drawable.personal_history,R.drawable.personal_setting}; // 替换为您的图片资源
-        String[] textArray = {"个人主页", "创作中心", "浏览历史", "设置"}; // 栏目名
+        String[] textArray = {"个人主页", "我的订阅", "浏览历史", "设置"}; // 栏目名
 
         // 创建自定义适配器
         CFragmentAdapter adapter = new CFragmentAdapter(getActivity(), textArray, imageArray);

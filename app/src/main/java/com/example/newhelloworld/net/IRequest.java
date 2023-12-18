@@ -111,6 +111,11 @@ public interface IRequest {
                                                    @Query("type") String type);
 
 
+    @GET("/api/album/mySubscribe")
+    Observable<GetCreateResp> getMySubscribeAlbum(@Query("page_no") Integer pageNum,
+                                                   @Query("page_size") Integer pageSize);
+
+
     //PodcastController
     @GET("/api/podcast/get_podcast_by_id")
     Observable<GetPodcastResp> getPodcast(@Query("podcastId") Integer podcastId);
