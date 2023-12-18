@@ -17,6 +17,7 @@ import com.example.newhelloworld.R;
 import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.activity.PageActivity;
 import com.example.newhelloworld.event.MsgAddToAudioList;
+import com.example.newhelloworld.event.MsgToAlbum;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.pojo.Album;
@@ -90,11 +91,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //TODO
-//                EventBus.getDefault().postSticky();
+                EventBus.getDefault().postSticky(new MsgToAlbum(album.getAlbum_id()));
                 PageActivity.startAction(context);
-
             }
         });
 

@@ -14,11 +14,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.activity.PageActivity;
+import com.example.newhelloworld.event.MsgToAlbum;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.Album;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -49,22 +52,24 @@ public class Fragment1 extends Fragment {
 
         getPopularAlbum();
 
-        //TODO
-        // 设置ListView的点击事件
+        //TODO:ALBUM后端修改后测试
         listView.setOnItemClickListener((adapterView, view1, position, l) -> {
             // 根据点击的位置跳转到相应的页面
             // 这里具体页面还没写，所以还没完善这里
             switch (position) {
                 case 0:
                     // 跳转到column 1
+                    EventBus.getDefault().postSticky(new MsgToAlbum(albums.get(position).getAlbum_id()));
                     startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 1:
                     // 跳转到column 2
+                    EventBus.getDefault().postSticky(new MsgToAlbum(albums.get(position).getAlbum_id()));
                     startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
                 case 2:
                     // 跳转到column 3
+                    EventBus.getDefault().postSticky(new MsgToAlbum(albums.get(position).getAlbum_id()));
                     startActivity(new Intent(getActivity(), PageActivity.class));
                     break;
             }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -13,6 +14,7 @@ import android.widget.ScrollView;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 public class WaterfallUtil extends ScrollView {
 
@@ -39,8 +41,8 @@ public class WaterfallUtil extends ScrollView {
     private int[] colHeight;
 
     /** 所有的图片资源路径 */
-    /**存放于app/src/main/assets/images**/
-    private String[] imageFilePaths={};
+    /**存放于app/src/main/assets/albumPosters**/
+    private List<String> imageFilePaths;
 
     /** 瀑布流显示的列数 */
     private int colCount;
@@ -91,7 +93,7 @@ public class WaterfallUtil extends ScrollView {
     /**
      * 在外部调用 第一次装载页面 必须调用
      */
-    public void setup() {
+    public void setup(List<String> posters) {
         containerLayout = new LinearLayout(getContext());
         containerLayout.setBackgroundColor(Color.WHITE);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -109,11 +111,8 @@ public class WaterfallUtil extends ScrollView {
             colLayoutArray.add(colLayout);
         }
 
-        try {
-            imageFilePaths = getContext().getAssets().list("images");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.imageFilePaths =posters;
+
         //添加第一页
         addNextPageContent(true);
     }
@@ -279,7 +278,8 @@ public class WaterfallUtil extends ScrollView {
         @Override
         public void run() {
             FlowingViewUtil FlowingViewUtil = new FlowingViewUtil(getContext(), id, colWidth);
-            String imageFilePath = "images/" + imageFilePaths[random.nextInt(imageFilePaths.length)];
+            String imageFilePath = "albumPosters/" + imageFilePaths.get(random.nextInt(imageFilePaths.size()));
+            Log.d("Water",imageFilePath);
             FlowingViewUtil.setImageFilePath(imageFilePath);
             FlowingViewUtil.loadImage();
             addItemHandler.sendMessage(addItemHandler.obtainMessage(0x00, FlowingViewUtil));
