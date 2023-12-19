@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
     <string name="large_text">To gain a broader understanding of the three psychological regions, we examined the
 correlations between the state prototypicality scores and the PESH
 indicators. The correlations shown in Table 3 reveal a number of
@@ -57,11 +58,11 @@ regions</string>
     <string name="introduction_edit">编辑简介</string>
     <string name="upload_avatar">上传头像</string>
     <string name="main_playlist_null">欢迎探索~</string>
-
+    <string name="error">Error</string>
 
     <string name="title_activity_category">CategoryActivity</string>
     <string name="action_settings">Settings</string>
-
+    <string name="suss">suss</string>
 
 
 </resources>
