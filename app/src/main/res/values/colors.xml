@@ -14,5 +14,6 @@
     <color name="grey88">#ff888888</color>
 
     <color name="blue_light">#aaaaff</color>
+    <color name="rippleColor">#C0362E</color>
 
 </resources>
