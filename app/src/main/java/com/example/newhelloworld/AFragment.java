@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -20,17 +21,20 @@ import com.example.newhelloworld.adapter.CustomAdapter;
 import com.example.newhelloworld.adapter.YourPagerAdapter;
 import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.event.MsgToCategory;
+import com.example.newhelloworld.event.MsgToSearchResult;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.Album;
 import com.example.newhelloworld.pojo.Podcast;
+import com.example.newhelloworld.pojo.PodcastDo;
 import com.example.newhelloworld.pojo.PodcastOffiRec;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastResp;
+import com.example.newhelloworld.queryVO.userInfo.GetSearchResp;
 import com.example.newhelloworld.util.ModelUtil;
 import com.google.android.material.tabs.TabLayout;
 
@@ -131,12 +135,63 @@ public class AFragment extends Fragment {
             }
         });
 
+        setSearchConfig();
 
         setFirstRow();
 
         setSecondRow();
 
         return view;
+    }
+
+    public void setSearchConfig(){
+        SearchView searchView = view.findViewById(R.id.searchView);
+
+        //输入和提交监听
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d(TAG, "onQueryTextSubmit");
+                Log.d(TAG, ""+s);
+
+                client.searchPodcast(1, 8, s, new MyObserver<GetSearchResp>() {
+                    @Override
+                    public void onSuccss(GetSearchResp getSearchResp) {
+                        Status status = getSearchResp.getStatus();
+                        if(status.getCode() == 200){
+                            //TODO 跳转result
+                            List<PodcastDo> podcasts = getSearchResp.getPodcasts();
+
+                            EventBus.getDefault().postSticky(new MsgToSearchResult(1, 8, s, podcasts));
+                            SearchResultActvity.startAction(getActivity());
+                        }else {
+                            Log.d(TAG, "search error: "+status.getMsg());
+                        }
+                    }
+                });
+
+                searchView.setQuery("", false);
+                searchView.clearFocus();  //可以收起键盘
+                searchView.onActionViewCollapsed();
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+//                Log.d(TAG, "onQueryTextChange");
+                return false;
+            }
+        });
+
+        //关闭事件
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+//                Log.d(TAG, "onClose");
+                return false;
+            }
+        });
     }
 
     public void setFirstRow(){

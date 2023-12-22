@@ -25,6 +25,7 @@ import com.acrcloud.rec.IACRCloudPartnerDeviceInfo;
 import com.acrcloud.rec.IACRCloudRadioMetadataListener;
 import com.acrcloud.rec.utils.ACRCloudLogger;
 import com.example.newhelloworld.R;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.views.RippleAnimationView;
 
 import org.json.JSONArray;
@@ -64,6 +65,9 @@ public class RecognizeActivity extends AppCompatActivity implements IACRCloudLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognize);
+
+        MyActivityManager.getInstance().add(this);
+
         path = Environment.getExternalStorageDirectory().toString()
                 + "/acrcloud";
         Log.e(TAG, path);

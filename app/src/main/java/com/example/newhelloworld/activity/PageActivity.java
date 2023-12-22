@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.adapter.PageAdapter;
 import com.example.newhelloworld.event.MsgToAlbum;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.model.PodcastEpisode;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
@@ -105,6 +106,9 @@ public class PageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page);
+
+        MyActivityManager.getInstance().add(this);
+
         button=(ImageButton) findViewById(R.id.btn_back);
         subscribeBtnView=(ImageButton)findViewById(R.id.subscribe_button);
         client=new MyRetrofitClient();

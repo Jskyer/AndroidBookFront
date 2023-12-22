@@ -9,12 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/tv_search_result"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textColor="#000000"
-        android:textSize="17sp" />
+        android:id="@+id/search_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

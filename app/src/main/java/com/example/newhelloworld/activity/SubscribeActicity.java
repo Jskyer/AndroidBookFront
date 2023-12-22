@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.adapter.SubscribeAdapter;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.SubscribeInfo;
@@ -48,6 +49,8 @@ public class SubscribeActicity extends AppCompatActivity {
         //WaterfallUtil WaterfallUtil = (WaterfallUtil) findViewById(R.id.waterfall);
         subscribeInfos=new ArrayList<>();
         client=new MyRetrofitClient();
+
+        MyActivityManager.getInstance().add(this);
 
         rcycView = findViewById(R.id.sublist);
         init();

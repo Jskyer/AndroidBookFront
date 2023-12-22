@@ -27,6 +27,7 @@ import com.example.newhelloworld.event.MsgAudioToMain;
 import com.example.newhelloworld.event.MsgPlaylistToMain;
 import com.example.newhelloworld.event.MsgRemoveInList;
 import com.example.newhelloworld.manager.AudioListManager;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.util.ResourceUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -234,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }*/
         setContentView(R.layout.activity_main);
 
+        MyActivityManager.getInstance().add(this);
 
         pref = getSharedPreferences("mode_pref", MODE_PRIVATE);
         boolean isSwitchOn = pref.getBoolean("isSwitchOn", false);

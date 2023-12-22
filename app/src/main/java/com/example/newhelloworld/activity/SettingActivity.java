@@ -14,12 +14,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.newhelloworld.LoginActivity;
+import com.example.newhelloworld.MainActivity;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.databinding.SettingLayoutBinding;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
+import com.example.newhelloworld.util.PreferenceUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,12 +41,28 @@ public class SettingActivity extends ViewBindingActivity<SettingLayoutBinding> i
         modifyPwdLayout = binding.modifyPwd;
         modifyPwdLayout.setOnClickListener(this);
 
+        binding.btnLogout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        showDialog();
+        int id = view.getId();
+        if(id == R.id.modify_pwd){
+            showDialog();
+        }else if (id == R.id.btn_logout){
+            logout();
+        }
+
     }
+
+    public void logout(){
+//        PreferenceUtil.removeString(this, PreferenceUtil.KEY_USER_TOKEN);
+//        PreferenceUtil.removeString(this, PreferenceUtil.K);
+        PreferenceUtil.clearPreferences(this);
+        MyActivityManager.getInstance().finishAll();
+        LoginActivity.startAction(this);
+    }
+
 
     private void showDialog(){
         Log.d(TAG, "showDialog");

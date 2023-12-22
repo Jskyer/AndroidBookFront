@@ -103,6 +103,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         return albums.size();
     }
 
+    public void updateList(List<Album> newDatas) {
+        // 在原有的数据之上增加新数据
+        if (newDatas != null && newDatas.size() > 0) {
+            albums.addAll(newDatas);
+            notifyDataSetChanged();
+        }
+
+    }
+
 
 //    public AlbumAdapter(Activity context, List<Album> albums) {
 //        super(context, R.layout.fragment_simple_item);

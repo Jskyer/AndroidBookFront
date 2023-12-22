@@ -28,6 +28,7 @@ import com.example.newhelloworld.event.MsgAudioToMain;
 import com.example.newhelloworld.event.MsgToComment;
 import com.example.newhelloworld.greenDao.HistoryInfoDao;
 import com.example.newhelloworld.manager.AudioListManager;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
@@ -219,6 +220,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
+
+        MyActivityManager.getInstance().add(this);
 
         client = new MyRetrofitClient();
 
