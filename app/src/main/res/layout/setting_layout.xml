@@ -11,17 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="30dp">
 
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="93dp"
             android:layout_height="40dp"
             android:src="@drawable/setting_outlook" />
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:text="@string/setting_item1"
@@ -60,15 +59,14 @@
 
         <ImageView
             android:id="@+id/pwd_head"
-            android:layout_width="40dp"
+            android:layout_width="93dp"
             android:layout_height="40dp"
             android:src="@drawable/setting_pwd" />
 
         <TextView
             android:id="@+id/pwd_text"
-            android:layout_width="120dp"
+            android:layout_width="260dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingLeft="30dp"
             android:text="@string/setting_pwd"
@@ -86,18 +84,17 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="60dp">
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
             android:id="@+id/btn_avatar"
-            android:text="@string/setting_item2"
-            android:textSize="20sp"
-            android:textColor="@color/warning"
-            android:layout_marginLeft="10dp"
+            android:layout_width="356dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="28dp"
             android:layout_marginRight="10dp"
-            />
+            android:text="@string/setting_item2"
+            android:textColor="@color/warning"
+            android:textSize="20sp" />
 
 <!--        <TextView-->
 <!--            android:layout_width="match_parent"-->

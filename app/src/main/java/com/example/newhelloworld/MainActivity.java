@@ -1,17 +1,13 @@
 package com.example.newhelloworld;
 
 
-import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.res.ResourcesCompat;
@@ -23,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.newhelloworld.activity.AudioActivity;
+import com.example.newhelloworld.activity.RecognizeActivity;
 import com.example.newhelloworld.adapter.EpisodeAdapter;
 import com.example.newhelloworld.event.AudioCompleteListener;
 import com.example.newhelloworld.event.MsgAddToAudioList;
@@ -32,8 +29,6 @@ import com.example.newhelloworld.event.MsgRemoveInList;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.util.ResourceUtil;
-import com.example.newhelloworld.util.WaterfallUtil;
-import com.example.newhelloworld.views.AudioRoundProgressView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
@@ -46,8 +41,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AudioCompleteListener {
@@ -65,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 底部当前歌曲控制按钮, 播放和暂停
      */
     private MaterialButton btnPlay;
+    /**
+     * 跳转到听歌识曲
+     */
+    private ImageButton btnRecog;
     /**
      * 音频播放器
      */
@@ -290,6 +287,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvSongName = findViewById(R.id.tv_song_name);
         btnPlay = findViewById(R.id.btn_play);
         btnPlay.setOnClickListener(this);
+        btnRecog=findViewById(R.id.toRecognize);
+        btnRecog.setOnClickListener(this);
 
         episodeListView = findViewById(R.id.bottom_sheet);
         rcycView = episodeListView.findViewById(R.id.episode_list);
@@ -484,6 +483,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnPlay.setTag("btn_play");
             }
 
+        }else if(id==R.id.toRecognize){
+            Log.d(TAG,"jump to recognize");
+            RecognizeActivity.startAction(this);
         }
     }
 

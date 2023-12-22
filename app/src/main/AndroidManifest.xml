@@ -42,6 +42,18 @@
         </intent-filter>-->
 
         </activity>
+        <activity
+            android:name=".activity.RecognizeActivity"
+            android:label="分类"
+            android:exported="true"
+            android:theme="@style/Theme.NewHelloWorld.NoActionBar" >
+            <!--        <intent-filter android:label="分类">
+                        <action android:name="android.intent.action.MAIN" />
+
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>-->
+
+        </activity>
 
         <activity
             android:name=".MainActivity"

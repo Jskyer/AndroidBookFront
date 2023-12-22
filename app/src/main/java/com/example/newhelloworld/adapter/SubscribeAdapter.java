@@ -36,7 +36,7 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            album_poster=itemView.findViewById(R.id.sub_po);
+            album_poster=itemView.findViewById(R.id.albumPoster);
         }
     }
     @NonNull
