@@ -19,9 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitFactory {
     private static class RetrofitHolder{
         private static Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://10.0.2.2:9090")
+                .baseUrl("http://10.0.2.2:9090")
 //                .baseUrl("http://10.0.2.2:7070")
-                .baseUrl("http://139.224.194.55:9090")
+//                .baseUrl("http://139.224.194.55:9090")
                 .client(getClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())

@@ -39,7 +39,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         ImageView imageView;
         TextView titleView;
         TextView uploaderView;
-        TextView viewsView;
+//        TextView viewsView;
         TextView dateView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -49,7 +49,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             imageView = itemView.findViewById(R.id.item_img);
             titleView = itemView.findViewById(R.id.item_title);
             uploaderView = itemView.findViewById(R.id.item_uploader);
-            viewsView = itemView.findViewById(R.id.item_views);
+//            viewsView = itemView.findViewById(R.id.item_views);
             dateView = itemView.findViewById(R.id.item_date);
         }
     }
@@ -78,7 +78,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         holder.titleView.setText(episode.getTitle());
         holder.uploaderView.setText(episode.getUploader_name());
-        holder.viewsView.setText("观看 "+ episode.getViews() + " 次");
+//        holder.viewsView.setText("观看 "+ episode.getViews() + " 次");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 定义日期格式
         holder.dateView.setText(sdf.format(episode.getDatetime()));
@@ -86,9 +86,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                EventBus.getDefault().postSticky(new MsgAddToAudioList(episode));
-
-                //TODO
                 Episode episode1 = ModelUtil.transEpisode(episode);
                 AudioListManager.getInstance().addData(episode1);
                 EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));

@@ -16,6 +16,7 @@ import com.example.newhelloworld.R;
 import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.activity.CommentActivity;
 import com.example.newhelloworld.event.MsgAddToAudioList;
+import com.example.newhelloworld.event.MsgToComment;
 import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.model.PodcastEpisode;
@@ -83,8 +84,8 @@ public class PageAdapter extends RecyclerView.Adapter<PageAdapter.ViewHolder> {
                 .into(holder.podcastPoster);
         holder.titleView.setText(podcast.getTitle());
         holder.contentView.setText(podcast.getUploaderName());
-        holder.timeView.setText(podcast.getDuration());
-        holder.dateView.setText(podcast.getCreateTime());
+        holder.timeView.setText(podcast.getDuration().toString());
+        holder.dateView.setText(podcast.getCreateTime().toString());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +99,8 @@ public class PageAdapter extends RecyclerView.Adapter<PageAdapter.ViewHolder> {
         holder.btn_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommentActivity.startAction(activity);
+                EventBus.getDefault().postSticky(new MsgToComment(podcast.getPodcastId()));
+                CommentActivity.startAction(context);
             }
         });
     }
