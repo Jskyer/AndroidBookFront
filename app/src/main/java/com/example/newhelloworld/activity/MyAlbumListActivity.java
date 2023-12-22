@@ -55,7 +55,7 @@ public class MyAlbumListActivity extends ViewBindingActivity<ContributionLayoutB
         albumList = new ArrayList<>();
         loadData();
         setRecycler();
-        setListener();
+//        setListener();
 
     }
 
@@ -70,7 +70,7 @@ public class MyAlbumListActivity extends ViewBindingActivity<ContributionLayoutB
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
 
-        adapter = new MyAlbumListAdapter(albumList, this);
+        adapter = new MyAlbumListAdapter(albumList, this, client);
         rcycView.setAdapter(adapter);
 
         rcycView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -96,37 +96,37 @@ public class MyAlbumListActivity extends ViewBindingActivity<ContributionLayoutB
         });
     }
 
-    public void setListener(){
-        binding.createAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                View inflate = getLayoutInflater().inflate(R.layout.dialog_myalbumlist_activity, null);
-
-                AlertDialog dialog = new AlertDialog.Builder(MyAlbumListActivity.this)
-                        .setView(inflate)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加"Yes"按钮
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Log.d(TAG, "open");
-
-                            }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加取消
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Log.d(TAG, "close");
-                            }
-                        }).create();
-
-                dialog.show();
-
-
-            }
-        });
-    }
+//    public void setListener(){
+//        binding.createAlbum.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                View inflate = getLayoutInflater().inflate(R.layout.dialog_myalbumlist_activity, null);
+//
+//                AlertDialog dialog = new AlertDialog.Builder(MyAlbumListActivity.this)
+//                        .setView(inflate)
+//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加"Yes"按钮
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Log.d(TAG, "open");
+//
+//                            }
+//                        })
+//                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加取消
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                Log.d(TAG, "close");
+//                            }
+//                        }).create();
+//
+//                dialog.show();
+//
+//
+//            }
+//        });
+//    }
 
     public void loadData(){
-        client.getCreatedPreviews(pageNo, pageSize, new MyObserver<GetCreateResp>() {
+        client.getMySubscribeAlbum(pageNo, pageSize, new MyObserver<GetCreateResp>() {
             @Override
             public void onSuccss(GetCreateResp getCreateResp) {
                 Status status = getCreateResp.getStatus();
@@ -151,6 +151,32 @@ public class MyAlbumListActivity extends ViewBindingActivity<ContributionLayoutB
                 }
             }
         });
+
+//        client.getCreatedPreviews(pageNo, pageSize, new MyObserver<GetCreateResp>() {
+//            @Override
+//            public void onSuccss(GetCreateResp getCreateResp) {
+//                Status status = getCreateResp.getStatus();
+//
+//                if(status.getCode() == 200){
+////                    episodeList.addAll(getHistoryResp.getHistorys());
+//
+//                    List<Album> albums = getCreateResp.getAlbums();
+//                    if(albums != null && albums.size() > 0){
+//                        Integer id = albums.get(0).getAlbum_id();
+//                        if(id != lastItemId){
+//                            Log.d(TAG,"load new: " + status.getMsg());
+//                            adapter.updateList(albums);
+//                            lastItemId = id;
+//                        }else{
+//                            Toast.makeText(MyAlbumListActivity.this, "到底啦~", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                }else{
+//                    Log.d(TAG,"status error: " + status.getMsg());
+//                }
+//            }
+//        });
     }
 
 

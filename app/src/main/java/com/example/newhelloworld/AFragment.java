@@ -246,7 +246,8 @@ public class AFragment extends Fragment {
                         imageArray[i] = podcasts.get(i).getPodcastPoster();
                         textArray[i] = podcasts.get(i).getTitle();
                         textArrayP[i] = podcasts.get(i).getUploaderName();
-                        textArrayR[i] = podcasts.get(i).getViews().toString();
+                        textArrayR[i] = podcasts.get(i).getCreateTime();
+//                        textArrayR[i] = podcasts.get(i).getViews().toString();
                     }
 
                     adapter = new CustomAdapter(getActivity(), textArray, textArrayP, textArrayR, imageArray);

@@ -77,8 +77,7 @@ public class PersonalDetailActivity extends ViewBindingActivity<PersonalDetailLa
         if(name != null){
             binding.username.setText(name);
         }
-        //TODO
-        //关注数
+
 
         //简介
         String intro = PreferenceUtil.getString(this, PreferenceUtil.KEY_USER_INTRO);
