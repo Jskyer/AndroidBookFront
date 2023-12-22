@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.newhelloworld.activity.HistoryActivity;
 import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
@@ -130,5 +131,9 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("rxjava", "ok 123");
     }
 
+    public static void startAction(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
 
 }

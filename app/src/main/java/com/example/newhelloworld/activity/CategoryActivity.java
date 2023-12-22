@@ -4,13 +4,16 @@ import android.os.Bundle;
 
 import com.example.newhelloworld.adapter.AlbumAdapter;
 import com.example.newhelloworld.event.MsgToCategory;
+import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.Album;
+import com.example.newhelloworld.pojo.HistoryInfo;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.databinding.ActivityCategoryBinding;
@@ -40,13 +44,15 @@ public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView rcycView;
 
+    private AlbumAdapter adapter;
     private MyRetrofitClient client;
-    private Album album;
-
+//    private Album album;
 
     private int pageNum = 1;
-    private int pageSize = 6;
+    private int pageSize = 8;
     private String type = "";
+
+    private Integer lastId = -1;
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onCategoryReceived(MsgToCategory msg){
@@ -62,6 +68,8 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        MyActivityManager.getInstance().add(this);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -75,18 +83,38 @@ public class CategoryActivity extends AppCompatActivity {
 
 
 
-
         client = new MyRetrofitClient();
-
-//        initData();
+        albumPodcastEpisodeList = new ArrayList<>();
 
         rcycView = findViewById(R.id.album_episode_list);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
+        adapter = new AlbumAdapter(albumPodcastEpisodeList, CategoryActivity.this);
+        rcycView.setAdapter(adapter);
 
-        albumPodcastEpisodeList = new ArrayList<>();
-//        PodcastEpisodeAdapter adapter = new PodcastEpisodeAdapter(albumPodcastEpisodeList,this);
-//        rcycView.setAdapter(adapter);
+        rcycView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                int itemCount = adapter.getItemCount();
+                int last = layoutManager.findLastVisibleItemPosition();
+                int childCount = recyclerView.getChildCount();
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE
+                        && last == itemCount - 1
+                        && childCount > 0){
+                    Log.d(TAG, "加载下一页");
+                    pageNum++;
+                    getAlbumByType();
+                }
+
+            }
+        });
+
+
 
         btn_back=(ImageButton)findViewById(R.id.btn_category_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -124,8 +152,17 @@ public class CategoryActivity extends AppCompatActivity {
                 if(status.getCode() == 200){
                     albumPodcastEpisodeList = getPopularAlbumResp.getAlbums();
 
-                    AlbumAdapter adapter = new AlbumAdapter(albumPodcastEpisodeList, CategoryActivity.this);
-                    rcycView.setAdapter(adapter);
+                    if(albumPodcastEpisodeList != null && albumPodcastEpisodeList.size() > 0) {
+                        int id = albumPodcastEpisodeList.get(0).getAlbum_id();
+
+                        if(id != lastId){
+                            Log.d(TAG,"load new: " + status.getMsg());
+                            adapter.updateList(albumPodcastEpisodeList);
+                            lastId = id;
+                        }else{
+                            Toast.makeText(CategoryActivity.this, "到底啦~", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                     Log.d(TAG, "getAlbumByType ok");
                 }else{

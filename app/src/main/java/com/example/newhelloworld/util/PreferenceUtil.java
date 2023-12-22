@@ -101,6 +101,15 @@ public class PreferenceUtil {
         SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, 0);
         return preferences.getBoolean(key, defaultValue);
     }
+
+    //删除指定的key
+    public static boolean removeString(Context context, String key) {
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(key);
+        return editor.commit();
+    }
+
     /**清除数据*/
     public static boolean clearPreferences(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREFERENCE_NAME, 0);

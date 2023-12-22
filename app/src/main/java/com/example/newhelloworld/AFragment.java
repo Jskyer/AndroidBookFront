@@ -162,7 +162,7 @@ public class AFragment extends Fragment {
                             //TODO 跳转result
                             List<PodcastDo> podcasts = getSearchResp.getPodcasts();
 
-                            EventBus.getDefault().postSticky(new MsgToSearchResult(podcasts));
+                            EventBus.getDefault().postSticky(new MsgToSearchResult(1, 8, s, podcasts));
                             SearchResultActvity.startAction(getActivity());
                         }else {
                             Log.d(TAG, "search error: "+status.getMsg());
@@ -170,13 +170,16 @@ public class AFragment extends Fragment {
                     }
                 });
 
+                searchView.setQuery("", false);
+                searchView.clearFocus();  //可以收起键盘
+                searchView.onActionViewCollapsed();
 
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d(TAG, "onQueryTextChange");
+//                Log.d(TAG, "onQueryTextChange");
                 return false;
             }
         });
@@ -185,7 +188,7 @@ public class AFragment extends Fragment {
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                Log.d(TAG, "onClose");
+//                Log.d(TAG, "onClose");
                 return false;
             }
         });

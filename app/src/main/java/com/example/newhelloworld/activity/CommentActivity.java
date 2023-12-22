@@ -20,6 +20,7 @@ package com.example.newhelloworld.activity;
         import com.example.newhelloworld.adapter.CommentAdapter;
 
         import com.example.newhelloworld.event.MsgToComment;
+        import com.example.newhelloworld.manager.MyActivityManager;
         import com.example.newhelloworld.net.MyObserver;
         import com.example.newhelloworld.net.MyRetrofitClient;
         import com.example.newhelloworld.pojo.Comment;
@@ -68,6 +69,8 @@ public class CommentActivity extends AppCompatActivity {
         //binding=ActivityCategoryBinding.inflate(getLayoutInflater());
         client = new MyRetrofitClient();
         setContentView(R.layout.comment_lv);
+
+        MyActivityManager.getInstance().add(this);
 
         rcycView = findViewById(R.id.comment_list_view);
         LinearLayoutManager manager = new LinearLayoutManager(this);
