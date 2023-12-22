@@ -15,6 +15,7 @@ import com.example.newhelloworld.queryVO.podcast.UploadPodcastResp;
 import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
 import com.example.newhelloworld.queryVO.userInfo.GetCreateResp;
 import com.example.newhelloworld.queryVO.userInfo.GetHistoryResp;
+import com.example.newhelloworld.queryVO.userInfo.GetSearchResp;
 import com.example.newhelloworld.queryVO.userInfo.GetSubscribeResp;
 import com.example.newhelloworld.queryVO.userInfo.IntegerResp;
 
@@ -81,6 +82,14 @@ public interface IRequest {
 
     @POST("/api/user/add_history")
     Observable<ResetPassResp> addHistory(@Query("podcast_id") Integer podcast_id);
+
+
+//    TODO
+    @GET("/api/user/search")
+    Observable<GetSearchResp> searchPodcast(@Query("page_no") Integer pageNum,
+                                            @Query("page_size") Integer pageSize,
+                                            @Query("key") String key);
+
 
 
     //AlbumController

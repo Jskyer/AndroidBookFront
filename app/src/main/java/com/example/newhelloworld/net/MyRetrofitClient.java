@@ -14,6 +14,7 @@ import com.example.newhelloworld.queryVO.podcast.UploadPodcastResp;
 import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
 import com.example.newhelloworld.queryVO.userInfo.GetCreateResp;
 import com.example.newhelloworld.queryVO.userInfo.GetHistoryResp;
+import com.example.newhelloworld.queryVO.userInfo.GetSearchResp;
 import com.example.newhelloworld.queryVO.userInfo.GetSubscribeResp;
 import com.example.newhelloworld.queryVO.userInfo.IntegerResp;
 
@@ -204,6 +205,20 @@ public class MyRetrofitClient {
                 .subscribe(observer);
         return res;
     }
+
+    public Observable<GetSearchResp> searchPodcast(Integer pageNum, Integer pageSize, String key,
+                                                   Observer<GetSearchResp> observer){
+        Retrofit retrofit = RetrofitFactory.getInstance();
+        IRequest iRequest = retrofit.create(IRequest.class);
+
+        Observable<GetSearchResp> res = iRequest.searchPodcast(pageNum, pageSize, key);
+        res.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+        return res;
+    }
+
+
 
     //AlbumController
     public Observable<GetAlbumInfoResp> getAlbumPreviews(Integer album_id, Integer page_no, Integer page_size,

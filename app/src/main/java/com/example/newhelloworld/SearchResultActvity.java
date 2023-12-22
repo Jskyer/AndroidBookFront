@@ -2,6 +2,7 @@ package com.example.newhelloworld;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -9,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.newhelloworld.activity.HistoryActivity;
 
 @SuppressLint("SetTextI18n")
 public class SearchResultActvity extends AppCompatActivity {
@@ -50,4 +53,10 @@ public class SearchResultActvity extends AppCompatActivity {
             }
         }
     }
+
+    public static void startAction(Context context){
+        Intent intent = new Intent(context, SearchResultActvity.class);
+        context.startActivity(intent);
+    }
+
 }
