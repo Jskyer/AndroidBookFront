@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     private Button verifyButton;
     private Button signUpButton;
+
+    private ImageButton loginButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         verifyButton = this.findViewById(R.id.VerifyButton);
         signUpButton = this.findViewById(R.id.SignUpButton);
+        loginButton = this.findViewById(R.id.ReturnLogin);
 
 
         verifyButton.setOnClickListener(
@@ -113,6 +118,17 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d("rxjava", pwd);
 
                         register(map);
+                    }
+                }
+        );
+
+        loginButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // 跳转到注册界面
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                        startActivity(intent);
                     }
                 }
         );

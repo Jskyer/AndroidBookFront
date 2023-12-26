@@ -6,7 +6,7 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dp_103"
+        android:layout_height="@dimen/dp_105"
         android:background="@color/primary"
         android:gravity="center_vertical" />
 
@@ -14,18 +14,19 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="62dp"
-        android:src="@drawable/btn_play" />
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/btn_play"
+        app:backgroundTint="#4682B4" />
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fab"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="15dp" />
 
     <ImageView
         android:id="@+id/imageView3"

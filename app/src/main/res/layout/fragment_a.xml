@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:background="@color/primary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        </androidx.appcompat.widget.Toolbar>
+
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="match_parent"
+        android:layout_width="253dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="25dp"
-        android:queryHint="Search here" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/search_view_background"
+        android:queryHint="Search here"
+        android:searchIcon="@drawable/ic_search" />
 
     <TextView
         android:id="@+id/recommend"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/searchView"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:text="编辑推荐"
+        android:text="每日精选"
         android:textColor="@color/primary"
         android:textSize="26dp" />
 
@@ -43,15 +61,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="430dp"
-        android:background="@color/grey88"
+        android:layout_marginTop="480dp"
+        android:background="#758a99"
         android:elevation="6dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="418dp"
-        android:layout_height="154dp"
+        android:layout_height="150dp"
         android:layout_below="@id/tab_layout"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="-2dp" />
@@ -61,15 +79,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="670dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="102.75dp"
+            android:layout_width="101.75dp"
             android:layout_height="34dp"
             android:layout_gravity="left"
             android:layout_marginLeft="0dp"
-            android:background="#EEEEEE"
+            android:background="@color/primary"
             android:gravity="center"
             android:padding="8dp"
             android:text="流行"
@@ -102,16 +120,16 @@
 
     <LinearLayout
         android:id="@+id/line2"
-        android:layout_width="102.75dp"
+        android:layout_width="101.75dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="102.75dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="670dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:background="#EEEEEE"
+            android:background="@color/primary"
             android:gravity="center"
             android:padding="8dp"
             android:text="现代"
@@ -144,16 +162,16 @@
 
     <LinearLayout
         android:id="@+id/line3"
-        android:layout_width="102.75dp"
+        android:layout_width="101.75dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="205.5dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="670dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:background="#EEEEEE"
+            android:background="@color/primary"
             android:gravity="center"
             android:padding="8dp"
             android:text="经典"
@@ -185,16 +203,16 @@
 
     <LinearLayout
         android:id="@+id/line4"
-        android:layout_width="102.75dp"
+        android:layout_width="101.75dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="308.25dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="670dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="34dp"
-            android:background="#EEEEEE"
+            android:background="@color/primary"
             android:gravity="center"
             android:padding="8dp"
             android:text="爵士"
@@ -224,9 +242,21 @@
 
     </LinearLayout>
 
+        <TextView
+            android:id="@+id/TitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="850dp"
+            android:layout_marginEnd="100dp"
+            android:gravity="center"
+            android:textColor="#808080"
+            android:textSize="10dp"
+            android:textStyle="italic" />
+
 
 </RelativeLayout>
 
-
+</ScrollView>
 
 

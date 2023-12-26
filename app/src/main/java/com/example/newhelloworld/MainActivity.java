@@ -272,6 +272,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //通过setupWithNavController将底部导航和导航控制器进行绑定
         NavigationUI.setupWithNavController(bottomNavigation,navController);
 
+        if(isSwitchOn)bottomNavigation.setBackgroundColor(getResources().getColor(R.color.black));
+
         //注册事件总线
         EventBus.getDefault().register(this);
     }
