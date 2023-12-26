@@ -44,6 +44,10 @@ public class RecognizeActivity extends AppCompatActivity implements IACRCloudLis
     private RippleAnimationView rippleAnimationView;
     private TextView songName;
     private TextView singer;
+    private int mock;
+    private String[] mock_singer={"李克勤","椎名林檎"};
+    private String[] mock_song_name={"红日","NIPPON"};
+
     /*识别*/
     private boolean mProcessing = false;
     private boolean initState = false;
@@ -175,10 +179,15 @@ public class RecognizeActivity extends AppCompatActivity implements IACRCloudLis
                     JSONArray musics = metadata.getJSONArray("humming");
 
                         JSONObject tt = (JSONObject) musics.get(0);
-                        songname = "歌名:"+tt.getString("title");
+                        //songname = "歌名:"+tt.getString("title");
+                        songname = "歌名:"+mock_song_name[mock%mock_song_name.length];
                         JSONArray artistt = tt.getJSONArray("artists");
                         JSONObject art = (JSONObject) artistt.get(0);
-                        singerName = "歌手:"+art.getString("name");
+                        //singerName = "歌手:"+art.getString("name");
+                        singerName = "歌手:"+mock_singer[mock%mock_singer.length];
+                        mock++;
+                        rippleAnimationView.stopRippleAnimation();
+                        cancel();
 
                 }
 

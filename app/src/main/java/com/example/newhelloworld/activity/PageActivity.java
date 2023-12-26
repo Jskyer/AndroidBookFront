@@ -19,8 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.adapter.PageAdapter;
+import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.event.MsgToAlbum;
+import com.example.newhelloworld.event.MsgToComment;
+import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.manager.MyActivityManager;
+import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.model.PodcastEpisode;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
@@ -31,6 +35,7 @@ import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.album.GetAlbumInfoResp;
 import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
 import com.example.newhelloworld.queryVO.userInfo.IntegerResp;
+import com.example.newhelloworld.util.ModelUtil;
 import com.example.newhelloworld.util.ResourceUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,6 +51,7 @@ public class PageActivity extends AppCompatActivity {
 
     private ImageButton button;
     private ImageButton btn_comment;
+    private ImageButton btn_addfirstPlay;
     private TextView albumNameView;
     private TextView uploadTimeView;
 
@@ -87,7 +93,7 @@ public class PageActivity extends AppCompatActivity {
 
                     albumNameView.setText(album.getAlbum_name());
                     uploadTimeView.setText(album.getUpload_time());
-                    uploaderNameView.setText(album.getUpload_id());
+                    uploaderNameView.setText("关注数:"+album.getSubscribe_number());
                     descripView.setText(album.getDescription());
                     Glide.with(PageActivity.this)
                             .load(ResourceUtil.getAlbumPosterPath(album.getAlbum_poster()))
@@ -111,6 +117,7 @@ public class PageActivity extends AppCompatActivity {
 
         button=(ImageButton) findViewById(R.id.btn_back);
         subscribeBtnView=(ImageButton)findViewById(R.id.subscribe_button);
+        btn_addfirstPlay=(ImageButton)findViewById(R.id.imageButton3);
         client=new MyRetrofitClient();
         podcasts=new ArrayList<>();
 
@@ -148,6 +155,7 @@ public class PageActivity extends AppCompatActivity {
                                         Status status=resetPassResp.getStatus();
                                         if(status.getCode()==200){
                                             Log.d(TAG,"关注"+album_id.toString()+"成功");
+                                            flush(rcycView);
                                         }
                                     }
                                 });
@@ -159,6 +167,7 @@ public class PageActivity extends AppCompatActivity {
                                         Status status=resetPassResp.getStatus();
                                         if(status.getCode()==200){
                                             Log.d(TAG,"取消关注"+album_id.toString()+"成功");
+                                            flush(rcycView);
                                         }
                                     }
                                 });
@@ -168,6 +177,15 @@ public class PageActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+        btn_addfirstPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Episode episode1 = ModelUtil.transEpisode(podcasts.get(0));
+                AudioListManager.getInstance().addData(episode1);
+                EventBus.getDefault().postSticky(new MsgAddToAudioList(episode1));
+                AudioActivity.startAction(PageActivity.this);
             }
         });
         // 创建图像数组和文本数组
@@ -194,5 +212,10 @@ public class PageActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+    public void flush(View view) {
+        finish();
+        PageActivity.startAction(this);
+
     }
 }

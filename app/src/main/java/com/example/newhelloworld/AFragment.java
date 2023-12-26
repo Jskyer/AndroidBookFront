@@ -3,10 +3,10 @@ package com.example.newhelloworld;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.activity.CategoryActivity;
-import com.example.newhelloworld.activity.PageActivity;
+import com.example.newhelloworld.activity.RecognizeActivity;
 import com.example.newhelloworld.adapter.CustomAdapter;
 import com.example.newhelloworld.adapter.YourPagerAdapter;
 import com.example.newhelloworld.event.MsgAddToAudioList;
@@ -26,21 +26,16 @@ import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
-import com.example.newhelloworld.pojo.Album;
 import com.example.newhelloworld.pojo.Podcast;
 import com.example.newhelloworld.pojo.PodcastDo;
-import com.example.newhelloworld.pojo.PodcastOffiRec;
 import com.example.newhelloworld.queryVO.Status;
-import com.example.newhelloworld.queryVO.album.GetPopularAlbumResp;
 import com.example.newhelloworld.queryVO.podcast.GetPodcastOffiRecResp;
-import com.example.newhelloworld.queryVO.podcast.GetPodcastResp;
 import com.example.newhelloworld.queryVO.userInfo.GetSearchResp;
 import com.example.newhelloworld.util.ModelUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +51,7 @@ public class AFragment extends Fragment {
     private MyRetrofitClient client;
 
     private List<Podcast> podcasts;
+    private ImageButton btnRecog;
 
     private String[] imageArray;
     private  String[] textArray; // 栏目名
@@ -69,8 +65,9 @@ public class AFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         client = new MyRetrofitClient();
 
-        view = inflater.inflate(R.layout.fragment_a, container, false);
+        view = inflater.from(getActivity()).inflate(R.layout.fragment_a, container, false);
         listView = view.findViewById(R.id.list_view);
+        btnRecog=view.findViewById(R.id.toRecognize);
         podcasts = new ArrayList<>();
 
         // 创建图像数组和文本数组
@@ -132,6 +129,12 @@ public class AFragment extends Fragment {
                     // 跳转到column 3
                     startActivity(new Intent(getActivity(), AudioActivity.class));
                     break;
+            }
+        });
+        btnRecog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecognizeActivity.startAction(getActivity());
             }
         });
 

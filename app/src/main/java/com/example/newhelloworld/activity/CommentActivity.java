@@ -13,6 +13,7 @@ package com.example.newhelloworld.activity;
         import android.widget.Toast;
 
         import androidx.appcompat.app.AppCompatActivity;
+        import androidx.recyclerview.widget.DividerItemDecoration;
         import androidx.recyclerview.widget.LinearLayoutManager;
         import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,6 +74,9 @@ public class CommentActivity extends AppCompatActivity {
         MyActivityManager.getInstance().add(this);
 
         rcycView = findViewById(R.id.comment_list_view);
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        rcycView.addItemDecoration(decoration);
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
         edit = (EditText) findViewById(R.id.comment_ct);
