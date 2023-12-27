@@ -14,11 +14,12 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="211dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/btn_play"
+        android:layout_toEndOf="@+id/textView8"
+        android:src="@mipmap/ic_subscribe"
         app:backgroundTint="#4682B4" />
 
     <ListView
@@ -40,10 +41,10 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="订阅"
-        android:textSize="@dimen/dp_25"
         android:layout_marginLeft="@dimen/dp_68"
-        android:layout_marginTop="@dimen/dp_38"/>
+        android:layout_marginTop="@dimen/dp_38"
+        android:text="订阅"
+        android:textSize="@dimen/dp_25" />
 
 
 </RelativeLayout>

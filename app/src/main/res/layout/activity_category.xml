@@ -38,10 +38,15 @@
 
             <ImageButton
                 android:id="@+id/btn_category_back"
-                android:layout_width="72dp"
-                android:layout_height="51dp"
-                android:src="@mipmap/ic_back"
-                tools:srcCompat="@mipmap/ic_back" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="#008C9EFF"
+                android:rotationY="0"
+                android:src="@drawable/ic_return"
+                tools:src="@drawable/ic_return"
+                tools:srcCompat="@drawable/ic_return" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

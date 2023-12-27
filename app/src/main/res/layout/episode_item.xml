@@ -25,10 +25,10 @@
                 android:id="@+id/playlst_poster"
                 android:layout_width="@dimen/dp_48"
                 android:layout_height="@dimen/dp_48"
+                android:clickable="true"
                 android:padding="1dp"
                 android:src="@drawable/icon_music"
-                android:clickable="true"
-                app:strokeColor="@color/white"
+                app:strokeColor="@color/background"
                 app:strokeWidth="@dimen/dp_2" />
 
         </RelativeLayout>

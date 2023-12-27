@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp">
@@ -8,7 +9,12 @@
     <LinearLayout
         android:layout_width="397dp"
         android:layout_height="162dp"
-        android:orientation="vertical">
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        android:outlineAmbientShadowColor="#D5D1D1">
 
         <LinearLayout
             android:layout_width="409dp"
@@ -17,8 +23,8 @@
 
             <TextView
                 android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="TextView"
                 android:textSize="24sp" />
@@ -26,9 +32,9 @@
             <TextView
                 android:id="@+id/time"
                 android:layout_width="230dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="TextView"
-                android:textSize="15sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -38,19 +44,25 @@
 
             <TextView
                 android:id="@+id/content"
-                android:layout_width="310dp"
-                android:layout_height="63dp"
+                android:layout_width="325dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingLeft="30dp"
                 android:text="TextView"
                 android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/like"
-                android:layout_width="69dp"
-                android:layout_height="69dp"
+                android:layout_width="58dp"
+                android:layout_height="61dp"
                 android:layout_marginStart="45dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/logo" />
+                android:layout_marginRight="20dp"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/ic_like"
+                tools:srcCompat="@mipmap/ic_like" />
         </LinearLayout>
 
     </LinearLayout>

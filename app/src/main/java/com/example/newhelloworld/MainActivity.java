@@ -60,10 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private MaterialButton btnPlay;
     /**
-     * 跳转到听歌识曲
-     */
-    private ImageButton btnRecog;
-    /**
      * 音频播放器
      */
 //    private MediaPlayer mediaPlayer;
@@ -291,8 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvSongName = findViewById(R.id.tv_song_name);
         btnPlay = findViewById(R.id.btn_play);
         btnPlay.setOnClickListener(this);
-        btnRecog=findViewById(R.id.toRecognize);
-        btnRecog.setOnClickListener(this);
+
 
         episodeListView = findViewById(R.id.bottom_sheet);
         rcycView = episodeListView.findViewById(R.id.episode_list);
@@ -487,9 +482,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnPlay.setTag("btn_play");
             }
 
-        }else if(id==R.id.toRecognize){
-            Log.d(TAG,"jump to recognize");
-            RecognizeActivity.startAction(this);
         }
     }
 

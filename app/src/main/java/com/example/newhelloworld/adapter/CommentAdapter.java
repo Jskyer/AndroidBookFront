@@ -79,8 +79,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Comment comment=data.get(position);
 
         Log.d("bind",comment.getComment_text());
-        holder.user_name.setText(comment.getCommenter_id().toString());
-        holder.time.setText(comment.getLikeNum().toString());
+        holder.user_name.setText("评论者id:"+comment.getCommenter_id().toString());
+        holder.time.setText("点赞数:"+comment.getLikeNum().toString());
         holder.content.setText(comment.getComment_text());
         holder.btn_like.setOnClickListener(new View.OnClickListener() {
             @Override
