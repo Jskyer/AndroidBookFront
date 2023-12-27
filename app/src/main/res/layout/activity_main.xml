@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context="com.example.newhelloworld.activity.BaseActivity">
 
 
@@ -43,9 +44,9 @@
                 android:id="@+id/iv_logo"
                 android:layout_width="@dimen/dp_48"
                 android:layout_height="@dimen/dp_48"
-                android:padding="1dp"
-                android:src="@drawable/icon_music"
                 android:clickable="true"
+                android:padding="1dp"
+                app:srcCompat="@mipmap/ic_playmusic"
                 app:strokeColor="@color/white"
                 app:strokeWidth="@dimen/dp_2" />
 
@@ -54,7 +55,7 @@
         <!--歌曲信息  歌名 - 歌手 -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_song_name"
-            android:layout_width="0dp"
+            android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="marquee"
@@ -72,21 +73,22 @@
             android:id="@+id/btn_play"
             android:layout_width="@dimen/dp_36"
             android:layout_height="@dimen/dp_36"
-            android:tag="btn_play"
             android:insetLeft="@dimen/dp_0"
             android:insetTop="@dimen/dp_0"
             android:insetRight="@dimen/dp_0"
             android:insetBottom="@dimen/dp_0"
+            android:tag="btn_play"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-            app:backgroundTint="@color/teal_700"
+            app:backgroundTint="#63FFFFFF"
             app:cornerRadius="@dimen/dp_18"
-            app:icon="@drawable/icon_play"
+            app:icon="@drawable/btn_play"
             app:iconGravity="textStart"
             app:iconPadding="@dimen/dp_0"
-            app:iconSize="@dimen/dp_36" />
+            app:iconSize="@dimen/dp_36"
+            app:iconTint="#FFFFFF" />
     </LinearLayout>
 
-    <include layout="@layout/episode_list_activity"/>
+    <include layout="@layout/episode_list_activity" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -95,7 +97,6 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         app:menu="@menu/menu" />
-
 
 
 </RelativeLayout>

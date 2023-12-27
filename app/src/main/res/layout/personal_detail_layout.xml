@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="202dp"
             android:layout_height="212dp"
             android:orientation="vertical"
@@ -46,8 +47,8 @@
                 android:id="@+id/btn_avatar"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:text="@string/edit_avatar"
                 android:textSize="20sp"
                 app:cornerRadius="10dp"
@@ -62,9 +63,9 @@
     <View
         android:id="@+id/Divider1"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:layout_below="@id/recommend"
-        android:background="@color/primary" />
+        android:background="#D3C1E8FF" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,10 +131,10 @@
     <View
         android:id="@+id/Divider2"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_height="2dp"
         android:layout_below="@id/recommend"
-        android:background="@color/primary" />
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="#D3C1E8FF" />
 
     <EditText
         android:id="@+id/introduction"

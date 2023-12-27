@@ -48,15 +48,13 @@
                     <ImageView
                         android:id="@+id/page_album_poster"
                         android:layout_width="match_parent"
-                        android:layout_height="164dp"
-                        app:srcCompat="@drawable/guolai" />
+                        android:layout_height="164dp" />
 
                     <TextView
                         android:id="@+id/page_uploadtime"
                         android:layout_width="match_parent"
                         android:layout_height="36dp"
-                        android:layout_marginTop="5dp"
-                        android:text="发布时间" />
+                        android:layout_marginTop="5dp" />
 
                 </LinearLayout>
 
@@ -74,14 +72,12 @@
                         android:id="@+id/page_album_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="album_name"
                         android:textSize="34sp" />
 
                     <TextView
                         android:id="@+id/page_uploader_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="user_name"
                         android:textSize="20sp" />
 
                     <LinearLayout
@@ -127,7 +123,6 @@
                 android:layout_height="183dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="description"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
