@@ -17,6 +17,8 @@ import com.example.newhelloworld.LoginActivity;
 import com.example.newhelloworld.MainActivity;
 import com.example.newhelloworld.R;
 import com.example.newhelloworld.databinding.SettingLayoutBinding;
+import com.example.newhelloworld.event.LogoutMsg;
+import com.example.newhelloworld.manager.AudioListManager;
 import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
@@ -25,6 +27,7 @@ import com.example.newhelloworld.queryVO.signIn.ResetPassResp;
 import com.example.newhelloworld.util.PreferenceUtil;
 
 import org.apache.commons.lang3.StringUtils;
+import org.greenrobot.eventbus.EventBus;
 
 public class SettingActivity extends ViewBindingActivity<SettingLayoutBinding> implements View.OnClickListener{
     private final String TAG = "SettingActivity";
@@ -42,6 +45,12 @@ public class SettingActivity extends ViewBindingActivity<SettingLayoutBinding> i
         modifyPwdLayout.setOnClickListener(this);
 
         binding.btnLogout.setOnClickListener(this);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -59,6 +68,12 @@ public class SettingActivity extends ViewBindingActivity<SettingLayoutBinding> i
 //        PreferenceUtil.removeString(this, PreferenceUtil.KEY_USER_TOKEN);
 //        PreferenceUtil.removeString(this, PreferenceUtil.K);
         PreferenceUtil.clearPreferences(this);
+
+        AudioListManager.getInstance().release();
+        Toast.makeText(this, "登出成功", Toast.LENGTH_SHORT).show();
+
+        EventBus.getDefault().postSticky(new LogoutMsg(true));
+
         MyActivityManager.getInstance().finishAll();
         LoginActivity.startAction(this);
     }

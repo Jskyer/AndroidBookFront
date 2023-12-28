@@ -22,6 +22,7 @@ import com.example.newhelloworld.activity.AudioActivity;
 import com.example.newhelloworld.activity.RecognizeActivity;
 import com.example.newhelloworld.adapter.EpisodeAdapter;
 import com.example.newhelloworld.event.AudioCompleteListener;
+import com.example.newhelloworld.event.LogoutMsg;
 import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.event.MsgAudioToMain;
 import com.example.newhelloworld.event.MsgPlaylistToMain;
@@ -111,6 +112,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Episode curEpisode;
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onLogoutReceived(LogoutMsg msg){
+        Log.d(TAG, "onLogoutReceived");
+
+        ivLogo.setImageResource(R.drawable.default_botpic);
+        tvSongName.setText("欢迎探索~");
+
+        btnPlay.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.icon_play, null));
+        btnPlay.setTag("btn_play");
+
+        episodeList = null;
+        curEpisode = null;
+
+        EventBus.getDefault().removeStickyEvent(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onBackToMainFromAudio(MsgAudioToMain msg){
         Log.d(TAG, "onBackToMainFromAudio");
         Log.d(TAG, ""+msg);
@@ -186,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(list.size() == 0){
                 Log.d(TAG, "size == 0");
 
-                ivLogo.setImageResource(R.drawable.icon_music);
+                ivLogo.setImageResource(R.drawable.default_botpic);
                 tvSongName.setText("欢迎探索~");
                 btnPlay.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.icon_play, null));
                 btnPlay.setTag("btn_play");

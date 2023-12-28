@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,15 +68,34 @@ public class PageActivity extends AppCompatActivity {
     private PageAdapter adapter;
     private RecyclerView rcycView;
 
-    /*页面显示*/
+    private Album album;
 
+    /*页面显示*/
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void onAlbumReceived(MsgToAlbum msg){
         Log.d(TAG,"onAlbumReceived");
         album_id=msg.getAlbumId();
         getAlbumById();
+
+        getIsSubscribe();
+
         EventBus.getDefault().removeStickyEvent(this);
+    }
+
+    private void getIsSubscribe(){
+        client.getSubscribe(album_id, new MyObserver<IntegerResp>() {
+            @Override
+            public void onSuccss(IntegerResp integerResp) {
+                Status status = integerResp.getStatus();
+                if (status.getCode() == 200) {
+                    if(integerResp.getNum() == 1){
+                        subscribeBtnView.setImageResource(R.drawable.sub_light);
+                    }
+                }
+            }
+        });
+
     }
 
     private void getAlbumById() {
@@ -84,7 +104,7 @@ public class PageActivity extends AppCompatActivity {
             public void onSuccss(GetAlbumInfoResp getAlbumInfoResp) {
                 Status status=getAlbumInfoResp.getStatus();
                 if(status.getCode()==200){
-                    Album album=getAlbumInfoResp.getAlbum();
+                    album=getAlbumInfoResp.getAlbum();
                     albumNameView=findViewById(R.id.page_album_name);
                     uploadTimeView=findViewById(R.id.page_uploadtime);
                     uploaderNameView=findViewById(R.id.page_uploader_name);
@@ -155,7 +175,14 @@ public class PageActivity extends AppCompatActivity {
                                         Status status=resetPassResp.getStatus();
                                         if(status.getCode()==200){
                                             Log.d(TAG,"关注"+album_id.toString()+"成功");
-                                            flush(rcycView);
+
+                                            //TODO 变高亮
+                                            subscribeBtnView.setImageResource(R.drawable.sub_light);
+
+                                            int cursub = album.getSubscribe_number() + 1;
+                                            album.setSubscribe_number(cursub);
+                                            uploaderNameView.setText("关注数:"+cursub);
+//                                            flush(rcycView);
                                         }
                                     }
                                 });
@@ -167,7 +194,14 @@ public class PageActivity extends AppCompatActivity {
                                         Status status=resetPassResp.getStatus();
                                         if(status.getCode()==200){
                                             Log.d(TAG,"取消关注"+album_id.toString()+"成功");
-                                            flush(rcycView);
+
+                                            //TODO 变默认
+                                            subscribeBtnView.setImageResource(R.drawable.sub_default);
+
+                                            int cursub = album.getSubscribe_number() - 1;
+                                            album.setSubscribe_number(cursub);
+                                            uploaderNameView.setText("关注数:"+cursub);
+//                                            flush(rcycView);
                                         }
                                     }
                                 });
@@ -213,9 +247,8 @@ public class PageActivity extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-    public void flush(View view) {
-        finish();
-        PageActivity.startAction(this);
-
-    }
+//    public void flush(View view) {
+//        finish();
+//        PageActivity.startAction(this);
+//    }
 }

@@ -19,6 +19,9 @@ public class AudioListManager {
     public static int MODE_LIST_LOOP = 0; //列表循环
     public static int MODE_SINGLE = 1; //单曲循环
     public static int MODE_RANDOM = 2; //随机
+
+    private static AudioListManager instance;
+
     private AudioListManager(){
         audioList = new ArrayList<>();
         audioPlayManager = AudioPlayManager.getInstance();
@@ -28,12 +31,15 @@ public class AudioListManager {
         setListeners();
     }
 
-    private static class AudioListManagerHolder{
-        private static AudioListManager instance = new AudioListManager();
-    }
+//    private static class AudioListManagerHolder{
+//        private static AudioListManager instance = new AudioListManager();
+//    }
 
     public static AudioListManager getInstance(){
-        return AudioListManagerHolder.instance;
+        if(instance == null){
+            instance = new AudioListManager();
+        }
+        return instance;
     }
 
     private AudioPlayManager audioPlayManager;
@@ -376,6 +382,7 @@ public class AudioListManager {
 
     public void release(){
         audioPlayManager.releasePlayer();
+        instance = null;
     }
 
 //    public void reset(){

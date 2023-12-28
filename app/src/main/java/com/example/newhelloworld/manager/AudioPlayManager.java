@@ -12,17 +12,23 @@ import java.util.Locale;
 // 单集播放页管理
 public class AudioPlayManager {
     public static String TAG = "AudioPlayManager";
+
+    private static AudioPlayManager instance;
+
     private AudioPlayManager(){
         player = new MediaPlayer();
 //        lastTime = 0;
     }
 
-    private static class AudioPlayManagerHolder{
-        private static AudioPlayManager instance = new AudioPlayManager();
-    }
+//    private static class AudioPlayManagerHolder{
+//        private static AudioPlayManager instance = new AudioPlayManager();
+//    }
 
     public static AudioPlayManager getInstance(){
-        return AudioPlayManagerHolder.instance;
+        if(instance == null){
+            instance = new AudioPlayManager();
+        }
+        return instance;
     }
     // 单曲的播放状态
 //    private int status;
@@ -95,6 +101,10 @@ public class AudioPlayManager {
         player.stop();
         player.release();
         isRelease = true;
+
+        curEpisode = null;
+
+        instance = null;
 
         Log.d(TAG, "releasePlayer complete");
     }

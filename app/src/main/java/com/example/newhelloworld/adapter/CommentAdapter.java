@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -90,9 +91,19 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     public void onSuccss(StatusResp statusResp) {
                         Status status=statusResp.getStatus();
                         if(status.getCode()==200){
-                            Log.d(TAG,"点赞/取消点赞成功");
-                            EventBus.getDefault().postSticky(new MsgToComment(comment.getPodcastId()));
-                            CommentActivity.startAction(context);
+                            int likeNum = comment.getLikeNum();
+                            if(status.getMsg().equals("点赞成功")){
+                                likeNum++;
+                                comment.setLikeNum(likeNum);
+                                holder.time.setText("点赞数:"+likeNum);
+                            }else{
+                                likeNum--;
+                                comment.setLikeNum(likeNum);
+                                holder.time.setText("点赞数:"+likeNum);
+                            }
+
+//                            EventBus.getDefault().postSticky(new MsgToComment(comment.getPodcastId()));
+//                            CommentActivity.startAction(context);
                             //notifyItemChanged(holder.getAdapterPosition(),null);
                         }
                     }

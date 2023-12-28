@@ -1,42 +1,40 @@
-
-
 package com.example.newhelloworld.activity;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.View;
-        import android.view.inputmethod.InputMethodManager;
-        import android.widget.EditText;
-        import android.widget.ImageButton;
-        import android.widget.Toast;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
-        import androidx.appcompat.app.AppCompatActivity;
-        import androidx.recyclerview.widget.DividerItemDecoration;
-        import androidx.recyclerview.widget.LinearLayoutManager;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.example.newhelloworld.R;
-        import com.example.newhelloworld.adapter.CommentAdapter;
+import com.example.newhelloworld.R;
+import com.example.newhelloworld.adapter.CommentAdapter;
 
-        import com.example.newhelloworld.event.MsgToComment;
-        import com.example.newhelloworld.manager.MyActivityManager;
-        import com.example.newhelloworld.net.MyObserver;
-        import com.example.newhelloworld.net.MyRetrofitClient;
-        import com.example.newhelloworld.pojo.Comment;
-        import com.example.newhelloworld.queryVO.GetCommentsResp;
-        import com.example.newhelloworld.queryVO.Status;
-        import com.example.newhelloworld.queryVO.StatusResp;
+import com.example.newhelloworld.event.MsgToComment;
+import com.example.newhelloworld.manager.MyActivityManager;
+import com.example.newhelloworld.net.MyObserver;
+import com.example.newhelloworld.net.MyRetrofitClient;
+import com.example.newhelloworld.pojo.Comment;
+import com.example.newhelloworld.queryVO.GetCommentsResp;
+import com.example.newhelloworld.queryVO.Status;
+import com.example.newhelloworld.queryVO.StatusResp;
 
-        import org.apache.commons.lang3.StringUtils;
-        import org.greenrobot.eventbus.EventBus;
-        import org.greenrobot.eventbus.Subscribe;
-        import org.greenrobot.eventbus.ThreadMode;
+import org.apache.commons.lang3.StringUtils;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
-        import java.util.ArrayList;
-        import java.util.Date;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class CommentActivity extends AppCompatActivity {
     public static final String TAG = "CommentActivity";
@@ -47,8 +45,10 @@ public class CommentActivity extends AppCompatActivity {
     private EditText edit;
     private Integer podcastId;
     private CommentAdapter adapter;
+
     /*for adapter*/
-    private List<Comment> comments = new ArrayList<>();
+//    private List<Comment> comments = new ArrayList<>();
+
     private MyRetrofitClient client;
     //private ActivityCategoryBinding binding;
     private RecyclerView rcycView;
@@ -79,6 +79,9 @@ public class CommentActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rcycView.setLayoutManager(manager);
+
+
+
         edit = (EditText) findViewById(R.id.comment_ct);
         addCommentBtn = findViewById(R.id.send);
         button = findViewById(R.id.btn_back_comment);
@@ -103,7 +106,7 @@ public class CommentActivity extends AppCompatActivity {
                         Status status = statusResp.getStatus();
                         if (status.getCode() == 200) {
                             Log.d(TAG, "成功发送comment：" + content);
-                            flush(rcycView);
+//                            flush(rcycView);
                         } else {
                             Log.d(TAG, "发送失败");
                         }
@@ -138,31 +141,52 @@ public class CommentActivity extends AppCompatActivity {
             public void onSuccss(GetCommentsResp getCommentsResp) {
                 Status status = getCommentsResp.getStatus();
                 if (status.getCode() == 200) {
-                    comments = new ArrayList<>();
+
                     commentList = getCommentsResp.getComments();
-                    for (int i = 0; i < commentList.size(); i++) {
-                        Comment comment = new Comment();
-                        comment.setComment_id(commentList.get(i).getComment_id());
-                        comment.setCommenter_id(commentList.get(i).getCommenter_id());
-                        comment.setComment_text(commentList.get(i).getComment_text());
 
-                        comment.setComment_time(commentList.get(i).getComment_time());
-                        comment.setLikeNum(commentList.get(i).getLikeNum());
-                        comment.setPodcastId(podcast_id);
-                        //Log.d("podcastId",commentList.get(i).getComment_text());
-                        comments.add(comment);
-                    }
-
-                    adapter = new CommentAdapter(comments, CommentActivity.this);
+                    adapter = new CommentAdapter(commentList, CommentActivity.this);
                     rcycView.setAdapter(adapter);
-                    /*for(int i=0;i<comments.size();i++){
-                        String temp=comments.get(i).getComment_text();
-                        Log.d("创建comment",temp);
-                    }*/
 
+                    Log.d(TAG, "getSubscribePreviews ok");
+                }else{
+                    Log.d(TAG, "getSubscribePreviews error");
                 }
             }
         });
+
+//        client.getComments(podcast_id, new MyObserver<GetCommentsResp>() {
+//            @Override
+//            public void onSuccss(GetCommentsResp getCommentsResp) {
+//                Status status = getCommentsResp.getStatus();
+//                if (status.getCode() == 200) {
+//                    comments = new ArrayList<>();
+//                    commentList = getCommentsResp.getComments();
+//                    for (int i = 0; i < commentList.size(); i++) {
+//                        Comment comment = new Comment();
+//                        comment.setComment_id(commentList.get(i).getComment_id());
+//                        comment.setCommenter_id(commentList.get(i).getCommenter_id());
+//                        comment.setComment_text(commentList.get(i).getComment_text());
+//
+//                        comment.setComment_time(commentList.get(i).getComment_time());
+//                        comment.setLikeNum(commentList.get(i).getLikeNum());
+//                        comment.setPodcastId(podcast_id);
+//                        //Log.d("podcastId",commentList.get(i).getComment_text());
+//                        comments.add(comment);
+//                    }
+//
+////                    adapter = new CommentAdapter(comments, CommentActivity.this);
+////                    rcycView.setAdapter(adapter);
+//
+//
+//                    /*for(int i=0;i<comments.size();i++){
+//                        String temp=comments.get(i).getComment_text();
+//                        Log.d("创建comment",temp);
+//                    }*/
+//
+//                }
+//            }
+//        });
+
     }
 
     public static void startAction(Context context) {
@@ -177,11 +201,11 @@ public class CommentActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    public void flush(View view) {
-        finish();
-        EventBus.getDefault().postSticky(new MsgToComment(podcastId));
-        CommentActivity.startAction(this);
-
-    }
+//    public void flush(View view) {
+//        finish();
+//        EventBus.getDefault().postSticky(new MsgToComment(podcastId));
+//        CommentActivity.startAction(this);
+//
+//    }
 }
 

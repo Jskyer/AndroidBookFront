@@ -4,6 +4,7 @@ import com.example.newhelloworld.model.Episode;
 import com.example.newhelloworld.pojo.HistoryInfo;
 import com.example.newhelloworld.pojo.Podcast;
 import com.example.newhelloworld.pojo.PodcastDo;
+import com.example.newhelloworld.pojo.SubscribeInfo;
 
 public class ModelUtil {
     //后端Podcast pojo 转为 AudioListManager需要的Episode
@@ -48,4 +49,20 @@ public class ModelUtil {
         episode.setLastTime(0);
         return episode;
     }
+
+
+    public static Episode transEpisode(SubscribeInfo info){
+        Episode episode = new Episode();
+
+        episode.setId(info.getPodcast_id());
+        episode.setTitle(info.getTitle());
+        episode.setUploader_name(info.getUploader_name());
+        episode.setPoster(info.getPodcast_poster());
+        episode.setDuration(Integer.parseInt(info.getDuration()));
+        episode.setPodcast_path(info.getPodcast_path());
+
+        episode.setLastTime(0);
+        return episode;
+    }
+
 }
