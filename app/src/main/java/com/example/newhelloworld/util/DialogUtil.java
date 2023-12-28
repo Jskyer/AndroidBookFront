@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AlertDialog;
 
 public class DialogUtil {
-    //create用于跳转
+
     public static AlertDialog permissionDialog(Context context){
         return new AlertDialog.Builder(context)
                         .setTitle("PodOasis")//设置标题

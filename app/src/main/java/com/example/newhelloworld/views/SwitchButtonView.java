@@ -17,6 +17,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.newhelloworld.R;
+import com.example.newhelloworld.event.MsgModeChange;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -122,17 +125,20 @@ public class SwitchButtonView extends View {
 
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 // 关闭暗黑模式
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                isSwitchOn = false;
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+                EventBus.getDefault().postSticky(new MsgModeChange(0));
+
             } else {
                 // 开启暗黑模式
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                isSwitchOn = true;
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                EventBus.getDefault().postSticky(new MsgModeChange(1));
             }
 
             Log.d("night mode", "after touch "+isSwitchOn);
 
-            invalidate();
+//            invalidate();
         }
 
 

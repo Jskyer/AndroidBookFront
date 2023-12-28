@@ -2,6 +2,7 @@ package com.example.newhelloworld;
 
 
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.newhelloworld.event.AudioCompleteListener;
 import com.example.newhelloworld.event.LogoutMsg;
 import com.example.newhelloworld.event.MsgAddToAudioList;
 import com.example.newhelloworld.event.MsgAudioToMain;
+import com.example.newhelloworld.event.MsgModeChange;
 import com.example.newhelloworld.event.MsgPlaylistToMain;
 import com.example.newhelloworld.event.MsgRemoveInList;
 import com.example.newhelloworld.manager.AudioListManager;
@@ -60,29 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 底部当前歌曲控制按钮, 播放和暂停
      */
     private MaterialButton btnPlay;
-    /**
-     * 音频播放器
-     */
-//    private MediaPlayer mediaPlayer;
-    /**
-     * 记录当前播放歌曲的位置
-     */
-//    public int mCurrentPosition = -1;
 
-    /**
-     * 自定义进度条
-     */
-//    private AudioRoundProgressView musicProgress;
-
-    /**
-     * 音乐进度间隔时间
-     */
-//    private static final int INTERNAL_TIME = 1000;
-
-    /**
-     * 图片动画
-     */
-//    private ObjectAnimator logoAnimation;
 
     BottomNavigationView bottomNavigation;
 
@@ -112,6 +92,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Episode curEpisode;
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onModeChange(MsgModeChange msg){
+        Log.d(TAG, "onModeChange");
+        Log.d(TAG, "curEpisode: "+curEpisode);
+
+        if (msg.getMode() == 0) {
+            // 关闭暗黑模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        } else {
+            // 开启暗黑模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+        }
+
+        EventBus.getDefault().removeStickyEvent(msg);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onLogoutReceived(LogoutMsg msg){
         Log.d(TAG, "onLogoutReceived");
 
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         episodeList = null;
         curEpisode = null;
 
-        EventBus.getDefault().removeStickyEvent(this);
+        EventBus.getDefault().removeStickyEvent(msg);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -133,9 +131,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, ""+msg);
 
         Episode episode = msg.getEpisode();
-        boolean flag = msg.isPlaying();
+//        boolean flag = msg.isPlaying();
 
-        if (flag && audioListManager.isCurInListPlaying(episode)){
+        if (audioListManager.isPlayManagerPlaying() && audioListManager.isCurInListPlaying(episode)){
             btnPlay.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.icon_pause, null));
             btnPlay.setTag("btn_pause");
         }else{
@@ -152,10 +150,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvSongName.setText(episode.getTitle());
 
         curEpisode = episode;
+        Log.d(TAG, "curEpisode: "+curEpisode);
 
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-        EventBus.getDefault().removeStickyEvent(this);
+        EventBus.getDefault().removeStickyEvent(msg);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -185,8 +184,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvSongName.setText(episode.getTitle());
 
         curEpisode = episode;
+        Log.d(TAG, "curEpisode: "+curEpisode);
 
-        EventBus.getDefault().removeStickyEvent(this);
+        EventBus.getDefault().removeStickyEvent(msg);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -234,18 +234,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-        EventBus.getDefault().removeStickyEvent(this);
+        EventBus.getDefault().removeStickyEvent(msg);
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-/*
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }*/
+
+        Log.d(TAG, "onCreate");
+
         setContentView(R.layout.activity_main);
 
         MyActivityManager.getInstance().add(this);
@@ -256,8 +254,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
-        bindView();
+
         initPlayer();
+
+        bindView();
 
         setEpisodeListSheet();
 
@@ -294,8 +294,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        Log.d(TAG, "onDestroy");
         EventBus.getDefault().unregister(this);
     }
+
 
     public void bindView(){
         ivLogo = findViewById(R.id.iv_logo);
@@ -308,6 +311,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         episodeListView = findViewById(R.id.bottom_sheet);
         rcycView = episodeListView.findViewById(R.id.episode_list);
+
+        Log.d(TAG, "curEpisode: "+curEpisode);
+        Log.d(TAG, "list: "+episodeList);
+
+
+        //切换夜间模式会重新create activity，根据播放列表是否有单集，显示laybottom
+        if(audioListManager.getList() != null && audioListManager.getList().size() > 0){
+            Episode episode = audioListManager.getList().get(0);
+            if(episode != null){
+                Log.d(TAG, "add audio view");
+
+                if (audioListManager.isPlayManagerPlaying() && audioListManager.isCurInListPlaying(episode)){
+
+                    Log.d(TAG, "set btn_pause");
+                    btnPlay.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.icon_pause, null));
+                    btnPlay.setTag("btn_pause");
+                }else{
+                    Log.d(TAG, "set btn_play");
+
+                    btnPlay.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.icon_play, null));
+                    btnPlay.setTag("btn_play");
+                }
+
+                Glide.with(this)
+                        .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
+                        .centerCrop()
+                        .into(ivLogo);
+                tvSongName.setText(episode.getTitle());
+
+                Log.d(TAG, ""+tvSongName.getText());
+
+                curEpisode = episode;
+
+            }else{
+                Log.d(TAG, "add default view");
+                ivLogo.setImageResource(R.drawable.default_botpic);
+                tvSongName.setText("欢迎探索~");
+
+                btnPlay.setIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.icon_play, null));
+                btnPlay.setTag("btn_play");
+            }
+        }
 
         // glide测试
 //        Glide.with(this)
