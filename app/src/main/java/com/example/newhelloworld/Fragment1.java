@@ -52,7 +52,7 @@ public class Fragment1 extends Fragment {
 
         getPopularAlbum();
 
-        //TODO:ALBUM后端修改后测试
+
         listView.setOnItemClickListener((adapterView, view1, position, l) -> {
             // 根据点击的位置跳转到相应的页面
             // 这里具体页面还没写，所以还没完善这里

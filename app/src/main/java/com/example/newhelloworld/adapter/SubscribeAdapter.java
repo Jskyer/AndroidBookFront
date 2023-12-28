@@ -16,6 +16,7 @@ import com.example.newhelloworld.R;
 import com.example.newhelloworld.activity.PageActivity;
 import com.example.newhelloworld.activity.SubscribeActicity;
 import com.example.newhelloworld.event.MsgToAlbum;
+import com.example.newhelloworld.pojo.Album;
 import com.example.newhelloworld.pojo.SubscribeInfo;
 import com.example.newhelloworld.util.ResourceUtil;
 
@@ -24,10 +25,10 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.ViewHolder>{
-    private List<SubscribeInfo> albums;
+    private List<Album> albums;
     private Context context;
 
-    public SubscribeAdapter(Context context,List<SubscribeInfo> albums){
+    public SubscribeAdapter(Context context,List<Album> albums){
         this.context=context;
         this.albums=albums;
     }
@@ -50,10 +51,10 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SubscribeInfo subscribeInfo=albums.get(position);
-        String poster=subscribeInfo.getPodcast_poster();
+        Album subscribeInfo=albums.get(position);
+        String poster=subscribeInfo.getAlbum_poster();
         Glide.with(context)
-                .load(ResourceUtil.getPodcastPosterPath(poster))
+                .load(ResourceUtil.getAlbumPosterPath(poster))
                 .centerCrop()
                 .into(holder.album_poster);
         holder.album_poster.setOnClickListener(new View.OnClickListener() {

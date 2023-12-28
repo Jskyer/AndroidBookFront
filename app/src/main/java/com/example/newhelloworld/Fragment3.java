@@ -57,7 +57,7 @@ public class Fragment3 extends Fragment {
 
         instance = AudioListManager.getInstance();
 
-        //TODO
+        //
         // 设置ListView的点击事件
         listView.setOnItemClickListener((adapterView, view1, position, l) -> {
             // 根据点击的位置跳转到相应的页面

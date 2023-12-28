@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,8 +17,10 @@ import com.example.newhelloworld.adapter.SubscribeAdapter;
 import com.example.newhelloworld.manager.MyActivityManager;
 import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
+import com.example.newhelloworld.pojo.Album;
 import com.example.newhelloworld.pojo.SubscribeInfo;
 import com.example.newhelloworld.queryVO.Status;
+import com.example.newhelloworld.queryVO.userInfo.GetCreateResp;
 import com.example.newhelloworld.queryVO.userInfo.GetSubscribeResp;
 import com.example.newhelloworld.util.ResourceUtil;
 import com.example.newhelloworld.util.WaterfallUtil;
@@ -39,7 +42,7 @@ public class SubscribeActicity extends AppCompatActivity {
     private RecyclerView rcycView;
     SubscribeAdapter adapter;
 
-    List<SubscribeInfo> subscribeInfos;
+    List<Album> subscribeInfos;
 
 
     @Override
@@ -72,18 +75,51 @@ public class SubscribeActicity extends AppCompatActivity {
 
     }
     private void init(){
-        //TODO:ALBUM后端修改后测试
-        client.getSubscribePreviews(pageNo, pageSize, new MyObserver<GetSubscribeResp>() {
+        //+:ALBUM后端修改后测试
+
+        client.getMySubscribeAlbum(pageNo, pageSize, new MyObserver<GetCreateResp>() {
             @Override
-            public void onSuccss(GetSubscribeResp getSubscribeResp) {
-                Status status=getSubscribeResp.getStatus();
-                if(status.getCode()==200){
-                    subscribeInfos=getSubscribeResp.getSubscribes();
+            public void onSuccss(GetCreateResp getCreateResp) {
+                Status status = getCreateResp.getStatus();
+
+                if(status.getCode() == 200){
+//                    episodeList.addAll(getHistoryResp.getHistorys());
+                    subscribeInfos=getCreateResp.getAlbums();
                     adapter=new SubscribeAdapter(SubscribeActicity.this,subscribeInfos);
                     rcycView.setAdapter(adapter);
+
+//                    List<Album> albums = getCreateResp.getAlbums();
+//                    if(albums != null && albums.size() > 0){
+//                        Integer id = albums.get(0).getAlbum_id();
+//                        if(id != lastItemId){
+//                            Log.d(TAG,"load new: " + status.getMsg());
+//                            adapter.updateList(albums);
+//                            lastItemId = id;
+//                        }else{
+//                            Toast.makeText(MyAlbumListActivity.this, "到底啦~", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+
+                    Log.d(TAG,"status ok");
+
+                }else{
+                    Log.d(TAG,"status error: " + status.getMsg());
                 }
             }
         });
+
+
+//        client.getSubscribePreviews(pageNo, pageSize, new MyObserver<GetSubscribeResp>() {
+//            @Override
+//            public void onSuccss(GetSubscribeResp getSubscribeResp) {
+//                Status status=getSubscribeResp.getStatus();
+//                if(status.getCode()==200){
+//                    subscribeInfos=getSubscribeResp.getSubscribes();
+//                    adapter=new SubscribeAdapter(SubscribeActicity.this,subscribeInfos);
+//                    rcycView.setAdapter(adapter);
+//                }
+//            }
+//        });
         //String path=removePrefix("/album/1702195552966_song001.png","/album/");
 /*
         for(int i=0;i<20;i++){

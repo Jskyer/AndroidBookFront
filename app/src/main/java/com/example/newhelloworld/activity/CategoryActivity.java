@@ -34,7 +34,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-//TODO:ALBUM后端修改后测试
+
 
 public class CategoryActivity extends AppCompatActivity {
     public static final String TAG = "CategoryActivity";

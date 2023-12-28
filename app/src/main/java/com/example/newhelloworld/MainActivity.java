@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnPlay.setTag("btn_play");
         }
 
-//        TODO
+//
         Glide.with(this)
                 .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
                 .centerCrop()
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnPlay.setTag("btn_play");
         }
 
-//        TODO
+//
         Glide.with(this)
                 .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
                 .centerCrop()
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "size > 0");
 
                 Episode tmp = list.get(0);
-//                TODO
+//
                 Glide.with(this)
                         .load(ResourceUtil.getPodcastPosterPath(tmp.getPoster()))
                         .centerCrop()
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         episodeListView = findViewById(R.id.bottom_sheet);
         rcycView = episodeListView.findViewById(R.id.episode_list);
 
-        //TODO glide测试
+        // glide测试
 //        Glide.with(this)
 //                .load(ResourceUtil.getImgNetPath("faker.jpg"))
 //                .centerCrop()
@@ -504,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCompleteForNext(Episode episode) {
-//        TODO
+//
         Glide.with(this)
                 .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
                 .centerCrop()

@@ -97,7 +97,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
 
                         textTitleView.setText(newEpi.getTitle());
                         textUserNameView.setText(newEpi.getUploader_name());
-//                    TODO
+//
                         Glide.with(AudioActivity.this)
                                 .load(ResourceUtil.getPodcastPosterPath(newEpi.getPoster()))
                                 .centerCrop()
@@ -137,7 +137,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         textUserNameView.setText(episode.getUploader_name());
         setModeView();
 
-//        TODO
+//
         Glide.with(this)
                 .load(ResourceUtil.getPodcastPosterPath(episode.getPoster()))
                 .centerCrop()
@@ -497,7 +497,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
 //                Log.d("audio", "to play");
 //
 //                btn_play.setImageResource(R.drawable.btn_pause);
-//                //TODO 测试用
+//                // 测试用
 ////                player.start();
 //                audioListManager.play(curEpisode);
 //                publishProgress();
@@ -533,7 +533,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 btn_play.setImageResource(R.drawable.btn_pause);
                 btn_play.setTag("btn_pause");
 
-                //TODO 改变当前显示的单集ui
+                // 改变当前显示的单集ui
                 Glide.with(this)
                         .load(ResourceUtil.getPodcastPosterPath(res.getPoster()))
                         .centerCrop()
@@ -560,7 +560,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
 
                 btn_play.setImageResource(R.drawable.btn_pause);
                 btn_play.setTag("btn_pause");
-                //TODO 改变当前显示的单集ui
+                // 改变当前显示的单集ui
                 Glide.with(this)
                         .load(ResourceUtil.getPodcastPosterPath(res.getPoster()))
                         .centerCrop()
@@ -608,7 +608,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         } else if (id == R.id.comment) {
             Log.d("audio", "comment");
 
-            //TODO comment
+            // comment
             EventBus.getDefault().postSticky(new MsgToComment(curEpisode.getId()));
             CommentActivity.startAction(this);
         }

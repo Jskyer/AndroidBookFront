@@ -46,7 +46,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-//TODO:ALBUM后端修改后测试
+
+
 public class PageActivity extends AppCompatActivity {
     public static final String TAG="PageActivity";
 
@@ -176,7 +177,7 @@ public class PageActivity extends AppCompatActivity {
                                         if(status.getCode()==200){
                                             Log.d(TAG,"关注"+album_id.toString()+"成功");
 
-                                            //TODO 变高亮
+                                            // 变高亮
                                             subscribeBtnView.setImageResource(R.drawable.sub_light);
 
                                             int cursub = album.getSubscribe_number() + 1;
@@ -195,7 +196,7 @@ public class PageActivity extends AppCompatActivity {
                                         if(status.getCode()==200){
                                             Log.d(TAG,"取消关注"+album_id.toString()+"成功");
 
-                                            //TODO 变默认
+                                            // 变默认
                                             subscribeBtnView.setImageResource(R.drawable.sub_default);
 
                                             int cursub = album.getSubscribe_number() - 1;

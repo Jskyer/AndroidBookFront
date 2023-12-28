@@ -162,7 +162,7 @@ public class AFragment extends Fragment {
                     public void onSuccss(GetSearchResp getSearchResp) {
                         Status status = getSearchResp.getStatus();
                         if(status.getCode() == 200){
-                            //TODO 跳转result
+                            // 跳转result
                             List<PodcastDo> podcasts = getSearchResp.getPodcasts();
 
                             EventBus.getDefault().postSticky(new MsgToSearchResult(1, 8, s, podcasts));
