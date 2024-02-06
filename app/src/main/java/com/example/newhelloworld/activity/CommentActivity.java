@@ -26,6 +26,7 @@ import com.example.newhelloworld.pojo.Comment;
 import com.example.newhelloworld.queryVO.GetCommentsResp;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.StatusResp;
+import com.example.newhelloworld.util.PreferenceUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
@@ -106,6 +107,9 @@ public class CommentActivity extends AppCompatActivity {
                         Status status = statusResp.getStatus();
                         if (status.getCode() == 200) {
                             Log.d(TAG, "成功发送comment：" + content);
+
+                            requestComment(podcastId);
+
 //                            flush(rcycView);
                         } else {
                             Log.d(TAG, "发送失败");
@@ -113,6 +117,10 @@ public class CommentActivity extends AppCompatActivity {
 
                     }
                 });
+
+//                int userid = Integer.parseInt(PreferenceUtil.getString(CommentActivity.this, PreferenceUtil.KEY_USER_ID));
+//                Comment comment = new Comment(null, podcastId, userid, content, null, 0);
+//                adapter.updateList(comment);
 
             }
         });
@@ -143,7 +151,6 @@ public class CommentActivity extends AppCompatActivity {
                 if (status.getCode() == 200) {
 
                     commentList = getCommentsResp.getComments();
-
                     adapter = new CommentAdapter(commentList, CommentActivity.this);
                     rcycView.setAdapter(adapter);
 
@@ -154,38 +161,6 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
 
-//        client.getComments(podcast_id, new MyObserver<GetCommentsResp>() {
-//            @Override
-//            public void onSuccss(GetCommentsResp getCommentsResp) {
-//                Status status = getCommentsResp.getStatus();
-//                if (status.getCode() == 200) {
-//                    comments = new ArrayList<>();
-//                    commentList = getCommentsResp.getComments();
-//                    for (int i = 0; i < commentList.size(); i++) {
-//                        Comment comment = new Comment();
-//                        comment.setComment_id(commentList.get(i).getComment_id());
-//                        comment.setCommenter_id(commentList.get(i).getCommenter_id());
-//                        comment.setComment_text(commentList.get(i).getComment_text());
-//
-//                        comment.setComment_time(commentList.get(i).getComment_time());
-//                        comment.setLikeNum(commentList.get(i).getLikeNum());
-//                        comment.setPodcastId(podcast_id);
-//                        //Log.d("podcastId",commentList.get(i).getComment_text());
-//                        comments.add(comment);
-//                    }
-//
-////                    adapter = new CommentAdapter(comments, CommentActivity.this);
-////                    rcycView.setAdapter(adapter);
-//
-//
-//                    /*for(int i=0;i<comments.size();i++){
-//                        String temp=comments.get(i).getComment_text();
-//                        Log.d("创建comment",temp);
-//                    }*/
-//
-//                }
-//            }
-//        });
 
     }
 

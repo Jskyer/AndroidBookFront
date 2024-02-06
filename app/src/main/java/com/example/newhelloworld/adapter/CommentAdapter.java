@@ -26,6 +26,7 @@ import com.example.newhelloworld.net.MyObserver;
 import com.example.newhelloworld.net.MyRetrofitClient;
 import com.example.newhelloworld.pojo.Comment;
 import com.example.newhelloworld.model.PodcastEpisode;
+import com.example.newhelloworld.pojo.HistoryInfo;
 import com.example.newhelloworld.queryVO.Status;
 import com.example.newhelloworld.queryVO.StatusResp;
 
@@ -108,13 +109,24 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                         }
                     }
                 });
+
             }
+
         });
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void updateList(Comment newData) {
+        // 在原有的数据之上增加新数据
+        if (newData != null) {
+            data.add(newData);
+            notifyDataSetChanged();
+        }
+
     }
 
 }
